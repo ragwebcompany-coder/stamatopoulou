@@ -1,0 +1,34 @@
+# Psychoptia — Χριστίνα Σταματοπούλου, Κλινική Ψυχολόγος MSc — CLINICBRAIN
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
+Options -Indexes
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # CSS/JS φέρουν αποτύπωμα περιεχομένου στο όνομα -> ασφαλές μακρύ cache
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  # Οι εικόνες ΔΕΝ έχουν αποτύπωμα: σύντομο cache ώστε να φαίνονται οι αλλαγές
+  ExpiresByType image/jpeg "access plus 1 day"
+  ExpiresByType image/png "access plus 1 day"
+  ExpiresByType image/svg+xml "access plus 1 day"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# HTTPS + www (ενεργοποιήστε αφού εγκατασταθεί το πιστοποιητικό SSL)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>

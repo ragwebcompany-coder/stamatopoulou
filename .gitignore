@@ -1,0 +1,15 @@
+# macOS / Google Drive
+.DS_Store
+.Spotlight-V100
+.Trashes
+Icon?
+*.icloud
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Προσωρινά
+*.tmp
+*.log
