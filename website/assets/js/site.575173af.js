@@ -139,5 +139,55 @@
     var y = el.getBoundingClientRect().top + window.pageYOffset - off - 8;
     window.scrollTo({ top: y < 0 ? 0 : y, behavior: reduce ? "auto" : "smooth" });
   });
+  /* ------------------------------------------------- φόρμα επικοινωνίας
+     Δύο τρόποι αποστολής, ανάλογα με το data-endpoint:
+       • με endpoint  -> POST με fetch, χωρίς να φύγει ο χρήστης από τη σελίδα
+       • χωρίς        -> συνθέτει mailto: και ανοίγει τον mail client
+     Το δεύτερο είναι το fallback ώσπου να μπει πραγματικό backend, ώστε η
+     φόρμα να μην είναι ποτέ «νεκρή». */
+  qa("[data-contact-form]").forEach(function (form) {
+    var status = form.querySelector("[data-form-status]");
+    var btn = form.querySelector('button[type=submit]');
+
+    function say(msg, state) {
+      if (!status) return;
+      status.textContent = msg;
+      status.setAttribute("data-state", state);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      var data = new FormData(form);
+      var endpoint = form.getAttribute("data-endpoint");
+
+      if (!endpoint) {
+        var body =
+          "Ονοματεπώνυμο: " + (data.get("name") || "") + "\n" +
+          "Email: " + (data.get("email") || "") + "\n" +
+          "Τηλέφωνο: " + (data.get("phone") || "—") + "\n\n" +
+          (data.get("message") || "");
+        window.location.href = "mailto:" + form.getAttribute("data-mailto") +
+          "?subject=" + encodeURIComponent(form.getAttribute("data-subject") || "") +
+          "&body=" + encodeURIComponent(body);
+        say("Ανοίγει το πρόγραμμα email σας για να σταλεί το μήνυμα.", "ok");
+        return;
+      }
+
+      btn.disabled = true;
+      say("Αποστολή…", "");
+      fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } })
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          form.reset();
+          say("Ευχαριστώ — το μήνυμα στάλθηκε. Θα επικοινωνήσω μαζί σας σύντομα.", "ok");
+        })
+        .catch(function () {
+          say("Κάτι πήγε στραβά. Δοκιμάστε ξανά ή καλέστε με στο τηλέφωνο.", "error");
+        })
+        .then(function () { btn.disabled = false; });
+    });
+  });
 
 })();

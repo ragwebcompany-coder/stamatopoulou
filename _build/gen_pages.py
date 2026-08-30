@@ -9,26 +9,71 @@ HOME = ("Αρχική", U("index.html"))
 TODAY = "2026-08-26"
 
 # ==================================================================== helpers
-def svc_cards(depth, exclude=None, cls="cb-cards cb-cards--3"):
+def _card(depth, item, cls="cb-card"):
+    """Ένα κουτάκι υπηρεσίας ή κατηγορίας — ολόκληρο το κουτί είναι ο σύνδεσμος.
+
+    Η φωτογραφία κάθεται στην κορυφή, γεμάτο πλάτος, και το εικονίδιο μετακομίζει
+    πάνω της ως μετάλλιο: έτσι η κάρτα κερδίζει την εικόνα χωρίς να χάσει το
+    εικονογραφικό λεξιλόγιο που έχουν και οι υπόλοιπες κάρτες του site.
+    """
     r = rel(depth)
-    out = []
-    for s in SERVICES:
-        if s["slug"] == exclude:
-            continue
-        out.append(
-            f'<a class="cb-card" href="{r}{s["slug"]}" data-reveal>'
-            f'<span class="cb-card__ic">{icon(s["icon"], "w-7 h-7")}</span>'
-            f'<span class="cb-card__t">{s["short"]}</span>'
-            f'<span class="cb-card__d">{s["teaser"]}</span>'
-            f'<span class="cb-card__more">Περισσότερα <span>&#8594;</span></span></a>'
-        )
+    ph = photo_of(item)
+    if ph:
+        name, alt, _cap = ph
+        media = (f'<span class="cb-card__media">'
+                 f'<img src="{r}assets/img/{name}-card.jpg" width="720" height="450" '
+                 f'loading="lazy" decoding="async" alt="{alt}">'
+                 f'<span class="cb-card__ic">{icon(item["icon"], "w-7 h-7")}</span></span>')
+        cls += " cb-card--photo"
+    else:
+        media = f'<span class="cb-card__ic">{icon(item["icon"], "w-7 h-7")}</span>'
+    return (f'<a class="{cls}" href="{r}{S(item)}" data-reveal>{media}'
+            f'<span class="cb-card__t">{L(item, "short")}</span>'
+            f'<span class="cb-card__d">{L(item, "teaser")}</span>'
+            f'<span class="cb-card__more">{T("cta.more")} <span>&#8594;</span></span></a>')
+
+
+def cat_cards(depth, cls="cb-cards cb-cards--3"):
+    """Οι τρεις βασικές καρτέλες — αυτό που βλέπει ο επισκέπτης πρώτο."""
+    return f'<div class="{cls}">' + "".join(_card(depth, c) for c in CATEGORIES) + "</div>"
+
+
+def svc_cards(depth, exclude=None, cls="cb-cards cb-cards--3", items=None):
+    """Τα κουτάκια των υπηρεσιών — ολόκληρο το κουτί είναι ο σύνδεσμος.
+
+    Η φωτογραφία της κατηγορίας κάθεται στην κορυφή, γεμάτο πλάτος, και το
+    εικονίδιο μετακομίζει πάνω της ως μετάλλιο: έτσι η κάρτα κερδίζει την
+    εικόνα χωρίς να χάσει το εικονογραφικό λεξιλόγιο που έχουν και οι υπόλοιπες
+    κάρτες του site (λόγοι εμπιστοσύνης, προσεγγίσεις) που δεν έχουν φωτογραφία.
+    """
+    out = [_card(depth, x) for x in (items or SERVICES) if x["slug"] != exclude]
     return f'<div class="{cls}">' + "".join(out) + "</div>"
+
+
+def svc_figures(depth, slug):
+    """Οι ίδιες φωτογραφίες, σε μεγάλο μέγεθος, μέσα στην περιγραφή της υπηρεσίας.
+
+    Όπου η κατηγορία στεγάζει δύο μεθόδους (Theta Healing και ραδιαισθησία),
+    μπαίνουν δίπλα-δίπλα: η κάρτα δείχνει μόνο την πρώτη, η σελίδα και τις δύο.
+    """
+    item = next((x for x in SERVICES + CATEGORIES if x["slug"] == slug), None)
+    if not item or not item.get("photos"):
+        return ""
+    r = rel(depth)
+    shots = [photo_of(item, i) for i in range(len(item["photos"]))]
+    figs = "".join(
+        f'<figure class="cb-figure">'
+        f'<img src="{r}assets/img/{name}.jpg" width="1240" height="775" '
+        f'loading="lazy" decoding="async" alt="{alt}">'
+        f'<figcaption>{cap}</figcaption></figure>' for name, alt, cap in shots)
+    cls = "cb-figs" + (" cb-figs--2" if len(shots) > 1 else "")
+    return f'<div class="{cls}" data-reveal>{figs}</div>'
 
 
 def related_chips(depth, exclude):
     r = rel(depth)
-    links = "".join(f'<a class="cb-chip" href="{r}{s["slug"]}">{s["nav"]}</a>'
-                    for s in SERVICES if s["slug"] != exclude)
+    links = "".join(f'<a class="cb-chip" href="{r}{S(x)}">{L(x, "nav")}</a>'
+                    for x in SERVICES if x["slug"] != exclude)
     return f'<div class="cb-chips">{links}</div>'
 
 
@@ -62,9 +107,10 @@ def infinity_rule():
             's-6.4 6.5-10 6.5a6.5 6.5 0 0 1 0-13z"/></svg>')
 
 
-def cta_button(depth, label="ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ"):
+def cta_button(depth, label=None):
+    label = label or T("cta.bookLong")
     return (f'<a class="cb-btn cb-btn--dark" style="justify-content:center" '
-            f'href="{rel(depth)}epikoinonia.html#rantevou">{label}'
+            f'href="{rel(depth)}{page_slug("epikoinonia.html")}#rantevou">{label}'
             f'<span class="cb-btn__arrow">&#8594;</span></a>')
 
 
@@ -82,11 +128,10 @@ Community Psychology) στο <strong>University of East London</strong>. Δια�
 
 HOME_FAQ = [
  ("Πώς κλείνω την πρώτη μου συνεδρία;",
-  f'<p>Με ένα τηλεφώνημα στο <a href="tel:+30{PHONE}">{PHONE_P}</a> ή στο '
-  f'<a href="tel:+30{MOBILE}">{MOBILE_P}</a>. Δεν υπάρχει ηλεκτρονική ατζέντα και είναι σκόπιμο: '
-  f'μια σύντομη συνομιλία αρκεί για να δούμε τι σας απασχολεί, ποιο πλαίσιο ταιριάζει και πότε '
-  f'μπορούμε να ξεκινήσουμε. Αν προτιμάτε γραπτά, στείλτε email στο '
-  f'<a href="mailto:{EMAIL}">{EMAIL}</a> και θα επικοινωνήσω μαζί σας.</p>'),
+  f'<p>Με ένα τηλεφώνημα στο <a href="tel:+30{PHONE}">{PHONE_P}</a>: μια σύντομη συνομιλία '
+  f'αρκεί για να δούμε τι σας απασχολεί, ποιο πλαίσιο ταιριάζει και πότε μπορούμε να ξεκινήσουμε. '
+  f'Αν προτιμάτε γραπτά, συμπληρώστε τη <a href="epikoinonia.html#rantevou">φόρμα επικοινωνίας</a> '
+  f'ή στείλτε email στο <a href="mailto:{EMAIL}">{EMAIL}</a> και θα επικοινωνήσω μαζί σας.</p>'),
  ("Πόσο διαρκεί μια συνεδρία και κάθε πότε γίνεται;",
   f"<p>Η συνεδρία διαρκεί <strong>{SESSION} λεπτά</strong>. Η συχνότητα καθορίζεται από κοινού και "
   "συνήθως ξεκινά ως εβδομαδιαία, ώστε να χτιστεί η θεραπευτική σχέση· στη συνέχεια προσαρμόζεται "
@@ -113,13 +158,15 @@ def home():
     d = 0
     hero = f"""<section class="cb-hero" id="top">
 <div class="cb-hero__bg" data-anim="hero-img" aria-hidden="true">
+<img class="cb-hero__photo" src="assets/img/hero-grafeio.jpg" width="1440" height="1080"
+ fetchpriority="high" decoding="async" alt="">
+<div class="cb-hero__scrim"></div>
 <div class="cb-hero-glow"></div><div class="cb-hero-grid"></div>
-{mandala_art()}
 </div>
 <div class="container mx-auto px-6 md:px-12 relative z-10" data-anim="hero-content">
 <div class="cb-hero__in">
 <span class="cb-eyebrow cb-eyebrow--light" data-anim="hero-in" data-delay=".4">{TITLE_LINE} · {CITY}</span>
-<h1 class="cb-hero__h1" data-anim="hero-in" data-delay=".55">Ένας χώρος όπου<br>μπορείτε να ανοίξετε</h1>
+<h1 class="cb-hero__h1" data-anim="hero-in" data-delay=".55">Όταν το φως συναντά την κατανόηση,<br class="cb-hero__br"> γεννιέται η σύνδεση</h1>
 <p class="cb-hero__lede" data-anim="hero-in" data-delay=".7">Ψυχοθεραπεία για παιδιά, εφήβους και ενήλικες,
 συμβουλευτική γονέων και παιγνιοθεραπεία. Η θεραπευτική διαδικασία ξεκινά από κλινική αξιολόγηση και
 διαμορφώνεται γύρω από αυτό που φέρνετε εσείς — όχι γύρω από ένα έτοιμο πρωτόκολλο.</p>
@@ -180,7 +227,7 @@ def home():
 χρειάζεται και κατανόηση και συγκεκριμένα εργαλεία για το αύριο το πρωί. Ένας έφηβος χρειάζεται
 πρώτα να εμπιστευτεί ότι ο χώρος είναι δικός του.</p>
 </div>
-<p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="proseggiseis.html">ΟΙ ΘΕΡΑΠΕΥΤΙΚΕΣ ΠΡΟΣΕΓΓΙΣΕΙΣ<span class="cb-btn__arrow">&#8594;</span></a></p>
+<p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="viografiko.html">ΣΠΟΥΔΕΣ &amp; ΕΚΠΑΙΔΕΥΣΕΙΣ<span class="cb-btn__arrow">&#8594;</span></a></p>
 </div>
 </div>
 </div>
@@ -191,12 +238,12 @@ def home():
 <div class="container mx-auto px-6 md:px-12">
 <div style="max-width:56rem;margin-bottom:3rem" data-reveal>
 <span class="cb-eyebrow">Οι υπηρεσίες</span>
-<h2 class="cb-h2">Έξι πλαίσια συνεργασίας</h2>
-<p class="cb-lede">Ψυχοθεραπεία παιδιών, εφήβων και ενηλίκων, συμβουλευτική γονέων, παιγνιοθεραπεία και
-δημιουργικές τέχνες — και, ξεχωριστά, ορισμένες συμπληρωματικές μέθοδοι χαλάρωσης. Σε κάθε περίπτωση,
-η δουλειά ξεκινά από αυτό που φέρνετε εσείς.</p>
+<h2 class="cb-h2">Τρεις κατευθύνσεις</h2>
+<p class="cb-lede">Ψυχοθεραπεία και συμβουλευτική για κάθε ηλικία, παιγνιοθεραπεία με δημιουργικές
+τέχνες, και — σε εντελώς ξεχωριστό πλαίσιο — ενεργειακές θεραπείες. Σε κάθε περίπτωση, η δουλειά
+ξεκινά από αυτό που φέρνετε εσείς.</p>
 </div>
-{svc_cards(d)}
+{cat_cards(d)}
 <p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="ypiresies.html">ΔΕΙΤΕ ΟΛΕΣ ΤΙΣ ΥΠΗΡΕΣΙΕΣ<span class="cb-btn__arrow">&#8594;</span></a></p>
 </div>
 </section>"""
@@ -261,7 +308,7 @@ def home():
 <div style="margin-top:2rem">{online_note()}</div>
 <div style="margin-top:2rem">{contact_card(d)}</div>
 </div>
-<div data-reveal>{booking_block(d)}</div>
+<div data-reveal>{contact_form(d)}</div>
 </div>
 </div>
 </section>"""
@@ -402,6 +449,10 @@ def viografiko():
 
 
 # ==================================================================== ΠΡΟΣΕΓΓΙΣΕΙΣ
+# ΕΚΤΟΣ BUILD. Η πελάτισσα ζήτησε να αφαιρεθεί η καρτέλα «Προσεγγίσεις»: δεν
+# θέλει να παρουσιάζονται ως ολοκληρωμένες προσεγγίσεις «σε αυτή τη φάση». Το
+# περιεχόμενο μένει εδώ γιατί μπορεί να επανέλθει ή να τροφοδοτήσει την ενότητα
+# «Γιατί εμένα» — δεν παράγεται όμως σελίδα (βλ. build()).
 def proseggiseis():
     d = 0
     slug = "proseggiseis.html"
@@ -479,7 +530,7 @@ def proseggiseis():
 με αυτήν των παραπάνω προσεγγίσεων και <em>δεν</em> υποκαθιστούν ψυχολογική ή ιατρική φροντίδα.
 Προσφέρονται μόνο κατόπιν συζήτησης, ποτέ ως εναλλακτική σε ενδεδειγμένη θεραπεία, και ποτέ σε
 περιστατικά όπου χρειάζεται κλινική παρέμβαση.
-<a href="ypiresies/enallaktikes-methodoi.html">Αναλυτικά για το πλαίσιο</a>.</div>
+<a href="ypiresies/energeiakes-therapeies.html">Αναλυτικά για το πλαίσιο</a>.</div>
 </div>
 
 {crisis_note()}
@@ -534,7 +585,7 @@ def ypiresies():
 αίτημα — και μπορεί να αλλάξει στην πορεία, αν αλλάξουν τα δεδομένα.</p>
 </div>
 </div>
-{svc_cards(d)}
+{cat_cards(d)}
 </div>
 </section>
 
@@ -569,8 +620,8 @@ def ypiresies():
     ld = [practice_ld(), person_ld(),
           {"@type": "CollectionPage", "@id": U(slug) + "#page", "url": U(slug),
            "name": "Υπηρεσίες ψυχοθεραπείας και συμβουλευτικής", "inLanguage": "el-GR",
-           "hasPart": [{"@type": "Service", "name": plain(s["short"]),
-                        "url": U(s["slug"])} for s in SERVICES]},
+           "hasPart": [{"@type": "Service", "name": plain(L(x, "short")),
+                        "url": U(S(x))} for x in SERVICES]},
           breadcrumb_ld([HOME, ("Υπηρεσίες", U(slug))])]
     return render(depth=d,
         title=f"Υπηρεσίες Ψυχοθεραπείας {CITY} | Παιδιά, Έφηβοι, Ενήλικες",
@@ -582,7 +633,7 @@ def ypiresies():
 # ==================================================================== ΣΕΛΙΔΕΣ ΥΠΗΡΕΣΙΩΝ
 COMMON_FACTS = [("Διάρκεια", f"{SESSION} λεπτά ανά συνεδρία"),
                 ("Πλαίσιο", f"Στο γραφείο στην {CITY} ή διαδικτυακά"),
-                ("Ραντεβού", "Τηλεφωνικά — δεν υπάρχει ηλεκτρονική ατζέντα")]
+                ("Ραντεβού", "Τηλεφωνικά ή με τη φόρμα επικοινωνίας")]
 
 SERVICE_PAGES = {
 
@@ -670,8 +721,8 @@ SERVICE_PAGES = {
 φύση του, παράγει ένταση: το ίδιο παιδί που ζητά ανεξαρτησία, χρειάζεται ταυτόχρονα ασφάλεια.</p>
 <p>Η θεραπεία δίνει έναν τρίτο χώρο, έξω από το σπίτι και έξω από το σχολείο, όπου ο έφηβος μπορεί να
 σκεφτεί δυνατά χωρίς συνέπειες. Ανάλογα με το αίτημα, χρησιμοποιούνται εργαλεία από τη
-<a href="../proseggiseis.html#gnosiaki">γνωσιακή–συμπεριφορική προσέγγιση</a> για τη διαχείριση του
-άγχους, τη <a href="../proseggiseis.html#systimiki">συστημική ματιά</a> για τις σχέσεις, και συχνά
+<strong>γνωσιακή–συμπεριφορική προσέγγιση</strong> για τη διαχείριση του
+άγχους, τη <strong>συστημική ματιά</strong> για τις σχέσεις, και συχνά
 <a href="paigniotherapeia-dimiourgikes-technes.html">δημιουργικές τεχνικές</a> όταν ο λόγος
 κολλάει.</p>
 
@@ -793,7 +844,7 @@ SERVICE_PAGES = {
 <p>Η συμβουλευτική γονέων δεν είναι μάθημα σωστής ανατροφής ούτε αξιολόγηση των γονιών. Είναι ένας
 χώρος όπου κοιτάμε μαζί τη <strong>σχέση γονέα–παιδιού</strong> και τα μοτίβα που έχουν στηθεί γύρω
 από μια δυσκολία — και δοκιμάζουμε τι μπορεί να κινηθεί.</p>
-<p>Η ματιά είναι <a href="../proseggiseis.html#systimiki">συστημική</a>: η συμπεριφορά ενός παιδιού
+<p>Η ματιά είναι <strong>συστημική</strong>: η συμπεριφορά ενός παιδιού
 δεν εμφανίζεται στο κενό. Έχει νόημα μέσα στο σύστημα της οικογένειας, συχνά εξυπηρετεί κάτι, και
 συντηρείται από κύκλους αλληλεπίδρασης στους οποίους συμμετέχουν όλοι. Το ερώτημα δεν είναι ποιος
 φταίει, αλλά τι συντηρεί τον κύκλο και πού μπορεί να σπάσει.</p>
@@ -901,20 +952,20 @@ SERVICE_PAGES = {
        "δεν κινείται συναισθηματικά, ένα διαφορετικό κανάλι έκφρασης συχνά ξεμπλοκάρει τη "
        "διαδικασία.</p>")]),
 
-# ------------------------------------------------------------------ εναλλακτικές
-"ypiresies/enallaktikes-methodoi.html": dict(
- title="Theta Healing &amp; Θεραπευτική Ραδιαισθησία | Το πλαίσιο",
- desc=("Συμπληρωματικές μέθοδοι χαλάρωσης και ενεργειακής εργασίας, σε ξεχωριστό πλαίσιο από την "
-       "ψυχοθεραπεία. Τι είναι, τι δεν είναι και πότε δεν προσφέρονται."),
+# ------------------------------------------------------- ενεργειακές θεραπείες
+"ypiresies/energeiakes-therapeies.html": dict(
+ title="Ενεργειακές Θεραπείες | Theta Healing &amp; Θεραπευτική Ραδιαισθησία",
+ desc=("Ενεργειακές θεραπείες: Theta Healing και θεραπευτική ραδιαισθησία, ως συμπληρωματικές "
+       "μέθοδοι χαλάρωσης σε ξεχωριστό πλαίσιο από την ψυχοθεραπεία."),
  eyebrow="Συμπληρωματικά",
- marq="ΠΛΑΙΣΙΟ",
- h1="Theta Healing &amp;<br>Θεραπευτική Ραδιαισθησία",
+ marq="ΕΝΕΡΓΕΙΑΚΕΣ",
+ h1="Ενεργειακές<br>Θεραπείες",
  lede=("Συμπληρωματικές μέθοδοι χαλάρωσης και ενεργειακής εργασίας. Προσφέρονται σε πλαίσιο "
        "εντελώς ξεχωριστό από την ψυχοθεραπεία — και αυτή η σελίδα εξηγεί γιατί."),
  facts=[("Απευθύνεται σε", "Ενήλικες, κατόπιν συζήτησης"),
         ("Πλαίσιο", "Ξεχωριστές συνεδρίες, όχι εντός ψυχοθεραπείας"),
         ("Δεν προσφέρονται", "Σε ανηλίκους και σε ενεργά κλινικά περιστατικά"),
-        ("Ραντεβού", "Τηλεφωνικά — δεν υπάρχει ηλεκτρονική ατζέντα")],
+        ("Ραντεβού", "Τηλεφωνικά ή με τη φόρμα επικοινωνίας")],
  body="""
 <div class="cb-note cb-note--scope" style="margin-top:0"><strong>Πριν από οτιδήποτε άλλο.</strong>
 Το <strong>Theta Healing</strong> και η <strong>θεραπευτική ραδιαισθησία</strong> είναι
@@ -922,6 +973,16 @@ SERVICE_PAGES = {
 τεκμηρίωση αντίστοιχη με αυτήν των αναγνωρισμένων ψυχοθεραπευτικών προσεγγίσεων και <em>δεν</em>
 υποκαθιστούν ψυχολογική, ψυχιατρική ή ιατρική φροντίδα. Δεν υπόσχονται ίαση, διάγνωση ή θεραπεία
 καμίας πάθησης.</div>
+
+<h2 class="cb-h2" style="margin-top:2.5rem">Οι δύο μέθοδοι</h2>
+<p>Κάτω από τον όρο «ενεργειακές θεραπείες» παρουσιάζονται εδώ δύο διακριτές πρακτικές. Δεν είναι
+μία ενιαία μέθοδος και δεν λειτουργούν με τον ίδιο τρόπο:</p>
+<ul>
+<li><strong>Theta Healing.</strong> Καθοδηγούμενη διαδικασία βαθιάς χαλάρωσης, με εστίαση σε
+πεποιθήσεις και μοτίβα που ο ίδιος ο άνθρωπος αναγνωρίζει ως περιοριστικά.</li>
+<li><strong>Θεραπευτική ραδιαισθησία.</strong> Εργασία με εκκρεμές και διαγράμματα, ως εργαλείο
+εστίασης και αναστοχασμού μέσα σε μια συνεδρία χαλάρωσης.</li>
+</ul>
 
 <h2 class="cb-h2">Γιατί υπάρχει αυτή η σελίδα</h2>
 <p>Θα ήταν ευκολότερο να μην αναφέρονται καθόλου. Επιλέγω να αναφέρονται, με σαφή οριοθέτηση, για
@@ -976,32 +1037,38 @@ SERVICE_PAGES = {
 
 
 def service_page(slug, cfg):
-    d = 1
-    name = plain(next(s["nav"] for s in SERVICES if s["slug"] == slug))
-    crumbs = breadcrumbs(d, [("Αρχική", "index.html"), ("Υπηρεσίες", "ypiresies.html"), (name, None)])
+    # Το βάθος προκύπτει από το ΠΑΡΑΓΟΜΕΝΟ slug, όχι από το ελληνικό κλειδί:
+    # η ελληνική σελίδα ζει στο ypiresies/… (βάθος 1) και η αγγλική στο
+    # en/services/… (βάθος 2), οπότε χρειάζονται διαφορετικά «../».
+    d = depth_of(page_slug(slug))
+    name = plain(next(L(x, "nav") for x in SERVICES if x["slug"] == slug))
+    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")),
+                             (T("nav.services"), page_slug("ypiresies.html")), (name, None)])
     hero = page_hero(cfg["eyebrow"], cfg["h1"], cfg["lede"], crumbs, marq_word=cfg["marq"])
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-grid-2 cb-grid-2--aside">
 <div>
+{svc_figures(d, slug)}
 <div class="cb-prose" data-reveal>{cfg["body"]}</div>
-<h2 class="cb-h2" data-reveal>Με μια ματιά</h2>
+<h2 class="cb-h2" data-reveal>{T("sp.glance")}</h2>
 {facts(cfg["facts"])}
 <div data-reveal style="margin-top:2rem">{online_note()}</div>
-<h2 class="cb-h2" data-reveal style="margin-top:3rem">Συχνές ερωτήσεις</h2>
+<h2 class="cb-h2" data-reveal style="margin-top:3rem">{T("sp.faq")}</h2>
 <div data-reveal>{faq_block(cfg["faq"])}</div>
 <div data-reveal style="margin-top:2.5rem">{crisis_note()}</div>
-<h2 class="cb-h2" data-reveal style="margin-top:3rem">Άλλες υπηρεσίες</h2>
+<h2 class="cb-h2" data-reveal style="margin-top:3rem">{T("sp.other")}</h2>
 {related_chips(d, slug)}
 </div>
 {aside(d, extra=cta_button(d))}
 </div>
 </div>
 </section>"""
+    slug = page_slug(slug)   # από εδώ και κάτω μιλάμε URL, όχι κλειδιά
     ld = [practice_ld(), person_ld(),
           {"@type": "WebPage", "@id": U(slug) + "#page", "url": U(slug),
-           "name": name, "inLanguage": "el-GR",
-           "about": {"@type": "Service", "name": name, "serviceType": "Ψυχοθεραπεία / Συμβουλευτική",
+           "name": name, "inLanguage": T("lang.code"),
+           "about": {"@type": "Service", "name": name, "serviceType": T("sp.serviceType"),
                      "provider": {"@id": SITE_URL + "/#grafeio"},
                      "areaServed": {"@type": "City", "name": CITY}},
            "lastReviewed": TODAY,
@@ -1010,6 +1077,58 @@ def service_page(slug, cfg):
           breadcrumb_ld([HOME, ("Υπηρεσίες", U("ypiresies.html")), (name, U(slug))])]
     return render(depth=d, title=cfg["title"], description=cfg["desc"], canonical=U(slug),
                   ld_graph=ld, active="ypiresies.html", content=hero + body, og_type="article")
+
+
+def category_page(cat):
+    """Η σελίδα μιας καρτέλας που στεγάζει επιμέρους πλαίσια.
+
+    Δεν επαναλαμβάνει το περιεχόμενο των παιδιών της: εξηγεί τι κοινό έχουν και
+    τα παρουσιάζει ως κάρτες, ώστε ο επισκέπτης να διαλέξει ηλικιακή ομάδα.
+    """
+    d, slug = 1, cat["slug"]
+    name = plain(L(cat, "nav"))
+    crumbs = breadcrumbs(d, [("Αρχική", "index.html"), ("Υπηρεσίες", "ypiresies.html"), (name, None)])
+    hero = page_hero("Υπηρεσίες", "Ψυχοθεραπεία &amp;<br>Συμβουλευτική",
+                     "Μία θεραπευτική διαδικασία, τέσσερα πλαίσια. Ποιο ταιριάζει προκύπτει από την "
+                     "κλινική αξιολόγηση της πρώτης συνάντησης — όχι από ένα έτοιμο πρωτόκολλο.",
+                     crumbs, marq_word="ΣΥΝΕΔΡΙΕΣ")
+    kids = cat_children(cat)
+    body = f"""<section class="cb-section">
+<div class="container mx-auto px-6 md:px-12">
+<div class="cb-grid-2 cb-grid-2--aside">
+<div>
+<div class="cb-prose" data-reveal>
+<h2 class="cb-h2" style="margin-top:0">Τι είναι κοινό σε όλα</h2>
+<p>Είτε πρόκειται για παιδί, έφηβο, ενήλικα ή γονέα, η δουλειά ξεκινά από το ίδιο σημείο: μια
+<strong>κλινική αξιολόγηση</strong> στην πρώτη συνάντηση, όπου παίρνουμε το ιστορικό και βλέπουμε
+μαζί τι εξυπηρετεί καλύτερα το αίτημα.</p>
+<p>Αυτό που αλλάζει είναι τα εργαλεία. Ένα παιδί επτά ετών δεν θα μιλήσει για το άγχος του· θα το
+παίξει. Ένας ενήλικας με κρίσεις πανικού χρειάζεται και κατανόηση και συγκεκριμένα εργαλεία για το
+αύριο το πρωί. Ένας έφηβος χρειάζεται πρώτα να εμπιστευτεί ότι ο χώρος είναι δικός του. Και συχνά,
+όταν το αίτημα αφορά παιδί, η πιο ουσιαστική δουλειά γίνεται με τους γονείς.</p>
+<p>Οι συνεδρίες διαρκούν {SESSION} λεπτά και γίνονται στο γραφείο στην {CITY} ή διαδικτυακά, στα
+ελληνικά ή στα αγγλικά.</p>
+</div>
+<h2 class="cb-h2" data-reveal>Διαλέξτε πλαίσιο</h2>
+{svc_cards(d, items=kids, cls="cb-cards")}
+<div data-reveal style="margin-top:2.5rem">{online_note()}</div>
+<div data-reveal style="margin-top:2rem">{crisis_note()}</div>
+</div>
+{aside(d, extra=cta_button(d))}
+</div>
+</div>
+</section>"""
+    ld = [practice_ld(), person_ld(),
+          {"@type": "CollectionPage", "@id": U(slug) + "#page", "url": U(slug),
+           "name": name, "inLanguage": "el-GR",
+           "hasPart": [{"@type": "Service", "name": plain(L(k, "short")), "url": U(S(k))}
+                       for k in kids]},
+          breadcrumb_ld([HOME, ("Υπηρεσίες", U("ypiresies.html")), (name, U(slug))])]
+    return render(depth=d,
+        title=f"Ψυχοθεραπεία &amp; Συμβουλευτική {CITY} | Παιδιά, Έφηβοι, Ενήλικες",
+        description=("Ψυχοθεραπεία παιδιών, εφήβων και ενηλίκων και συμβουλευτική γονέων στην "
+                     f"{CITY} ή διαδικτυακά, με κλινική αξιολόγηση από την πρώτη συνάντηση."),
+        canonical=U(slug), ld_graph=ld, active="ypiresies.html", content=hero + body)
 
 
 # ==================================================================== ΤΟΠΙΚΗ ΣΕΛΙΔΑ
@@ -1021,7 +1140,7 @@ def local_page():
                      "Πού βρίσκεται το γραφείο, πώς θα έρθετε και ποιες περιοχές εξυπηρετούνται — "
                      "μαζί με τη δυνατότητα διαδικτυακών συνεδριών σε όλη την Ελλάδα.",
                      crumbs, marq_word="ΗΛΙΟΥΠΟΛΗ")
-    area_items = "".join(f"<li>{a}</li>" for a in AREAS[:-1])
+    area_items = "".join(f"<li>{a}</li>" for a in AREAS_NEAR)
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-grid-2 cb-grid-2--aside">
@@ -1063,8 +1182,8 @@ def local_page():
 <h2 class="cb-h2">Ραντεβού</h2>
 {hours_note()}
 <p style="margin-top:1.5rem">Τα ραντεβού κλείνονται τηλεφωνικά στο
-<a href="tel:+30{PHONE}">{PHONE_P}</a> ή στο <a href="tel:+30{MOBILE}">{MOBILE_P}</a>.
-Κάθε συνεδρία διαρκεί {SESSION} λεπτά.</p>
+<a href="tel:+30{PHONE}">{PHONE_P}</a> ή μέσα από τη
+<a href="epikoinonia.html#rantevou">φόρμα επικοινωνίας</a>. Κάθε συνεδρία διαρκεί {SESSION} λεπτά.</p>
 </div>
 </div>
 {aside(d, extra=cta_button(d))}
@@ -1078,7 +1197,7 @@ def local_page():
 <span class="cb-eyebrow">Υπηρεσίες</span>
 <h2 class="cb-h2">Τι μπορούμε να δουλέψουμε μαζί</h2>
 </div>
-{svc_cards(d)}
+{cat_cards(d)}
 </div>
 </section>"""
     ld = [practice_ld(), person_ld(),
@@ -1342,7 +1461,7 @@ ALL_FAQ = HOME_FAQ + [
   "<p>Όχι, και δηλώνεται ρητά. Πρόκειται για συμπληρωματικές πρακτικές χαλάρωσης που προσφέρονται σε "
   "<strong>ξεχωριστό πλαίσιο</strong>, δεν διαθέτουν αντίστοιχη επιστημονική τεκμηρίωση και δεν "
   "υποκαθιστούν ψυχολογική ή ιατρική φροντίδα. Δεν προσφέρονται σε ανηλίκους ούτε σε ενεργά κλινικά "
-  "περιστατικά. <a href=\"ypiresies/enallaktikes-methodoi.html\">Αναλυτικά για το πλαίσιο</a>.</p>"),
+  "περιστατικά. <a href=\"ypiresies/energeiakes-therapeies.html\">Αναλυτικά για το πλαίσιο</a>.</p>"),
  ("Τι κάνω αν βρίσκομαι σε κρίση;",
   "<p>Η ψυχοθεραπεία δεν είναι υπηρεσία επείγουσας ανάγκης. Αν σκέφτεστε να βλάψετε τον εαυτό σας ή "
   "κάποιον άλλο, καλέστε αμέσως τη <a href=\"tel:1018\">1018</a> (Γραμμή Παρέμβασης για την "
@@ -1382,8 +1501,8 @@ def epikoinonia():
     slug = "epikoinonia.html"
     crumbs = breadcrumbs(d, [("Αρχική", "index.html"), ("Επικοινωνία", None)])
     hero = page_hero("Επικοινωνία", "Κλείστε το<br>ραντεβού σας",
-                     f"Τηλεφωνικά στο {PHONE_P} ή στο {MOBILE_P}. Δεν υπάρχει ηλεκτρονική ατζέντα "
-                     "— και είναι σκόπιμο.", crumbs, marq_word="ΡΑΝΤΕΒΟΥ")
+                     f"Τηλεφωνικά στο {PHONE_P} ή με ένα μήνυμα από τη φόρμα πιο κάτω. "
+                     "Η πρώτη επαφή δεν δεσμεύει σε τίποτα.", crumbs, marq_word="ΡΑΝΤΕΒΟΥ")
     maps_embed = ("https://www.google.com/maps?q=" +
                   "%CE%95%CE%B8%CE%BD%CE%AC%CF%81%CF%87%CE%BF%CF%85%20"
                   "%CE%9C%CE%B1%CE%BA%CE%B1%CF%81%CE%AF%CE%BF%CF%85%2025%20"
@@ -1397,12 +1516,13 @@ def epikoinonia():
 <div style="margin-top:2rem">{online_note()}</div>
 <div class="cb-prose" style="margin-top:2rem">
 <h3>Πρόσβαση</h3>
-<p>Το γραφείο βρίσκεται στην {STREET}, στην {CITY}, σε κεντρικό σημείο με εύκολη πρόσβαση από τα
-νότια προάστια. Δείτε <a href="psychologos-ilioupoli.html">αναλυτικές οδηγίες πρόσβασης και τις
+<p>Το γραφείο βρίσκεται στην {STREET}, στην {CITY}, σε κεντρικό σημείο με εύκολη πρόσβαση από όλη
+την Αττική. Δείτε <a href="psychologos-ilioupoli.html">αναλυτικές οδηγίες πρόσβασης και τις
 περιοχές που εξυπηρετούνται</a>.</p>
 <h3>Διαδικτυακές συνεδρίες</h3>
 <p>Οι συνεδρίες μπορούν να πραγματοποιηθούν και διαδικτυακά, με την ίδια διάρκεια και τον ίδιο τρόπο
-εργασίας. Χρειάζεστε μόνο έναν ήσυχο χώρο και σταθερή σύνδεση.</p>
+εργασίας — από οπουδήποτε στην Ελλάδα ή στο εξωτερικό. Χρειάζεστε μόνο έναν ήσυχο χώρο και σταθερή
+σύνδεση. Οι συνεδρίες γίνονται στα ελληνικά και στα αγγλικά.</p>
 <h3>Γραπτή επικοινωνία</h3>
 <p>Αν προτιμάτε να γράψετε, στείλτε email στο <a href="mailto:{EMAIL}">{EMAIL}</a> με ένα τηλέφωνο
 επικοινωνίας και θα σας καλέσω. Παρακαλώ <strong>μην αποστέλλετε ευαίσθητα δεδομένα υγείας μέσω
@@ -1410,7 +1530,17 @@ email</strong> — το email δεν είναι ασφαλές κανάλι γι
 </div>
 {crisis_note()}
 </div>
-<div data-reveal>{booking_block(d)}</div>
+<div data-reveal>{contact_form(d)}</div>
+</div>
+</div>
+</section>
+
+<section class="cb-section cb-section--lilac">
+<div class="container mx-auto px-6 md:px-12">
+<div style="max-width:62rem" data-reveal>
+<span class="cb-eyebrow">Περιοχές εξυπηρέτησης</span>
+<h2 class="cb-h2">Πού μπορούμε να συναντηθούμε</h2>
+{areas_block()}
 </div>
 </div>
 </section>
@@ -1439,7 +1569,7 @@ email</strong> — το email δεν είναι ασφαλές κανάλι γι
 LEGAL_PRIVACY = f"""
 <h2 class="cb-h2" style="margin-top:0">Υπεύθυνη επεξεργασίας</h2>
 <p>{NAME}, Κλινική Ψυχολόγος (αρ. αδείας {LICENSE}), {STREET}, {ZIP_PRETTY} {CITY}.
-Τηλέφωνα <a href="tel:+30{PHONE}">{PHONE_P}</a> και <a href="tel:+30{MOBILE}">{MOBILE_P}</a>,
+Τηλέφωνο <a href="tel:+30{PHONE}">{PHONE_P}</a>,
 email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
 <h2 class="cb-h2">Ποια δεδομένα συλλέγονται</h2>
@@ -1526,7 +1656,7 @@ LEGAL_TERMS = f"""
 <strong>δεν αποτελούν ψυχοθεραπεία</strong>, δεν διαθέτουν αντίστοιχη επιστημονική τεκμηρίωση και
 δεν υποκαθιστούν ψυχολογική, ψυχιατρική ή ιατρική φροντίδα. Δεν διατυπώνεται καμία υπόσχεση
 θεραπείας ή αποτελέσματος. Αναλυτικά στη σχετική
-<a href="ypiresies/enallaktikes-methodoi.html">σελίδα</a>.</p>
+<a href="ypiresies/energeiakes-therapeies.html">σελίδα</a>.</p>
 
 <h2 class="cb-h2">Πνευματικά δικαιώματα</h2>
 <p>Το σύνολο του περιεχομένου (κείμενα, λογότυπο, φωτογραφίες, γραφικά) αποτελεί πνευματική
@@ -1564,7 +1694,7 @@ def not_found():
     hero = page_hero("404", "Η σελίδα δεν βρέθηκε",
                      "Η διεύθυνση που ζητήσατε δεν υπάρχει ή έχει μετακινηθεί. Δοκιμάστε από τους "
                      "παρακάτω συνδέσμους.", "")
-    links = "".join(f'<a class="cb-chip" href="{h}">{l}</a>' for l, h in NAV)
+    links = "".join(f'<a class="cb-chip" href="{h}">{l}</a>' for l, h in nav_items())
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-prose"><p>Μπορείτε να συνεχίσετε από εδώ:</p></div>
@@ -1678,7 +1808,6 @@ def build():
     pages = {
         "index.html": home(),
         "viografiko.html": viografiko(),
-        "proseggiseis.html": proseggiseis(),
         "ypiresies.html": ypiresies(),
         "psychologos-ilioupoli.html": local_page(),
         "arthra.html": arthra(),
@@ -1702,19 +1831,37 @@ def build():
     }
     for slug, cfg in SERVICE_PAGES.items():
         pages[slug] = service_page(slug, cfg)
+    # Οι καρτέλες που δεν έχουν δική τους καταχώριση στο SERVICE_PAGES είναι
+    # συλλογές: παίρνουν σελίδα-κόμβο με τα παιδιά τους.
+    for cat in CATEGORIES:
+        if cat["children"]:
+            pages[cat["slug"]] = category_page(cat)
 
-    # Η 404 σερβίρεται από οποιοδήποτε path — χρειάζεται απόλυτους συνδέσμους
-    p404 = pages["404.html"]
-    p404 = p404.replace('href="assets/', 'href="/assets/').replace('src="assets/', 'src="/assets/')
-    for _label, _href in NAV:
-        p404 = p404.replace('href="%s"' % _href, 'href="/%s"' % _href)
-    for _s in SERVICES:
-        p404 = p404.replace('href="%s"' % _s["slug"], 'href="/%s"' % _s["slug"])
-    for _extra in ("politiki-aporritou.html", "oroi-xrisis.html", "sitemap.xml",
-                   "psychologos-ilioupoli.html", "syxnes-erotiseis.html"):
-        p404 = p404.replace('href="%s"' % _extra, 'href="/%s"' % _extra)
-    p404 = p404.replace('src="assets/js/', 'src="/assets/js/')
-    pages["404.html"] = p404
+    # ---------------- αγγλική έκδοση ----------------
+    # Χτίζεται σε δεύτερο πέρασμα με αλλαγμένη γλώσσα: ο σκελετός (μενού, footer,
+    # φόρμα) παράγεται από τον ίδιο κώδικα, οπότε ό,τι διορθώνεται εκεί ισχύει
+    # αυτόματα και στις δύο εκδόσεις.
+    import content_en
+    set_lang("en")
+    pages.update(content_en.pages_en())
+    set_lang("el")
+
+    # Οι 404 σερβίρονται από οποιοδήποτε path — χρειάζονται απόλυτους συνδέσμους.
+    def absolutise(html, prefix=""):
+        html = (html.replace('href="assets/', 'href="/assets/')
+                    .replace('src="assets/', 'src="/assets/')
+                    .replace('href="../assets/', 'href="/assets/')
+                    .replace('src="../assets/', 'src="/assets/'))
+        targets = list(PAGE_SLUGS) + list(PAGE_SLUGS.values()) + ["sitemap.xml"]
+        # Από το μακρύτερο προς το κοντύτερο: αλλιώς το «index.html» θα χάλαγε
+        # πρώτο το «en/index.html» και θα έμενε μισοδιορθωμένο.
+        for t in sorted(set(targets), key=len, reverse=True):
+            short = t[len(prefix):] if prefix and t.startswith(prefix) else t
+            html = html.replace('href="%s"' % short, 'href="/%s"' % t)
+        return html.replace('src="assets/js/', 'src="/assets/js/')
+
+    pages["404.html"] = absolutise(pages["404.html"])
+    pages["en/404.html"] = absolutise(pages["en/404.html"], prefix="en/")
 
     for slug, html in pages.items():
         p = WEB / slug
@@ -1750,16 +1897,19 @@ def build():
 
     # ---------------- sitemap.xml
     prio = {"index.html": "1.0", "ypiresies.html": "0.9", "epikoinonia.html": "0.9",
-            "psychologos-ilioupoli.html": "0.9", "proseggiseis.html": "0.85",
+            "psychologos-ilioupoli.html": "0.9",
+            "ypiresies/psychotherapeia-symvouleftiki.html": "0.85",
             "viografiko.html": "0.8", "arthra.html": "0.7", "syxnes-erotiseis.html": "0.7",
             "politiki-aporritou.html": "0.3", "oroi-xrisis.html": "0.3"}
     urls = []
     for slug in pages:
-        if slug == "404.html":
+        if slug.endswith("404.html"):
             continue
+        # Η αγγλική σελίδα κληρονομεί την προτεραιότητα της ελληνικής της.
+        key = EN_TO_EL.get(slug, slug)
         loc = SITE_URL + "/" if slug == "index.html" else U(slug)
         urls.append(f"  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod>"
-                    f"<changefreq>monthly</changefreq><priority>{prio.get(slug,'0.8')}</priority></url>")
+                    f"<changefreq>monthly</changefreq><priority>{prio.get(key,'0.8')}</priority></url>")
     (WEB / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

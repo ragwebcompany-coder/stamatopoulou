@@ -2,7 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.psychoptia.com/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.psychoptia.com/viografiko.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.psychoptia.com/proseggiseis.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://www.psychoptia.com/ypiresies.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.psychoptia.com/psychologos-ilioupoli.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.psychoptia.com/arthra.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16,5 +15,23 @@
   <url><loc>https://www.psychoptia.com/ypiresies/psychotherapeia-enilikon.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.psychoptia.com/ypiresies/symvouleftiki-goneon.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.psychoptia.com/ypiresies/paigniotherapeia-dimiourgikes-technes.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.psychoptia.com/ypiresies/enallaktikes-methodoi.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/ypiresies/energeiakes-therapeies.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/ypiresies/psychotherapeia-symvouleftiki.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://www.psychoptia.com/en/index.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.psychoptia.com/en/about.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.psychoptia.com/en/contact.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.psychoptia.com/en/psychologist-ilioupoli.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.psychoptia.com/en/faq.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.psychoptia.com/en/articles.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.psychoptia.com/en/articles/carer-self-care.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/privacy-policy.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.psychoptia.com/en/terms-of-use.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/child-psychotherapy.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/adolescent-psychotherapy.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/adult-psychotherapy.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/parent-counselling.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/play-therapy-creative-arts.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/energy-therapies.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.psychoptia.com/en/services/psychotherapy-counselling.html</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
 </urlset>

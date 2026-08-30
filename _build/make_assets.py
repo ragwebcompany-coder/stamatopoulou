@@ -27,6 +27,26 @@ PHOTOS = {
     "online-synedries.jpg":        "PHOTO - BD479336-1092-4B69-9E69-F81CE67521E4.jpg",  # διαδικτυακά
 }
 
+# Οι φωτογραφίες των υπηρεσιών, μία ανά θεραπευτική κατηγορία. Το κλειδί είναι
+# το όνομα με το οποίο τις ζητά το site (βλ. SERVICES στο gen_common.py). Τα πεδία:
+#   focus — η κατακόρυφη εστίαση της περικοπής (0 = πάνω, 1 = κάτω)· χρειάζεται
+#           μόνο όπου το θέμα δεν κάθεται στο κέντρο του κάδρου.
+#   card  — αν βγαίνει και σε μικρό μέγεθος για το κουτάκι της αρχικής. Η
+#           ραδιαισθησία μοιράζεται κάρτα με το Theta Healing, οπότε εμφανίζεται
+#           μόνο μεγάλη, μέσα στη σελίδα των ενεργειακών μεθόδων.
+SERVICE_PHOTOS = {
+    "svc-psychotherapeia-enilikon":  dict(src="SERVICE - psychotherapeia-enilikon.jpg", focus=0.34),
+    "svc-psychotherapeia-efivon":    dict(src="SERVICE - psychotherapeia-efivon.jpg"),
+    "svc-psychotherapeia-paidion":   dict(src="SERVICE - psychotherapeia-paidion.jpg"),
+    "svc-symvouleftiki-goneon":      dict(src="SERVICE - symvouleftiki-goneon.jpg"),
+    "svc-paigniotherapeia":          dict(src="SERVICE - paigniotherapeia.jpg"),
+    "svc-theta-healing":             dict(src="SERVICE - theta-healing.jpg"),
+    "svc-radiaisthisia":             dict(src="SERVICE - radiaisthisia.jpg", card=False),
+}
+
+# Η φωτογραφία που κάθεται πίσω από το hero της αρχικής.
+HERO_SRC = "PHOTO - HERO.jpg"
+
 INK = (19, 18, 87)          # --cb-ink   · το indigo του λογοτύπου
 LIGHT = (248, 247, 252)     # --color-paper
 GOLD = (240, 180, 90)       # --cb-gold-soft
@@ -61,31 +81,39 @@ def cutout(box):
     return a, alpha
 
 
-def to_rgba(rgb, alpha, mono=False):
-    """Πίνακες -> εικόνα RGBA. Με mono=True, όλο το μελάνι γίνεται indigo."""
+def to_rgba(rgb, alpha):
+    """Πίνακες -> εικόνα RGBA."""
     h, w = alpha.shape
     out = np.zeros((h, w, 4), np.uint8)
-    if mono:
-        out[..., :3] = INK
-        # Το άνθος έχει εσωτερικές λεπτομέρειες που, μονόχρωμες, γίνονται
-        # μουτζούρα. Τις ανοίγουμε: όσο πιο σκούρο ήταν το pixel στο πρωτότυπο
-        # (δηλαδή όσο πιο κοντά στο φόντο), τόσο πιο διάφανο γίνεται εδώ.
-        lum = rgb.mean(axis=2) / 255.0
-        alpha = np.clip(alpha * (0.35 + 0.85 * lum), 0, 1)
-    else:
-        out[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
+    out[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
     out[..., 3] = (alpha * 255).astype(np.uint8)
     return Image.fromarray(out, "RGBA")
 
 
-def save_png8(im, name):
+def deepen(rgb, k, sat=1.15):
+    """Βαθαίνει το μελάνι κρατώντας την απόχρωσή του.
+
+    Το πρωτότυπο είναι τυπωμένο *ανοιχτό* πάνω σε indigo. Πάνω στο υπόλευκο
+    χαρτί του header η ίδια μελάνη μετρήθηκε σε 2.7:1 αντίθεση — κάτω από το
+    ελάχιστο 3:1 για γραφικά και πολύ κάτω από το 4.5:1 που θέλει το μικρό
+    κείμενο του λεκτικού. Ο πολλαπλασιασμός με `k` σκουραίνει χωρίς να πειράξει
+    τις σχέσεις των καναλιών, άρα το μωβ μένει μωβ και οι πορτοκαλί μύτες των
+    πετάλων μένουν πορτοκαλί· η μικρή ενίσχυση κορεσμού αναπληρώνει το
+    ξεθώριασμα που φέρνει πάντα το σκούρεμα.
+    """
+    out = rgb * k
+    grey = out.mean(axis=2, keepdims=True)
+    return np.clip(grey + (out - grey) * sat, 0, 255)
+
+
+def save_png8(im, name, colors=128):
     """PNG-8 με παλέτα και διαφάνεια.
 
     Το FASTOCTREE είναι ο μόνος αλγόριθμος του Pillow που κβαντίζει RGBA
     κρατώντας το alpha, και ρίχνει το αρχείο από ~200 KB σε ~30 KB χωρίς ορατή
     διαφορά σε λογότυπο με λίγα χρώματα.
     """
-    im.quantize(colors=64, method=Image.FASTOCTREE).save(IMG / name, optimize=True)
+    im.quantize(colors=colors, method=Image.FASTOCTREE).save(IMG / name, optimize=True)
     print(" ", name, im.size, (IMG / name).stat().st_size // 1024, "KB")
 
 
@@ -101,10 +129,10 @@ def write_logos():
     Πηγαίνει εκεί όπου το φόντο είναι το indigo του ίδιου του λογοτύπου και
     υπάρχει χώρος καθ' ύψος: footer και og-image.
 
-    Γιατί μονόχρωμο στο header: το πρωτότυπο μελάνι είναι *ανοιχτό* πάνω σε
-    σκούρο. Πάνω σε λευκό είτε θα εξαφανιζόταν, είτε θα έπρεπε να αντιστραφεί
-    η εσωτερική σκίαση του άνθους — που το αλλοιώνει. Μια καθαρή εκδοχή ενός
-    χρώματος κρατά το σχήμα ακέραιο.
+    Και οι δύο κρατούν τα χρώματα του πρωτοτύπου — το μωβ άνθος με τις
+    πορτοκαλί μύτες. Στο header το μελάνι μόνο βαθαίνει (βλ. `deepen`), όσο
+    χρειάζεται για να σταθεί πάνω στο ανοιχτό φόντο· το λεκτικό βαθαίνει
+    περισσότερο από το άνθος, γιατί ως κείμενο θέλει μεγαλύτερη αντίθεση.
     """
     # ---- κάθετο, πολύχρωμο: footer & og ------------------------------------
     rgb, alpha = cutout(LOGO_BOX)
@@ -112,9 +140,11 @@ def write_logos():
     save_png8(im.resize((OUT_W, round(OUT_W * im.height / im.width)), Image.LANCZOS),
               "logo-light.png")
 
-    # ---- οριζόντιο, μονόχρωμο: header --------------------------------------
-    flower = to_rgba(*cutout(FLOWER_BOX), mono=True)
-    text = to_rgba(*cutout(TEXT_BOX), mono=True)
+    # ---- οριζόντιο, πολύχρωμο: header --------------------------------------
+    frgb, fa = cutout(FLOWER_BOX)
+    flower = to_rgba(deepen(frgb, 0.88), fa)
+    trgb, ta = cutout(TEXT_BOX)
+    text = to_rgba(deepen(trgb, 0.70), ta)
 
     H = 330                                   # ~3× το ύψος εμφάνισης στο header
     fw = round(H * flower.width / flower.height)
@@ -156,6 +186,52 @@ def write_photos():
     print("  grafeio-43.jpg")
 
 
+def crop_ratio(im, ratio, focus=0.5):
+    """Περικοπή στο ζητούμενο πλάτος/ύψος, με το θέμα στο `focus` καθ\' ύψος."""
+    if im.width / im.height > ratio:                 # πολύ φαρδιά -> κόβουμε πλάγια
+        w = round(im.height * ratio)
+        left = round((im.width - w) * 0.5)
+        return im.crop((left, 0, left + w, im.height))
+    h = round(im.width / ratio)                      # πολύ ψηλή -> κόβουμε καθ\' ύψος
+    top = round((im.height - h) * focus)
+    return im.crop((0, top, im.width, top + h))
+
+
+def write_service_photos():
+    """Δύο μεγέθη ανά υπηρεσία, γιατί η ίδια λήψη παίζει σε δύο θέσεις.
+
+    `…-card.jpg` (720×450) — μέσα στο κουτάκι της υπηρεσίας, όπου η κάρτα δεν
+    ξεπερνά τα ~380 CSS px· ένα μεγάλο αρχείο εκεί θα ήταν καθαρή σπατάλη, αφού
+    η αρχική δείχνει έξι τέτοιες κάρτες μαζί.
+
+    `….jpg` (1240×775) — στην περιγραφή της αντίστοιχης σελίδας, όπου η εικόνα
+    πιάνει όλο το πλάτος της στήλης κειμένου.
+
+    Και τα δύο σε 16:10: αρκετά φαρδύ ώστε να μη σπρώχνει το κείμενο της κάρτας
+    κάτω από το πτυσσόμενο, αρκετά ψηλό ώστε να χωρά το θέμα της λήψης.
+    """
+    for out, cfg in SERVICE_PHOTOS.items():
+        base = crop_ratio(Image.open(BASE / cfg["src"]).convert("RGB"), 16 / 10,
+                          cfg.get("focus", 0.5))
+        sizes = [(out + ".jpg", 1240)]
+        if cfg.get("card", True):
+            sizes.append((out + "-card.jpg", 720))
+        for name, w in sizes:
+            im = base.resize((w, round(w * 10 / 16)), Image.LANCZOS)
+            im.save(IMG / name, quality=78, optimize=True, progressive=True)
+            print(" ", name, im.size, (IMG / name).stat().st_size // 1024, "KB")
+
+
+def write_hero():
+    """Το φόντο του hero. Κρατά το 4:3 του πρωτοτύπου και όχι μια φαρδιά
+    περικοπή: το CSS το κάνει `object-fit: cover`, οπότε σε στενή οθόνη
+    χρειάζεται ύψος για να μη μείνει το κάδρο μισό."""
+    p = Image.open(BASE / HERO_SRC).convert("RGB")
+    p = p.resize((1440, round(1440 * p.height / p.width)), Image.LANCZOS)
+    p.save(IMG / "hero-grafeio.jpg", quality=76, optimize=True, progressive=True)
+    print("  hero-grafeio.jpg", p.size, (IMG / "hero-grafeio.jpg").stat().st_size // 1024, "KB")
+
+
 def write_og():
     """Η εικόνα κοινοποίησης: το λογότυπο στο δικό του indigo, όπως το πρωτότυπο."""
     og = Image.new("RGB", (1200, 675), INK)
@@ -173,4 +249,6 @@ if __name__ == "__main__":
     IMG.mkdir(parents=True, exist_ok=True)
     print("λογότυπα:");     write_logos()
     print("φωτογραφίες:");  write_photos()
+    print("hero:");         write_hero()
+    print("υπηρεσίες:");    write_service_photos()
     print("κοινοποίηση:");  write_og()
