@@ -249,6 +249,11 @@ def footer(depth):
 <p class="cb-footer__slogan">{slogan()}</p>
 <p class="cb-footer__tag">{T("foot.tag").format(c=city())}</p>
 <p class="cb-footer__tag cb-footer__tag--sign">{T("foot.sign").format(l=LICENSE)}</p>
+<div class="cb-cert">
+<span class="cb-cert__badge"><img src="{r}assets/img/thetahealing-think.png" width="320" height="363"
+ loading="lazy" decoding="async" alt="{T("cert.thinkAlt")}"></span>
+<span class="cb-cert__t">{T("cert.think")}</span>
+</div>
 </div>
 
 <div class="cb-footer__col">
@@ -836,6 +841,19 @@ img { height: auto; }
 .cb-socials--footer .cb-socials__a:hover { background: #fff; }
 @media (prefers-reduced-motion: reduce) { .cb-socials__a { transition: none; }
   .cb-socials__a:hover { transform: none; } }
+
+/* ---- σήμα πιστοποίησης στο footer ----
+   Το σήμα του φορέα είναι σχεδόν μαύρο και πάνω στο indigo θα χανόταν, οπότε
+   κάθεται σε λευκή κάρτα — όπως τυπώνεται και στα ίδια τα πιστοποιητικά. */
+.cb-cert { margin-top: 1.6rem; display: flex; flex-direction: column;
+  align-items: flex-start; gap: .6rem; }
+.cb-cert__badge { display: block; background: #fff; border-radius: 6px; padding: .55rem .7rem;
+  line-height: 0; box-shadow: 0 10px 26px -18px rgba(0,0,0,.7); }
+.cb-cert__badge img { width: 7.5rem; height: auto; display: block; }
+/* Το 30ch έσπαγε τη λεζάντα σε δύο γραμμές χωρίς λόγο: χωράει ολόκληρη στο
+   πλάτος της στήλης, οπότε το όριο το βάζει η στήλη και όχι εμείς. */
+.cb-cert__t { font-size: .74rem; font-weight: 300; line-height: 1.55; color: var(--cb-lilac);
+  text-wrap: balance; }
 
 /* Οι ηλικιακές ομάδες κρέμονται οπτικά από την καρτέλα τους. */
 .cb-footer__sub { padding-left: .9rem; font-size: .84rem; opacity: .78; }

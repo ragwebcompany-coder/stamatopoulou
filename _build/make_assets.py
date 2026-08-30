@@ -47,6 +47,9 @@ SERVICE_PHOTOS = {
 # Η φωτογραφία που κάθεται πίσω από το hero της αρχικής.
 HERO_SRC = "PHOTO - HERO.jpg"
 
+# Το σήμα του φορέα πιστοποίησης για το Theta Healing.
+THINK_SRC = "LOGO - THETAHEALING THINK.png"
+
 INK = (19, 18, 87)          # --cb-ink   · το indigo του λογοτύπου
 LIGHT = (248, 247, 252)     # --color-paper
 GOLD = (240, 180, 90)       # --cb-gold-soft
@@ -232,6 +235,37 @@ def write_hero():
     print("  hero-grafeio.jpg", p.size, (IMG / "hero-grafeio.jpg").stat().st_size // 1024, "KB")
 
 
+def write_think_badge():
+    """Το σήμα THInK / ThetaHealing Institute of Knowledge, για το footer.
+
+    Η πηγή είναι στιγμιότυπο οθόνης: έχει μια μαύρη μπάρα πάνω αριστερά και
+    άγνωστο περιθώριο γύρω από το σήμα. Αντί για καρφωμένες συντεταγμένες —
+    που θα έσπαγαν με το πρώτο διαφορετικό στιγμιότυπο — εντοπίζουμε το μελάνι
+    και κόβουμε εκεί. Η μπάρα εξαιρείται κοιτάζοντας μόνο κάτω από αυτήν.
+
+    Το λευκό φόντο μένει ψημένο μέσα στην εικόνα: το σήμα είναι σχεδόν μαύρο
+    και πάνω στο indigo footer θα χανόταν, οπότε κάθεται σε λευκή κάρτα και
+    το CSS απλώς στρογγυλεύει τη γωνία.
+    """
+    im = Image.open(BASE / THINK_SRC).convert("RGB")
+    a = np.asarray(im, np.uint8)
+    top = 78                                   # κάτω από τη μαύρη μπάρα
+    ink = a[top:665].min(axis=2) < 232
+    ys, xs = np.where(ink)
+    box = (int(xs.min()), int(ys.min()) + top, int(xs.max()) + 1, int(ys.max()) + top + 1)
+    crop = im.crop(box)
+
+    pad = round(crop.width * 0.06)
+    canvas = Image.new("RGB", (crop.width + 2 * pad, crop.height + 2 * pad), (255, 255, 255))
+    canvas.paste(crop, (pad, pad))
+
+    w = 320                                    # 2× το μέγεθος εμφάνισης στο footer
+    out = canvas.resize((w, round(w * canvas.height / canvas.width)), Image.LANCZOS)
+    out.save(IMG / "thetahealing-think.png", optimize=True)
+    print("  thetahealing-think.png", out.size,
+          (IMG / "thetahealing-think.png").stat().st_size // 1024, "KB")
+
+
 def write_og():
     """Η εικόνα κοινοποίησης: το λογότυπο στο δικό του indigo, όπως το πρωτότυπο."""
     og = Image.new("RGB", (1200, 675), INK)
@@ -251,4 +285,5 @@ if __name__ == "__main__":
     print("φωτογραφίες:");  write_photos()
     print("hero:");         write_hero()
     print("υπηρεσίες:");    write_service_photos()
+    print("πιστοποίηση:");  write_think_badge()
     print("κοινοποίηση:");  write_og()

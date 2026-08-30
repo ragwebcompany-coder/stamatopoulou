@@ -144,6 +144,10 @@ STRINGS = {
  "foot.terms":   {"el": "Όροι Χρήσης", "en": "Terms of Use"},
  "foot.sitemap": {"el": "Χάρτης ιστότοπου", "en": "Sitemap"},
  "foot.madeby":  {"el": "Made by", "en": "Made by"},
+ "cert.think":   {"el": "Πιστοποιημένη σύμβουλος Theta Healing.",
+                  "en": "Certified ThetaHealing practitioner."},
+ "cert.thinkAlt": {"el": "THInK — ThetaHealing Institute of Knowledge",
+                   "en": "THInK — ThetaHealing Institute of Knowledge"},
  "foot.tag":     {"el": "Ψυχοθεραπεία παιδιών, εφήβων και ενηλίκων, συμβουλευτική γονέων και "
                         "παιγνιοθεραπεία, στην {c} ή διαδικτυακά.",
                   "en": "Psychotherapy for children, teenagers and adults, parent counselling and "
