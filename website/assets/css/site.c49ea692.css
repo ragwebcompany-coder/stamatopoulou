@@ -894,7 +894,10 @@ img { height: auto; }
   border-bottom: 1px solid rgba(19,18,87,.10); padding: .85rem 0; }
 
 /* ---- λογότυπο (εικόνα πελάτη) ---- */
-.cb-logo { display: block; text-decoration: none; max-width: 14rem; }
+/* Το `flex: none` είναι σκόπιμο: ως flex item σε γεμάτη σειρά, ο σύνδεσμος του
+   λογοτύπου συρρικνωνόταν μέχρι να εξαφανιστεί η εικόνα του αντί να ξεχειλίσει
+   ορατά το μενού — σφάλμα που φαινόταν μόνο σε συγκεκριμένα πλάτη. */
+.cb-logo { display: block; text-decoration: none; max-width: 14rem; flex: none; }
 .cb-logo img { display: block; width: 100%; height: auto; }
 .cb-logo__sub { font-size: .55rem; letter-spacing: .26em; text-transform: uppercase;
   color: var(--cb-violet); padding-left: .1rem; }
@@ -953,11 +956,20 @@ img { height: auto; }
 .cb-nav__drop__all span:last-child { transition: transform .3s ease; }
 .cb-nav__drop__all:hover span:last-child { transform: translateX(5px); }
 
-/* Ανάμεσα στο lg (1024px) και τα 1280px, πέντε ελληνικές ετικέτες μενού συν το
-   κουμπί ραντεβού δεν χωρούν στο ίδιο ύψος με το λογότυπο: το «Θεραπευτικές
-   Προσεγγίσεις» έσπαγε σε δύο γραμμές και το λογότυπο ακουμπούσε στο μενού.
-   Σφίγγουμε αποστάσεις και γράμματα αντί να κρύψουμε ετικέτες. */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* Το οριζόντιο μενού ξεκινά πλέον στα 1280px και όχι στα 1024: με τις τρεις
+   θεραπείες στο πρώτο επίπεδο οι ετικέτες έγιναν επτά, και σε tablet έσπαγαν
+   σε δεύτερη γραμμή. Κάτω από αυτό το πλάτος αναλαμβάνει το overlay μενού,
+   που τις δείχνει ούτως ή άλλως όλες. */
+.xl\:flex { display: none; }
+.xl\:hidden { display: block; }
+@media (min-width: 1280px) {
+  .xl\:flex { display: flex; }
+  .xl\:hidden { display: none; }
+}
+/* Ως τα 1600 οι επτά ετικέτες συν το κουμπί ραντεβού θέλουν σφίξιμο για να
+   μείνουν σε μία γραμμή με το λογότυπο. Στα 1440 με κανονικά μεγέθη η σειρά
+   ξεχείλιζε και το λογότυπο συνθλιβόταν στο μηδέν. */
+@media (min-width: 1280px) and (max-width: 1599px) {
   .cb-navbar { gap: 1.35rem; }
   .cb-nav { gap: .95rem; }
   .cb-nav__link { font-size: .6rem; letter-spacing: .09em; }

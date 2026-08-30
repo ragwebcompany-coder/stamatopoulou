@@ -801,14 +801,13 @@ still needed — including when therapy should come to an end.</li>
     return render(depth=d, title=f"Psychotherapy Services {CITY}, Athens | Children, Teens, Adults",
                   description=("Psychotherapy for children, teenagers and adults, parent counselling, "
                                f"play therapy and creative arts in {CITY}, Athens or online."),
-                  canonical=U(slug), ld_graph=ld, active="ypiresies.html", content=hero + body)
+                  canonical=U(slug), ld_graph=ld, active="", content=hero + body)
 
 
 def category_en(cat):
     d, slug = 2, cat["slug_en"]
     name = plain(L(cat, "nav"))
-    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")),
-                             (T("nav.services"), page_slug("ypiresies.html")), (name, None)])
+    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")), (name, None)])
     hero = page_hero("Services", "Psychotherapy &amp;<br>Counselling",
                      "One therapeutic process, four settings. Which one fits follows from the "
                      "clinical assessment of the first meeting — not from a ready-made protocol.",
@@ -844,14 +843,13 @@ in English.</p>
            "name": name, "inLanguage": "en-GB",
            "hasPart": [{"@type": "Service", "name": plain(L(k, "short")), "url": U(S(k))}
                        for k in kids]},
-          breadcrumb_ld([(T("nav.home"), U("en/index.html")),
-                         ("Services", U("en/services.html")), (name, U(slug))])]
+          breadcrumb_ld([(T("nav.home"), U("en/index.html")), (name, U(slug))])]
     return render(depth=d,
                   title=f"Psychotherapy &amp; Counselling {CITY}, Athens | Children, Teens, Adults",
                   description=("Psychotherapy for children, teenagers and adults and parent "
                                f"counselling in {CITY}, Athens or online, with clinical assessment "
                                "from the first meeting."),
-                  canonical=U(slug), ld_graph=ld, active="ypiresies.html", content=hero + body)
+                  canonical=U(slug), ld_graph=ld, active=S(cat), content=hero + body)
 
 
 # ==================================================================== ΕΠΙΚΟΙΝΩΝΙΑ

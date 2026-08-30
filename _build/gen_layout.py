@@ -87,26 +87,31 @@ def logo_block(depth, footer=False):
 
 
 def nav_links(depth, active):
-    """Η κύρια πλοήγηση. Το «Υπηρεσίες» κρύβει από κάτω του υπομενού με τα έξι
-    πλαίσια συνεργασίας — ανοίγει με hover και με πληκτρολόγιο (:focus-within),
-    χωρίς JavaScript. Παραμένει κανονικός σύνδεσμος προς το hub, ώστε σε οθόνη
-    αφής το πάτημα να οδηγεί στη σελίδα υπηρεσιών."""
+    """Η κύρια πλοήγηση.
+
+    Όποια καρτέλα στεγάζει επιμέρους πλαίσια κρύβει από κάτω της υπομενού με τα
+    παιδιά της — ανοίγει με hover και με πληκτρολόγιο (:focus-within), χωρίς
+    JavaScript. Παραμένει κανονικός σύνδεσμος προς τη σελίδα της, ώστε σε οθόνη
+    αφής το πάτημα να οδηγεί κάπου αντί να μη κάνει τίποτα.
+    """
     r = rel(depth)
+    by_href = {S(c): c for c in CATEGORIES}
     out = []
     for label, href in nav_items():
         is_active = href == active
         cls = " is-active" if is_active else ""
         cur = ' aria-current="page"' if is_active else ""
+        cat = by_href.get(href)
 
-        if href != "ypiresies.html":
+        if not cat or not cat["children"]:
             out.append(f'<a class="cb-nav__link{cls}" href="{r}{href}"{cur}>{label}</a>')
             continue
 
         items = "".join(
-            f'<a href="{r}{S(c)}">{icon(c["icon"], "w-5 h-5")}'
-            f'<span><span class="cb-nav__dt">{L(c, "short")}</span>'
-            f'<span class="cb-nav__dd">{L(c, "who")}</span></span></a>'
-            for c in CATEGORIES
+            f'<a href="{r}{S(k)}">{icon(k["icon"], "w-5 h-5")}'
+            f'<span><span class="cb-nav__dt">{L(k, "short")}</span>'
+            f'<span class="cb-nav__dd">{L(k, "who")}</span></span></a>'
+            for k in cat_children(cat)
         )
         out.append(
             f'<span class="cb-nav__item">'
@@ -115,7 +120,7 @@ def nav_links(depth, active):
             f'<span class="cb-nav__drop">'
             f'<span class="cb-nav__drop__in">{items}'
             f'<a class="cb-nav__drop__all" href="{r}{href}">'
-            f'<span>{T("nav.allservices")}</span><span>&#8594;</span></a>'
+            f'<span>{T("nav.overview")}</span><span>&#8594;</span></a>'
             f'</span></span></span>'
         )
     return "".join(out)
@@ -141,7 +146,9 @@ def header(depth, active, el_slug=None):
     r = rel(depth)
     links = nav_links(depth, active)
     menu_links = "".join('<a href="%s%s">%s</a>' % (r, href, label) for label, href in nav_items())
-    svc_links = "".join('<a href="%s%s">%s</a>' % (r, S(c), L(c, "nav")) for c in CATEGORIES)
+    # Οι τρεις κατηγορίες βρίσκονται πλέον στο κυρίως μενού, οπότε εδώ έχει νόημα
+    # να φανούν τα φύλλα τους — αλλιώς το υπομενού θα επαναλάμβανε τα ίδια.
+    svc_links = "".join('<a href="%s%s">%s</a>' % (r, S(x), L(x, "nav")) for x in SERVICES)
     return f"""<a class="cb-skip" href="#main">{T("skip")}</a>
 <div class="cb-topbar">
 <div class="cb-topbar__in">
@@ -153,12 +160,12 @@ def header(depth, active, el_slug=None):
 <header class="cb-header">
 <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
 {logo_block(depth)}
-<div class="cb-navbar hidden lg:flex items-center gap-8">
+<div class="cb-navbar hidden xl:flex items-center gap-8">
 <nav class="cb-nav" aria-label="{T("nav.main")}">{links}</nav>
 {lang_switch(depth, el_slug)}
 <a class="cb-btn cb-btn--sm" href="{r}{page_slug('epikoinonia.html')}#rantevou">{T("cta.book")}</a>
 </div>
-<button class="lg:hidden cb-burger" aria-label="{T("nav.open")}" aria-controls="cb-menu" aria-expanded="false">
+<button class="xl:hidden cb-burger" aria-label="{T("nav.open")}" aria-controls="cb-menu" aria-expanded="false">
 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
 </button>
 </div>
@@ -226,7 +233,8 @@ def footer(depth):
     r = rel(depth)
     nav_links = "".join('<li><a href="%s%s">%s</a></li>' % (r, href, label) for label, href in nav_items())
     # Στο footer χωράνε και οι έξι: είναι λίστα, όχι μενού.
-    svc_links = "".join(
+    svc_links = ('<li><a href="%s%s">%s</a></li>'
+                 % (r, page_slug("ypiresies.html"), T("nav.allservices"))) + "".join(
         '<li><a href="%s%s">%s</a></li>' % (r, S(c), L(c, "nav")) for c in CATEGORIES) + "".join(
         '<li class="cb-footer__sub"><a href="%s%s">%s</a></li>' % (r, S(s), L(s, "nav"))
         for c in CATEGORIES for s in cat_children(c))
@@ -373,7 +381,10 @@ img { height: auto; }
   border-bottom: 1px solid rgba(19,18,87,.10); padding: .85rem 0; }
 
 /* ---- λογότυπο (εικόνα πελάτη) ---- */
-.cb-logo { display: block; text-decoration: none; max-width: 14rem; }
+/* Το `flex: none` είναι σκόπιμο: ως flex item σε γεμάτη σειρά, ο σύνδεσμος του
+   λογοτύπου συρρικνωνόταν μέχρι να εξαφανιστεί η εικόνα του αντί να ξεχειλίσει
+   ορατά το μενού — σφάλμα που φαινόταν μόνο σε συγκεκριμένα πλάτη. */
+.cb-logo { display: block; text-decoration: none; max-width: 14rem; flex: none; }
 .cb-logo img { display: block; width: 100%; height: auto; }
 .cb-logo__sub { font-size: .55rem; letter-spacing: .26em; text-transform: uppercase;
   color: var(--cb-violet); padding-left: .1rem; }
@@ -432,11 +443,20 @@ img { height: auto; }
 .cb-nav__drop__all span:last-child { transition: transform .3s ease; }
 .cb-nav__drop__all:hover span:last-child { transform: translateX(5px); }
 
-/* Ανάμεσα στο lg (1024px) και τα 1280px, πέντε ελληνικές ετικέτες μενού συν το
-   κουμπί ραντεβού δεν χωρούν στο ίδιο ύψος με το λογότυπο: το «Θεραπευτικές
-   Προσεγγίσεις» έσπαγε σε δύο γραμμές και το λογότυπο ακουμπούσε στο μενού.
-   Σφίγγουμε αποστάσεις και γράμματα αντί να κρύψουμε ετικέτες. */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* Το οριζόντιο μενού ξεκινά πλέον στα 1280px και όχι στα 1024: με τις τρεις
+   θεραπείες στο πρώτο επίπεδο οι ετικέτες έγιναν επτά, και σε tablet έσπαγαν
+   σε δεύτερη γραμμή. Κάτω από αυτό το πλάτος αναλαμβάνει το overlay μενού,
+   που τις δείχνει ούτως ή άλλως όλες. */
+.xl\:flex { display: none; }
+.xl\:hidden { display: block; }
+@media (min-width: 1280px) {
+  .xl\:flex { display: flex; }
+  .xl\:hidden { display: none; }
+}
+/* Ως τα 1600 οι επτά ετικέτες συν το κουμπί ραντεβού θέλουν σφίξιμο για να
+   μείνουν σε μία γραμμή με το λογότυπο. Στα 1440 με κανονικά μεγέθη η σειρά
+   ξεχείλιζε και το λογότυπο συνθλιβόταν στο μηδέν. */
+@media (min-width: 1280px) and (max-width: 1599px) {
   .cb-navbar { gap: 1.35rem; }
   .cb-nav { gap: .95rem; }
   .cb-nav__link { font-size: .6rem; letter-spacing: .09em; }

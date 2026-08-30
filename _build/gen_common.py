@@ -171,12 +171,30 @@ def depth_of(slug):
 
 
 def nav_items():
-    """Η κύρια πλοήγηση στην τρέχουσα γλώσσα, ως [(ετικέτα, href)]."""
-    return [(T("nav.home"),     page_slug("index.html")),
-            (T("nav.bio"),      page_slug("viografiko.html")),
-            (T("nav.services"), page_slug("ypiresies.html")),
-            (T("nav.articles"), page_slug("arthra.html")),
-            (T("nav.contact"),  page_slug("epikoinonia.html"))]
+    """Η κύρια πλοήγηση στην τρέχουσα γλώσσα, ως [(ετικέτα, href)].
+
+    Οι τρεις θεραπευτικές κατηγορίες κάθονται στο πρώτο επίπεδο, κατόπιν
+    οδηγίας: η γενική καρτέλα «Υπηρεσίες» έκρυβε ακριβώς αυτό που έπρεπε να
+    φαίνεται. Η σελίδα-κόμβος υπηρεσιών παραμένει, αλλά πλέον φτάνει κανείς σε
+    αυτήν από το footer και όχι από το μενού.
+    """
+    return ([(T("nav.home"), page_slug("index.html")),
+             (T("nav.bio"),  page_slug("viografiko.html"))]
+            + [(L(c, "nav"), S(c)) for c in CATEGORIES]
+            + [(T("nav.articles"), page_slug("arthra.html")),
+               (T("nav.contact"),  page_slug("epikoinonia.html"))])
+
+
+def category_of(el_slug):
+    """Η καρτέλα στην οποία ανήκει μια σελίδα υπηρεσίας (ελληνικό slug).
+
+    Χρησιμεύει σε δύο σημεία: ποια καρτέλα φωτίζεται στο μενού όταν βλέπεις
+    ένα φύλλο, και τι γράφει το breadcrumb ανάμεσα στην αρχική και τη σελίδα.
+    """
+    for c in CATEGORIES:
+        if el_slug == c["slug"] or el_slug in c["children"]:
+            return c
+    return None
 
 SERVICES = [
     dict(slug="ypiresies/psychotherapeia-paidion.html",

@@ -627,7 +627,7 @@ def ypiresies():
         title=f"Υπηρεσίες Ψυχοθεραπείας {CITY} | Παιδιά, Έφηβοι, Ενήλικες",
         description=("Ψυχοθεραπεία παιδιών, εφήβων και ενηλίκων, συμβουλευτική γονέων, παιγνιοθεραπεία "
                      f"και δημιουργικές τέχνες στην {CITY} ή διαδικτυακά."),
-        canonical=U(slug), ld_graph=ld, active=slug, content=hero + body)
+        canonical=U(slug), ld_graph=ld, active="", content=hero + body)
 
 
 # ==================================================================== ΣΕΛΙΔΕΣ ΥΠΗΡΕΣΙΩΝ
@@ -1042,8 +1042,12 @@ def service_page(slug, cfg):
     # en/services/… (βάθος 2), οπότε χρειάζονται διαφορετικά «../».
     d = depth_of(page_slug(slug))
     name = plain(next(L(x, "nav") for x in SERVICES if x["slug"] == slug))
-    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")),
-                             (T("nav.services"), page_slug("ypiresies.html")), (name, None)])
+    parent = category_of(slug)
+    trail = [(T("nav.home"), page_slug("index.html"))]
+    if parent and parent["slug"] != slug:
+        trail.append((plain(L(parent, "nav")), S(parent)))
+    trail.append((name, None))
+    crumbs = breadcrumbs(d, trail)
     hero = page_hero(cfg["eyebrow"], cfg["h1"], cfg["lede"], crumbs, marq_word=cfg["marq"])
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
@@ -1064,6 +1068,7 @@ def service_page(slug, cfg):
 </div>
 </div>
 </section>"""
+    _key = slug              # το ελληνικό slug μένει το κλειδί των αντιστοιχίσεων
     slug = page_slug(slug)   # από εδώ και κάτω μιλάμε URL, όχι κλειδιά
     ld = [practice_ld(), person_ld(),
           {"@type": "WebPage", "@id": U(slug) + "#page", "url": U(slug),
@@ -1074,9 +1079,13 @@ def service_page(slug, cfg):
            "lastReviewed": TODAY,
            "reviewedBy": {"@id": SITE_URL + "/viografiko.html#psychologos"}},
           faq_ld(cfg["faq"]),
-          breadcrumb_ld([HOME, ("Υπηρεσίες", U("ypiresies.html")), (name, U(slug))])]
+          breadcrumb_ld([(T("nav.home"), U(page_slug("index.html")))] +
+                        ([(plain(L(parent, "nav")), U(S(parent)))]
+                         if parent and parent["slug"] != _key else []) +
+                        [(name, U(slug))])]
     return render(depth=d, title=cfg["title"], description=cfg["desc"], canonical=U(slug),
-                  ld_graph=ld, active="ypiresies.html", content=hero + body, og_type="article")
+                  ld_graph=ld, active=S(parent) if parent else "",
+                  content=hero + body, og_type="article")
 
 
 def category_page(cat):
@@ -1087,7 +1096,7 @@ def category_page(cat):
     """
     d, slug = 1, cat["slug"]
     name = plain(L(cat, "nav"))
-    crumbs = breadcrumbs(d, [("Αρχική", "index.html"), ("Υπηρεσίες", "ypiresies.html"), (name, None)])
+    crumbs = breadcrumbs(d, [("Αρχική", "index.html"), (name, None)])
     hero = page_hero("Υπηρεσίες", "Ψυχοθεραπεία &amp;<br>Συμβουλευτική",
                      "Μία θεραπευτική διαδικασία, τέσσερα πλαίσια. Ποιο ταιριάζει προκύπτει από την "
                      "κλινική αξιολόγηση της πρώτης συνάντησης — όχι από ένα έτοιμο πρωτόκολλο.",
@@ -1123,12 +1132,12 @@ def category_page(cat):
            "name": name, "inLanguage": "el-GR",
            "hasPart": [{"@type": "Service", "name": plain(L(k, "short")), "url": U(S(k))}
                        for k in kids]},
-          breadcrumb_ld([HOME, ("Υπηρεσίες", U("ypiresies.html")), (name, U(slug))])]
+          breadcrumb_ld([HOME, (name, U(slug))])]
     return render(depth=d,
         title=f"Ψυχοθεραπεία &amp; Συμβουλευτική {CITY} | Παιδιά, Έφηβοι, Ενήλικες",
         description=("Ψυχοθεραπεία παιδιών, εφήβων και ενηλίκων και συμβουλευτική γονέων στην "
                      f"{CITY} ή διαδικτυακά, με κλινική αξιολόγηση από την πρώτη συνάντηση."),
-        canonical=U(slug), ld_graph=ld, active="ypiresies.html", content=hero + body)
+        canonical=U(slug), ld_graph=ld, active=S(cat), content=hero + body)
 
 
 # ==================================================================== ΤΟΠΙΚΗ ΣΕΛΙΔΑ
