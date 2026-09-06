@@ -50,6 +50,12 @@ HERO_SRC = "PHOTO - HERO.jpg"
 # Το σήμα του φορέα πιστοποίησης για το Theta Healing.
 THINK_SRC = "LOGO - THETAHEALING THINK.png"
 
+# Το πιστοποιητικό Θεραπευτικής Ραδιαισθησίας (RSSE, Πολωνία). Η πηγή είναι
+# φωτογραφία του πλαστικοποιημένου εγγράφου πάνω σε γραφείο· η περικοπή κόβει
+# ό,τι περισσεύει γύρω, ώστε να μείνει μόνο το ίδιο το πιστοποιητικό.
+CERT_SRC = "CERT - radiaisthisia.jpg"
+CERT_BOX = (22, 108, 880, 1395)
+
 INK = (19, 18, 87)          # --cb-ink   · το indigo του λογοτύπου
 LIGHT = (248, 247, 252)     # --color-paper
 GOLD = (240, 180, 90)       # --cb-gold-soft
@@ -225,6 +231,19 @@ def write_service_photos():
             print(" ", name, im.size, (IMG / name).stat().st_size // 1024, "KB")
 
 
+def write_cert():
+    """Το πιστοποιητικό ραδιαισθησίας, στη σελίδα της αντίστοιχης υπηρεσίας.
+
+    Κάθετο και σε μέτριο πλάτος: εμφανίζεται σε στήλη ~22rem, οπότε τα 760px
+    αρκούν και για οθόνες υψηλής πυκνότητας.
+    """
+    im = Image.open(BASE / CERT_SRC).convert("RGB").crop(CERT_BOX)
+    im = im.resize((760, round(760 * im.height / im.width)), Image.LANCZOS)
+    im.save(IMG / "cert-radiaisthisia.jpg", quality=80, optimize=True, progressive=True)
+    print("  cert-radiaisthisia.jpg", im.size,
+          (IMG / "cert-radiaisthisia.jpg").stat().st_size // 1024, "KB")
+
+
 def write_hero():
     """Το φόντο του hero. Κρατά το 4:3 του πρωτοτύπου και όχι μια φαρδιά
     περικοπή: το CSS το κάνει `object-fit: cover`, οπότε σε στενή οθόνη
@@ -286,4 +305,5 @@ if __name__ == "__main__":
     print("hero:");         write_hero()
     print("υπηρεσίες:");    write_service_photos()
     print("πιστοποίηση:");  write_think_badge()
+    print("δίπλωμα:");      write_cert()
     print("κοινοποίηση:");  write_og()

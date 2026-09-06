@@ -373,27 +373,53 @@ point, not evidence.</div>
        "that stays out of reach in ordinary waking alertness can be worked with."),
  facts=[("For", "Any age; for minors, always with the parents' agreement")] + COMMON_FACTS_EN,
  body="""
-<h2 class="cb-h2" style="margin-top:0">What the theta frequencies are</h2>
-<p>The brain runs at different rhythms depending on its state. <strong>Theta</strong> is the rhythm
-it naturally produces on the border between sleep and waking — in deep relaxation, in meditation, in
-the last moments before falling asleep.</p>
-<p>In that state the mind becomes <strong>markedly more receptive</strong>: the critical, filtering
-function of everyday alertness recedes, and material that is otherwise out of reach becomes
-accessible.</p>
+<h2 class="cb-h2" style="margin-top:0">A route towards deeper beliefs and self-knowledge</h2>
+<p>ThetaHealing® is a technique of personal and spiritual development created by Vianna Stibal. It
+combines the meditative state, natural intuition and the exploration of the deeper beliefs that may
+shape how we perceive ourselves, how we relate and how we move through life.</p>
+<p>At its basis lies the idea that behind many conscious thoughts and choices there may be deeper
+beliefs and repeating patterns. Through targeted questions, a person has the chance to recognise
+them, to explore where they came from and to gain greater awareness of how they operate in their
+life.</p>
 
-<h2 class="cb-h2">What gets worked with</h2>
-<p>Through theta, <strong>very deep material</strong> can be worked with: beliefs about oneself and
-the world, repeating patterns, emotional loads a person carries without always knowing where they
-came from.</p>
-<p>The process is <strong>guided</strong>, and the person takes an active part in it — it is not
-something done to you, it is something you do.</p>
+<h2 class="cb-h2">The Theta state</h2>
+<p>The name of the technique is connected to the theta brainwaves, a normal form of electrical
+activity in the brain. Activity in the theta band has been studied, among other things, in relation
+to different states of meditation and inward concentration.</p>
+<p>ThetaHealing® uses a guided meditative process, aiming at a state of deeper inward focus and
+observation. No previous experience of meditation is required, and the person remains conscious,
+present and active throughout the session.</p>
 
-<h2 class="cb-h2">Where it can be applied</h2>
-<p>The range of requests is very wide and there is no age limit. Where a <strong>minor</strong> is
-involved, the <strong>parents' agreement</strong> always comes first.</p>
+<h2 class="cb-h2">What can we explore?</h2>
+<p>A session may focus on different areas of personal exploration, such as:</p>
+<ul><li>limiting beliefs and subconscious patterns</li><li>fears, insecurities and inner
+obstacles</li><li>repeating patterns in relationships</li><li>self-image, self-esteem and a sense of
+personal worth</li><li>boundaries, trust and expressing personal needs</li><li>beliefs about love,
+relationships, work, success and abundance</li><li>personal goals and the changes one wants</li>
+<li>the wish for deeper self-knowledge, inner connection and personal development</li></ul>
+<p>Of particular interest are often those points where a person feels they know consciously what
+they want, yet something within seems to lead them back to the same pattern.</p>
 
-<div class="cb-note cb-note--scope">Theta Healing <em>never</em> replaces medication or medical
-follow-up, and no recommendation to discontinue either is given.</div>
+<h2 class="cb-h2">How does a ThetaHealing® session work?</h2>
+<p>The session begins with the subject the person themselves wishes to explore. Through
+conversation and targeted questions, we gradually attempt to recognise the deeper beliefs that may
+be connected to it.</p>
+<p>The technique may use muscle testing as a tool for exploring beliefs, as well as the digging
+process: a sequence of questions intended to lead from the initial issue to deeper levels of meaning
+and belief.</p>
+<p>The practitioner works as a guide rather than a director: they do not decide for the person, nor
+tell them what to do. The process is founded on respect for their personal autonomy and their own
+pace, and any intervention presupposes their consent.</p>
+<p>The aim is not to hand over ready answers, but to create a space of deeper inward observation: to
+bring light to beliefs and patterns that operate less consciously, and to open room for different
+perspectives, choices and possibilities.</p>
+<p>Every session is different, because so is the person who comes to it.</p>
+
+<h2 class="cb-h2">A complementary approach</h2>
+<div class="cb-note cb-note--scope">ThetaHealing® is used as a complementary tool for
+self-knowledge, personal exploration and spiritual development. It is not psychotherapy, nor
+psychological or medical treatment, and it does not replace assessment, diagnosis or care by the
+appropriate health professional where that is needed.</div>
 """,
  faq=[("Is there an age limit?",
        "<p>No. It can be applied at any age. Where a minor is involved, the <strong>parents' "
@@ -421,19 +447,44 @@ follow-up, and no recommendation to discontinue either is given.</div>
  facts=[("For", "Any age; for minors, always with the parents' agreement")] + COMMON_FACTS_EN +
        [("Training", "Radiestezyjne Studio Subtelnych Energii, Poland")],
  body="""
-<h2 class="cb-h2" style="margin-top:0">What it is</h2>
-<p><strong>Therapeutic dowsing</strong> is work with a <strong>pendulum and charts</strong>. It is
-used as a method of locating and rebalancing: the pendulum acts as a pointer over charts covering
-different fields.</p>
+<p>Therapeutic Dowsing is an energy practice based on the idea that a person has an energy field,
+within which different states can be expressed as different qualities of vibration or frequency.</p>
+<p>In practice, specialist dowsing tools and frequency systems are used. First a dowsing exploration
+is carried out, in order to identify the energetic parameters that, according to the method, need
+work. The corresponding frequencies are then selected and applied, with the aim of releasing
+possible energetic burdens and returning the field to a more balanced state.</p>
+<p>This means that the same protocol is not applied to everyone. The process and the frequencies
+used are chosen individually, on the basis of the personal request and of the dowsing
+exploration.</p>
+<p>Depending on the school and the system of application, dowsing may also make use of colour
+vibrations, frequency charts and different specialist tools. Its applications are found mainly in
+energy work with people, while more broadly dowsing is also applied to animals, spaces and the
+environment.</p>
+<p>Therapeutic Dowsing may be chosen by people interested in a more holistic and energetic approach
+to personal wellbeing, who already have an interest in energy practices, or who wish to get to know
+a different way of working with energy.</p>
+<p>A session can take place in person or at a distance, since, according to the methodology of
+dowsing, its application does not require the physical presence of the person in the same room as
+the practitioner. The process is always carried out after the person has been informed and has given
+their consent.</p>
 
-<h2 class="cb-h2">The framework</h2>
-<p>It is a <strong>standalone method</strong>, with its own sessions. It is not folded into a session
-of another method and is not mixed with one.</p>
-<p>There is no age limit. Where a <strong>minor</strong> is involved, the <strong>parents'
-agreement</strong> always comes first.</p>
+<h2 class="cb-h2">The certification</h2>
+<figure class="cb-figure cb-figure--cert">
+<img src="../../assets/img/cert-radiaisthisia.jpg" width="760" height="1140" loading="lazy"
+ decoding="async"
+ alt="Certificate in Therapeutic Dowsing in the name of Christina Stamatopoulou, from the Polish Radiestezyjne Studio Subtelnych Energii Non Profit">
+<figcaption>Certification in <strong>Therapeutic Dowsing</strong> (Radiestezja Terapeutyczna) from
+the Polish <strong>Radiestezyjne Studio Subtelnych Energii &ldquo;Non Profit&rdquo; (RSSE)</strong>.
+The training covers the Technology of Therapeutic Dowsing, the use of specialist dowsing tools and
+of the Prometheus system, and work with frequencies and colour vibrations.</figcaption>
+</figure>
 
-<div class="cb-note cb-note--scope">Therapeutic dowsing <em>never</em> replaces medication or medical
-follow-up, and no recommendation to discontinue either is given.</div>
+<div class="cb-note cb-note--scope"><strong>An important clarification.</strong> Therapeutic Dowsing
+belongs to the field of energy practices and is not a method of medical or psychological diagnosis
+or treatment. The concepts of the energy field and of frequencies are described according to the
+theoretical framework of the method and are not scientifically established mechanisms of modern
+biomedical science. It does not replace medical, psychological or psychiatric care, nor medication
+or any other treatment recommended by a qualified health professional.</div>
 """,
  faq=[("Is there an age limit?",
        "<p>No. It can be applied at any age. Where a minor is involved, the <strong>parents' "
