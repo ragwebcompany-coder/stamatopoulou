@@ -158,7 +158,7 @@ def header(depth, active, el_slug=None):
 </div>
 </div>
 <header class="cb-header">
-<div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+<div class="container mx-auto px-6 md:px-12 flex justify-between items-center cb-header__in">
 {logo_block(depth)}
 <div class="cb-navbar hidden xl:flex items-center gap-8">
 <nav class="cb-nav" aria-label="{T("nav.main")}">{links}</nav>
@@ -384,6 +384,41 @@ img { height: auto; }
 .cb-header { position: sticky; top: 0; z-index: 50; background: rgba(248,247,252,.94);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(19,18,87,.10); padding: .85rem 0; }
+
+/* ---- ο σκελετός του header ----
+   Με οκτώ καρτέλες, διακόπτη γλώσσας και κουμπί ραντεβού, η σειρά δεν χωρούσε
+   πια μέσα στα 80rem του container: το λογότυπο ακουμπούσε το «Αρχική». Εδώ ο
+   header βγαίνει από το container και παίρνει όλο το πλάτος της οθόνης, οπότε
+   το λογότυπο κάθεται πιο αριστερά και το μενού ανασαίνει. Το `gap` είναι
+   δίχτυ ασφαλείας: ό,τι κι αν γίνει με τα πλάτη, τα δύο δεν ακουμπούν.
+   Ταυτόχρονα η τυπογραφία του μενού σφίγγει όσο στενεύει η οθόνη και χαλαρώνει
+   ξανά όταν υπάρχει χώρος. */
+.cb-header__in { gap: 1.75rem; }
+@media (min-width: 1280px) {
+  .cb-header__in { max-width: none; padding-inline: 1.75rem; gap: 1.5rem; }
+  .cb-navbar { gap: 1.25rem; }
+  .cb-nav { gap: 1rem; }
+  .cb-nav__link { font-size: .61rem; letter-spacing: .09em; }
+  .cb-btn--sm { padding: .65rem .95rem; font-size: .6rem; letter-spacing: .1em; }
+}
+@media (min-width: 1500px) {
+  .cb-header__in { padding-inline: 2.25rem; gap: 2rem; }
+  .cb-navbar { gap: 1.6rem; }
+  .cb-nav { gap: 1.25rem; }
+  .cb-nav__link { font-size: .65rem; letter-spacing: .12em; }
+  .cb-btn--sm { padding: .7rem 1.15rem; font-size: .63rem; letter-spacing: .12em; }
+}
+@media (min-width: 1750px) {
+  .cb-header__in { padding-inline: 3rem; gap: 2.5rem; }
+  .cb-nav { gap: 1.5rem; }
+  .cb-nav__link { font-size: .68rem; letter-spacing: .15em; }
+}
+/* Κάτω από τα 1280 το μενού είναι ήδη burger (xl: του Tailwind). Το ανεβάζουμε
+   στα 1360: στα 1280-1359 οι ελληνικές ετικέτες ξεχείλιζαν ακόμη. */
+@media (max-width: 1359px) {
+  .cb-navbar { display: none; }
+  .cb-burger { display: block; }
+}
 
 /* ---- λογότυπο (εικόνα πελάτη) ---- */
 /* Το `flex: none` είναι σκόπιμο: ως flex item σε γεμάτη σειρά, ο σύνδεσμος του
