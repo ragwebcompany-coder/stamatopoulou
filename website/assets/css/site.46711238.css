@@ -1025,13 +1025,17 @@ img { height: auto; }
   padding: 7rem 0 6rem; }
 .cb-hero__bg { position: absolute; inset: 0; }
 .cb-hero__in { max-width: 54rem; }
-.cb-hero__h1 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -.02em;
-  font-size: clamp(1.9rem, 4.6vw, 3.3rem); line-height: 1.16; margin: 1.1rem 0 1.75rem;
-  text-shadow: 0 2px 24px rgba(18,16,76,.6), 0 1px 4px rgba(18,16,76,.35); }
+/* Ο τίτλος της αρχικής είναι το σλόγκαν και τίποτα άλλο — δεν ακολουθεί lede.
+   Γι' αυτό γράφεται σε πλάγια Cormorant: πιο καλλιτεχνικό ύφος, μεγαλύτερο μέγεθος
+   και ανοιχτό tracking, ώστε να στέκει μόνο του μέσα στο hero. */
+.cb-hero__h1 { font-family: var(--font-serif); font-weight: 300; font-style: italic;
+  letter-spacing: .005em; font-size: clamp(2.15rem, 5.4vw, 4.1rem); line-height: 1.22;
+  margin: 1.3rem 0 0; max-width: 20ch;
+  text-shadow: 0 2px 24px rgba(10,10,16,.65), 0 1px 4px rgba(10,10,16,.4); }
 .cb-hero__lede { max-width: 46rem; font-weight: 300; font-size: 1.08rem; line-height: 1.8;
-  color: rgba(248,247,252,.88); text-shadow: 0 1px 12px rgba(18,16,76,.65); }
+  color: rgba(248,247,252,.92); text-shadow: 0 1px 12px rgba(10,10,16,.7); }
 .cb-hero__actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.5rem; }
-.cb-hero .cb-eyebrow--light { text-shadow: 0 1px 10px rgba(18,16,76,.7); }
+.cb-hero .cb-eyebrow--light { text-shadow: 0 1px 10px rgba(10,10,16,.75); }
 .cb-hero__cue { position: absolute; left: 50%; transform: translateX(-50%); bottom: 1.4rem; z-index: 2;
   display: flex; flex-direction: column; align-items: center; gap: .4rem;
   font-size: .58rem; letter-spacing: .3em; color: rgba(248,247,252,.5); }
@@ -1050,20 +1054,18 @@ img { height: auto; }
    αντί να περιμένει το CSS. Το `object-position` κρατά το πρόσωπο στο κάδρο όταν
    το cover κόβει — καθ' ύψος σε πλατιά οθόνη, πλάγια σε κινητό. */
 .cb-hero__photo { position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 46%; opacity: .78; }
-/* Δύο βαθμίδες: μία καθ' ύψος, ώστε τα κουμπιά στο κάτω μέρος να πατούν σε
-   σκούρο, και μία πλάγια, ώστε ο τίτλος αριστερά να μην κάθεται πάνω στα
-   διπλώματα του τοίχου. */
+  object-fit: cover; object-position: 50% 46%; }
+/* Η φωτογραφία μένει στα χρώματά της: το πέπλο είναι ουδέτερο σκούρο, όχι μωβ,
+   και υπάρχει μόνο όσο χρειάζεται για να διαβάζεται το λευκό κείμενο —
+   μία βαθμίδα καθ' ύψος για τα κουμπιά κάτω, μία πλάγια για τον τίτλο αριστερά. */
 .cb-hero__scrim { position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(18,16,76,.34) 0%, rgba(18,16,76,.08) 34%, rgba(18,16,76,.80) 100%),
-              linear-gradient(96deg, rgba(18,16,76,.72) 0%, rgba(18,16,76,.16) 58%, rgba(35,32,102,0) 100%); }
-/* Το πλέγμα φτιάχτηκε για κενό φόντο· πάνω σε φωτογραφία γίνεται θόρυβος. */
-.cb-hero__photo ~ .cb-hero-grid { opacity: .06; }
+  background: linear-gradient(180deg, rgba(10,10,16,.26) 0%, rgba(10,10,16,0) 34%, rgba(10,10,16,.72) 100%),
+              linear-gradient(96deg, rgba(10,10,16,.58) 0%, rgba(10,10,16,.10) 58%, rgba(10,10,16,0) 100%); }
 @media (max-width: 900px) {
-  .cb-hero__photo { object-position: 54% 38%; opacity: .66; }
+  .cb-hero__photo { object-position: 54% 38%; }
   /* Σε κινητό ο τίτλος δεν έχει πού αλλού να πάει παρά πάνω στη φωτογραφία,
      οπότε εδώ το πέπλο μένει πιο κλειστό απ' ό,τι σε πλατιά οθόνη. */
-  .cb-hero__scrim { background: linear-gradient(180deg, rgba(18,16,76,.42) 0%, rgba(18,16,76,.30) 26%, rgba(18,16,76,.88) 100%); }
+  .cb-hero__scrim { background: linear-gradient(180deg, rgba(10,10,16,.38) 0%, rgba(10,10,16,.26) 26%, rgba(10,10,16,.82) 100%); }
 }
 
 /* ---- το εικαστικό μαντάλα ----
@@ -1468,7 +1470,7 @@ img { height: auto; }
 
 /* Επικεφαλίδες: το κάτω όριο του clamp ήταν πολύ μεγάλο για οθόνες 360-390px.
    Ο τίτλος της αρχικής είναι πλέον το σλόγκαν — μακρύτερος, άρα πιο μαζεμένος. */
-.cb-hero__h1 { font-size: clamp(1.75rem, 5.6vw, 3.3rem); }
+.cb-hero__h1 { font-size: clamp(1.95rem, 6.6vw, 4.1rem); }
 .cb-page-hero__h1 { font-size: clamp(1.85rem, 6.4vw, 3.6rem); }
 .cb-h2 { font-size: clamp(1.6rem, 4.6vw, 2.9rem); }
 
@@ -1498,6 +1500,64 @@ body { overflow-wrap: break-word; }
    φειδώ, ως δεύτερος τόνος έμφασης. */
 
 /* Το άπειρο του λογοτύπου ως διακριτικό διαχωριστικό ενοτήτων. */
+/* ---- τυπογραφία των άρθρων ----
+   Οι ρήσεις μέσα στα κείμενα («Ξέρω τι θέλω…») δεν είναι επικεφαλίδες αλλά
+   ούτε απλές παράγραφοι: παίρνουν μεγαλύτερο μέγεθος και μωβ γραμμή. Οι πηγές
+   είναι μεν σημαντικές αλλά μακριές, γι' αυτό μπαίνουν σε <details>. */
+.cb-prose .cb-quote { font-family: var(--font-serif); font-style: italic; font-weight: 300;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height: 1.45; color: var(--cb-ink);
+  border-left: 2px solid var(--cb-violet); padding-left: 1.1rem; margin: 1.75rem 0; }
+.cb-src { margin: 2.5rem 0 0; border-top: 1px solid rgba(19,18,87,.12); padding-top: 1rem; }
+.cb-src summary { cursor: pointer; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--cb-violet); font-weight: 500; list-style: none; }
+.cb-src summary::-webkit-details-marker { display: none; }
+.cb-src summary::before { content: "+ "; }
+.cb-src[open] summary::before { content: "\2212 "; }
+.cb-src ol { margin: 1.1rem 0 0; padding-left: 1.3rem; }
+.cb-src li { font-size: .8rem; font-weight: 300; line-height: 1.6; color: var(--cb-muted);
+  margin-bottom: .7rem; word-break: break-word; }
+
+/* ---- «τι μπορούμε να δουλέψουμε μαζί»: έξι θεματικές, 3x2 ---- */
+.cb-topics { display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 2.5rem; }
+@media (min-width: 640px) { .cb-topics { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cb-topics { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+.cb-topic { background: #fff; border: 1px solid rgba(19,18,87,.09); border-radius: 5px;
+  padding: 1.75rem 1.6rem; display: flex; flex-direction: column; gap: .7rem; }
+.cb-topic__ic { color: var(--cb-violet); }
+.cb-topic__t { font-family: var(--font-serif); font-size: 1.24rem; font-weight: 400; line-height: 1.25;
+  color: var(--cb-ink); }
+.cb-topic__d { font-size: .89rem; font-weight: 300; line-height: 1.7; color: var(--cb-muted); }
+
+/* ---- «τι προσφέρει / τι δεν καλύπτει» ----
+   Δύο στήλες δίπλα-δίπλα ώστε η σύγκριση να διαβάζεται με μια ματιά· σε κινητό
+   πέφτουν η μία κάτω από την άλλη και τις ξεχωρίζει το χρώμα της γραμμής. */
+.cb-pc { display: grid; gap: 1.75rem; margin: 1.75rem 0 2.25rem; }
+@media (min-width: 720px) { .cb-pc { grid-template-columns: 1fr 1fr; gap: 2.25rem; } }
+.cb-pc__col { border-top: 2px solid; padding-top: .9rem; }
+.cb-pc__col--plus { border-color: var(--cb-violet); }
+.cb-pc__col--minus { border-color: rgba(19,18,87,.2); }
+.cb-pc h3 { font-family: var(--font-sans); font-size: .66rem; letter-spacing: .2em;
+  text-transform: uppercase; font-weight: 500; color: var(--cb-ink); margin: 0 0 .9rem; }
+.cb-pc__col--minus h3 { color: var(--cb-muted); }
+.cb-pc ul { list-style: none; margin: 0; padding: 0; }
+.cb-pc li { position: relative; padding-left: 1.05rem; margin-bottom: .7rem; font-weight: 300;
+  font-size: .94rem; line-height: 1.65; color: var(--cb-muted); }
+.cb-pc li::before { content: "\2014"; position: absolute; left: 0; color: var(--cb-violet);
+  opacity: .55; }
+.cb-pc__col--minus li::before { color: var(--cb-muted); opacity: .45; }
+
+/* ---- η ιστορία του ονόματος ----
+   Η εικόνα του ηλιοτρόπιου είναι πανοραμική (3:2) και θέλει όλο το πλάτος της
+   στήλης· το «credo» των τεσσάρων γραμμών στέκεται μόνο του σε σκούρο φόντο,
+   γι' αυτό γράφεται στην ίδια πλάγια γραμματοσειρά με τον τίτλο της αρχικής. */
+.cb-figure--wide img { border-radius: 6px; box-shadow: 0 18px 48px rgba(19,18,87,.14); }
+.cb-creed { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; text-align: center;
+  display: grid; gap: 1.15rem; }
+.cb-creed li { font-family: var(--font-serif); font-style: italic; font-weight: 300;
+  font-size: clamp(1.35rem, 3.4vw, 2.15rem); line-height: 1.3; color: rgba(248,247,252,.8); }
+.cb-creed li span { color: var(--cb-gold-soft); }
+@media (max-width: 640px) { .cb-creed { text-align: left; gap: .9rem; } }
+
 .cb-infinity { display: block; margin: 2.75rem auto; width: 3.5rem; height: auto;
   color: var(--cb-gold); opacity: .9; }
 .cb-section--dark .cb-infinity, .cb-page-hero .cb-infinity,
@@ -1518,7 +1578,7 @@ body { overflow-wrap: break-word; }
    κρατά το μωβ αποκλειστικά για τους συνδέσμους κειμένου. */
 .cb-card:hover .cb-card__more { color: var(--cb-gold); }
 
-/* Σημείωση για τις συμπληρωματικές μεθόδους (Theta Healing / ραδιαισθησία).
+/* Σημείωση για τις ενεργειακές θεραπείες (Theta Healing / ραδιαισθησία).
    Οπτικά ξεχωριστή από τα υπόλοιπα cb-note, γιατί λέει κάτι διαφορετικό:
    δεν είναι προειδοποίηση κρίσης, είναι οριοθέτηση πλαισίου. */
 .cb-note--scope { border-left-color: var(--cb-gold); background: rgba(184,121,31,.07); }

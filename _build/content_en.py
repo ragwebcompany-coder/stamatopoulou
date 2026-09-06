@@ -167,7 +167,7 @@ that: making therapy their own business rather than one more demand from adults.
 "ypiresies/psychotherapeia-enilikon.html": dict(
  title=f"Adult Psychotherapy {CITY} | Anxiety, Panic, Mood",
  desc=(f"Individual adult psychotherapy in {CITY}, Athens: anxiety, panic attacks, low mood, "
-       "burnout, relationships and identity. Clinical assessment and goals set together."),
+       "burnout, relationships and identity. The request and the goals are set together."),
  eyebrow="Adults",
  marq="ADULTS",
  h1="Adult<br>Psychotherapy",
@@ -177,7 +177,7 @@ that: making therapy their own business rather than one more demand from adults.
        [("Frequency", "Usually weekly at first; adjusted to the goals")],
  body="""
 <h2 class="cb-h2" style="margin-top:0">How we work</h2>
-<p>The first meeting is one of <strong>getting acquainted and clinical assessment</strong>: we take a
+<p>The first meeting is one of <strong>getting acquainted</strong>: we take a
 history, map out what brings you here and discuss therapeutic goals. You do not need to have
 formulated your request clearly — formulating it is already part of the work.</p>
 <p>From there the work moves on two levels at once. In <strong>understanding</strong>: where the
@@ -287,13 +287,14 @@ what can be done from here on.</div>
 # ------------------------------------------------------------------ play therapy
 "ypiresies/paigniotherapeia-dimiourgikes-technes.html": dict(
  title=f"Play Therapy {CITY} | Creative Arts",
- desc=(f"Play therapy and creative arts in {CITY}, Athens: symbolic play, drawing, storytelling and "
-       "dramatisation as therapeutic tools for children and teenagers."),
+ desc=(f"Play therapy and creative arts in {CITY}, Athens: symbolic techniques, drawing, "
+       "storytelling and dramatisation — working through deep material without having to name it."),
  eyebrow="Play Therapy",
  marq="PLAY",
  h1="Play Therapy &amp;<br>Creative Arts",
  lede=("Play is a child's language and toys are its words. In play therapy, play is not a break from "
-       "the work — it is the work."),
+       "the work — it is the work. And it is not only play: these are symbolic techniques, and they "
+       "reach where words do not."),
  facts=[("For", "Children and teenagers; selectively, adults too")] + COMMON_FACTS_EN +
        [("Training", "Play Therapy &amp; Creative Arts, Metropolitan College")],
  body="""
@@ -305,10 +306,22 @@ processes before it finds words — and it remains available long after childhoo
 is afraid of the dark than about yourself; and through the bear, in the end, the same fear gets
 worked through. The child always controls how close it comes.</p>
 
+<h2 class="cb-h2">Not "just playing"</h2>
+<p>Play therapy does not stop at play. At its core are <strong>symbolic techniques</strong> — the
+symbol, the figure, the image, the role, the story — through which material that has not yet found
+words can be worked with.</p>
+<p>That is precisely their value: a person can work through deep material at a
+<strong>subconscious and unconscious level</strong>, without having to put it into words. The
+understanding of what happens there rests largely on the psychoanalytic tradition, from which play
+therapy takes its theory of the symbol and the unconscious.</p>
+<p>So this is not a method "for small children who play". It is a process with depth — and it works
+with teenagers and with adults too, when words alone have reached their limit.</p>
+
 <h2 class="cb-h2">What it involves</h2>
 <ul>
-<li><strong>Symbolic and directed play</strong> — with figures, dolls, construction, board games that
-work on taking turns, losing and cooperating.</li>
+<li><strong>Symbolic play, non-directive and directive</strong> — with figures, dolls,
+construction, board games that work on taking turns, losing and cooperating. Most of it is led by the
+child; directive work comes in deliberately, where it is needed.</li>
 <li><strong>Art materials</strong> — drawing, clay, collage. The hand often arrives before speech.</li>
 <li><strong>Storytelling and story-making</strong> — therapeutic tales, stories the child continues
 or whose ending it changes.</li>
@@ -338,7 +351,7 @@ point, not evidence.</div>
       ("Is it the same as creative activities or arts clubs?",
        "<p>No. Creative activities aim at skill and enjoyment. Play therapy has a therapeutic aim, is "
        "carried out by a trained mental health professional, within a stable framework and with a "
-       "specific direction that follows from clinical assessment.</p>"),
+       "specific direction that follows from the therapeutic request.</p>"),
       ("Is it used with adults as well?",
        "<p>Yes, selectively. Creative and expressive techniques are often useful with adults who "
        "understand their difficulty intellectually but find that nothing shifts — the symbol reaches "
@@ -349,73 +362,88 @@ point, not evidence.</div>
        "resolve, and that is visible.</p>")]),
 
 # ------------------------------------------------------------------ energy therapies
-"ypiresies/energeiakes-therapeies.html": dict(
- title="Energy Therapies | Theta Healing &amp; Therapeutic Dowsing",
- desc=("Energy therapies: Theta Healing and therapeutic dowsing as complementary relaxation "
-       "methods, in a setting entirely separate from psychotherapy."),
- eyebrow="Complementary",
- marq="ENERGY",
- h1="Energy<br>Therapies",
- lede=("Complementary methods of relaxation and energy work. They are offered in a setting entirely "
-       "separate from psychotherapy — and this page explains why."),
- facts=[("For", "Adults, after discussion")] +
-       [("Duration", f"{SESSION} minutes per session"),
-        ("Setting", "Separate sessions, not within psychotherapy"),
-        ("Not offered", "To minors, or in active clinical cases"),
-        ("Appointments", "By phone or through the contact form")],
+"ypiresies/theta-healing.html": dict(
+ title=f"Theta Healing {CITY}, Athens | Work in the theta state",
+ desc=("Theta Healing in " + CITY + ", Athens or online: guided work in the theta brainwave state, "
+       "where very deep material can be reached. No age limit."),
+ eyebrow="Theta Healing",
+ marq="THETA",
+ h1="Theta<br>Healing",
+ lede=("Guided work in the theta brainwave state — where the mind becomes receptive and material "
+       "that stays out of reach in ordinary waking alertness can be worked with."),
+ facts=[("For", "Any age; for minors, always with the parents' agreement")] + COMMON_FACTS_EN,
  body="""
-<div class="cb-note cb-note--scope" style="margin-top:0"><strong>Before anything else.</strong>
-<strong>Theta Healing</strong> and <strong>therapeutic dowsing</strong> are complementary practices.
-They are <em>not</em> psychotherapy, they do <em>not</em> have scientific evidence comparable to that
-of recognised psychotherapeutic approaches, and they do <em>not</em> replace psychological,
-psychiatric or medical care. They promise no cure, no diagnosis and no treatment of any
-condition.</div>
+<h2 class="cb-h2" style="margin-top:0">What the theta frequencies are</h2>
+<p>The brain runs at different rhythms depending on its state. <strong>Theta</strong> is the rhythm
+it naturally produces on the border between sleep and waking — in deep relaxation, in meditation, in
+the last moments before falling asleep.</p>
+<p>In that state the mind becomes <strong>markedly more receptive</strong>: the critical, filtering
+function of everyday alertness recedes, and material that is otherwise out of reach becomes
+accessible.</p>
 
-<h2 class="cb-h2" style="margin-top:2.5rem">The two methods</h2>
-<p>Two distinct practices are presented here under the heading "energy therapies". They are not a
-single unified method and they do not work in the same way:</p>
-<ul>
-<li><strong>Theta Healing.</strong> A guided process of deep relaxation, focusing on beliefs and
-patterns that the person themselves recognises as limiting.</li>
-<li><strong>Therapeutic dowsing.</strong> Work with a pendulum and charts, as a tool for focus and
-reflection within a relaxation session.</li>
-</ul>
+<h2 class="cb-h2">What gets worked with</h2>
+<p>Through theta, <strong>very deep material</strong> can be worked with: beliefs about oneself and
+the world, repeating patterns, emotional loads a person carries without always knowing where they
+came from.</p>
+<p>The process is <strong>guided</strong>, and the person takes an active part in it — it is not
+something done to you, it is something you do.</p>
 
-<h2 class="cb-h2">Why this page exists</h2>
-<p>It would be easier not to mention them at all. I choose to mention them, with clear boundaries,
-for two reasons: because they are genuinely offered, and because someone looking for them deserves
-to find accurate information about what they are and what they are not — rather than promises.</p>
+<h2 class="cb-h2">Where it can be applied</h2>
+<p>The range of requests is very wide and there is no age limit. Where a <strong>minor</strong> is
+involved, the <strong>parents' agreement</strong> always comes first.</p>
 
-<h2 class="cb-h2">What a session is like</h2>
-<p>A quiet, structured hour. There is no diagnosis, no interpretation of your history and no advice
-about medical decisions. Most people describe it as a period of deep rest in which something they
-were carrying becomes easier to name.</p>
-
-<h2 class="cb-h2">When they are not offered</h2>
-<ul>
-<li>To minors, under any circumstances.</li>
-<li>In place of psychotherapy, psychiatric or medical treatment.</li>
-<li>During an acute crisis, or where there is risk to safety.</li>
-<li>Where someone is looking for a cure for a physical or mental illness.</li>
-</ul>
-
-<div class="cb-note"><strong>Kept separate on purpose.</strong> These sessions never take place
-inside psychotherapy. Mixing the two would blur what rests on clinical evidence and what does not —
-and that distinction is yours to have, not mine to smooth over.</div>
+<div class="cb-note cb-note--scope">Theta Healing <em>never</em> replaces medication or medical
+follow-up, and no recommendation to discontinue either is given.</div>
 """,
- faq=[("Is this psychotherapy?",
-       "<p>No. It is a complementary relaxation practice. Psychotherapy is a separate service, with "
-       "separate sessions, based on recognised therapeutic approaches and clinical assessment.</p>"),
-      ("Can it replace treatment I am already having?",
-       "<p>No, and it should not. Never stop psychiatric or medical treatment on the basis of a "
-       "complementary practice. If you are considering a change, discuss it with your treating "
-       "clinician.</p>"),
-      ("Do you offer this to children?",
-       "<p>No. These methods are not offered to minors under any circumstances.</p>"),
-      ("How do I know whether it is for me?",
-       "<p>We discuss it first. If what you are looking for is treatment for a difficulty, the "
-       "appropriate route is <a href=\"adult-psychotherapy.html\">psychotherapy</a> — and I will say "
-       "so plainly rather than book you a session.</p>")]),
+ faq=[("Is there an age limit?",
+       "<p>No. It can be applied at any age. Where a minor is involved, the <strong>parents' "
+       "agreement</strong> always comes first.</p>"),
+      ("What will I need to do in a session?",
+       "<p>I will guide you into a state of deep relaxation, and from there we work together. No "
+       "previous experience of meditation or similar practices is needed.</p>"),
+      ("Can it replace my medication?",
+       "<p>No. It does not replace medication or medical follow-up, and no recommendation to stop "
+       "either is given. If you are considering a change to your treatment, discuss it with your "
+       "treating clinician.</p>"),
+      ("How many sessions are needed?",
+       "<p>It depends on what you bring. Some requests are worked through in a few sessions, others "
+       "need more. It is discussed from the start and revisited as we go.</p>")]),
+
+"ypiresies/therapeftiki-radiaisthisia.html": dict(
+ title=f"Therapeutic Dowsing {CITY}, Athens | Pendulum &amp; charts",
+ desc=("Therapeutic dowsing in " + CITY + ", Athens or online: work with a pendulum and charts as a "
+       "method of locating and rebalancing. No age limit."),
+ eyebrow="Therapeutic Dowsing",
+ marq="DOWSING",
+ h1="Therapeutic<br>Dowsing",
+ lede=("Work with a pendulum and charts, as a method of locating and rebalancing — a standalone "
+       "method, with its own sessions."),
+ facts=[("For", "Any age; for minors, always with the parents' agreement")] + COMMON_FACTS_EN +
+       [("Training", "Radiestezyjne Studio Subtelnych Energii, Poland")],
+ body="""
+<h2 class="cb-h2" style="margin-top:0">What it is</h2>
+<p><strong>Therapeutic dowsing</strong> is work with a <strong>pendulum and charts</strong>. It is
+used as a method of locating and rebalancing: the pendulum acts as a pointer over charts covering
+different fields.</p>
+
+<h2 class="cb-h2">The framework</h2>
+<p>It is a <strong>standalone method</strong>, with its own sessions. It is not folded into a session
+of another method and is not mixed with one.</p>
+<p>There is no age limit. Where a <strong>minor</strong> is involved, the <strong>parents'
+agreement</strong> always comes first.</p>
+
+<div class="cb-note cb-note--scope">Therapeutic dowsing <em>never</em> replaces medication or medical
+follow-up, and no recommendation to discontinue either is given.</div>
+""",
+ faq=[("Is there an age limit?",
+       "<p>No. It can be applied at any age. Where a minor is involved, the <strong>parents' "
+       "agreement</strong> always comes first.</p>"),
+      ("Is it available online?",
+       f"<p>Yes. Sessions take place at the practice in {CITY} or online, with the same "
+       f"{SESSION}-minute duration.</p>"),
+      ("Can it replace my medication or medical follow-up?",
+       "<p>No. It does not replace medication or medical follow-up, and no recommendation to "
+       "discontinue either is given.</p>")]),
 }
 
 
@@ -442,7 +470,8 @@ HOME_FAQ_EN = [
   "cases where the law requires disclosure.</p>"),
  ("Do I need a diagnosis or a referral?",
   "<p>Neither. You can come simply because something is difficult, or because you want to "
-  "understand yourself better. The first meeting includes a clinical assessment, and from that we "
+  "understand yourself better. The first sessions are given to history-taking and to shaping the "
+  "therapeutic request, and from that we "
   "decide together what is appropriate.</p>"),
 ]
 
@@ -481,16 +510,11 @@ def home_en():
 <img class="cb-hero__photo" src="../assets/img/hero-grafeio.jpg" width="1440" height="1080"
  fetchpriority="high" decoding="async" alt="">
 <div class="cb-hero__scrim"></div>
-<div class="cb-hero-glow"></div><div class="cb-hero-grid"></div>
 </div>
 <div class="container mx-auto px-6 md:px-12 relative z-10" data-anim="hero-content">
 <div class="cb-hero__in">
 <span class="cb-eyebrow cb-eyebrow--light" data-anim="hero-in" data-delay=".4">Clinical Psychologist MSc · {CITY}, Athens</span>
 <h1 class="cb-hero__h1" data-anim="hero-in" data-delay=".55">Where light meets understanding,<br class="cb-hero__br"> connection is born</h1>
-<p class="cb-hero__lede" data-anim="hero-in" data-delay=".7">Psychotherapy for children, teenagers
-and adults, parent counselling and play therapy. The therapeutic process starts from a clinical
-assessment and takes shape around what you bring — not around a ready-made protocol.
-Sessions in Greek and in English.</p>
 <div class="cb-hero__actions" data-anim="hero-in" data-delay=".85">
 <a class="cb-btn cb-btn--light" href="tel:+30{PHONE}">{icon('phone','w-4 h-4')}<span>{PHONE_P}</span></a>
 <a class="cb-btn cb-btn--outline" href="#services">THE SERVICES<span class="cb-btn__arrow">&#8594;</span></a>
@@ -498,31 +522,6 @@ Sessions in Greek and in English.</p>
 </div>
 </div>
 <div class="cb-hero__cue" data-anim="cue" aria-hidden="true"><span>SCROLL</span><div data-anim="bounce">{icon('chev','w-5 h-5','2')}</div></div>
-</section>"""
-
-    trust = f"""<section class="cb-section cb-section--tight">
-<div class="container mx-auto px-6 md:px-12">
-<div class="cb-cards cb-cards--3">
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('brain','w-7 h-7')}</span>
-<span class="cb-card__t">Clinical assessment from the start</span>
-<span class="cb-card__d">The first meeting includes history-taking and clinical assessment, so that the setting is chosen on evidence rather than by chance.</span></div>
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('flower','w-7 h-7')}</span>
-<span class="cb-card__t">Three age groups</span>
-<span class="cb-card__d">Children, teenagers and adults — with different tools for each, from play to language.</span></div>
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('palette','w-7 h-7')}</span>
-<span class="cb-card__t">Play therapy &amp; the arts</span>
-<span class="cb-card__d">Specialist training in play therapy and the creative arts — for where words alone do not reach.</span></div>
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('hands','w-7 h-7')}</span>
-<span class="cb-card__t">Parents inside the process</span>
-<span class="cb-card__d">In work with children and teenagers, parents are not spectators: there are parallel meetings within an agreed framework.</span></div>
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('monitor','w-7 h-7')}</span>
-<span class="cb-card__t">In person or online</span>
-<span class="cb-card__d">At the practice in {CITY} or online, with the same way of working and the same duration — in Greek or in English.</span></div>
-<div class="cb-card" data-reveal><span class="cb-card__ic">{icon('shield','w-7 h-7')}</span>
-<span class="cb-card__t">Framework and confidentiality</span>
-<span class="cb-card__d">Licensed to practise, member of the Association of Greek Psychologists, in regular clinical supervision.</span></div>
-</div>
-</div>
 </section>"""
 
     approach = f"""<section class="cb-section cb-section--lilac cb-section--marq" id="approach">
@@ -538,12 +537,14 @@ Sessions in Greek and in English.</p>
 <span class="cb-eyebrow">The approach</span>
 <h2 class="cb-h2">The right tool for each person</h2>
 <div class="cb-prose">
-<p>There is no single method that suits everyone. That is why my work rests on
-<strong>three distinct trainings</strong> that speak to one another: the cognitive–behavioural
-approach, systemic and family therapy, and play therapy with the creative arts.</p>
-<p>Which of them is used — and in what proportion — is not decided in advance. It follows from the
-<strong>clinical assessment</strong> in the first meeting: from age, from what is being asked, from
-the context of a life and from the way each person finds it easiest to express themselves.</p>
+<p>There is no single method that suits everyone. I work with a <strong>holistic
+outlook</strong>: I draw together techniques and tools from the evidence-based approaches I have
+trained in and from the energy therapies, into a therapeutic plan made for the particular person.</p>
+<p>What is used — and in what proportion — is not decided in advance. It follows from the
+<strong>nature of what is being asked</strong>, from age, from the context of a life and from the way
+each person finds it easiest to express themselves. Where I judge it will help, I suggest bringing
+energy methods into the plan — and you are free to ask for them yourself. The aim is always the
+<strong>fullest possible therapeutic outcome</strong>.</p>
 <p>A seven-year-old will not talk about their anxiety; they will play it. An adult with panic attacks
 needs both understanding and concrete tools for tomorrow morning. A teenager first needs to trust
 that the space is genuinely their own.</p>
@@ -561,8 +562,7 @@ that the space is genuinely their own.</p>
 <span class="cb-eyebrow">The services</span>
 <h2 class="cb-h2">Three directions</h2>
 <p class="cb-lede">Psychotherapy and counselling for every age, play therapy with the creative arts,
-and — in an entirely separate setting — energy therapies. In every case, the work starts from what
-you bring.</p>
+and energy therapies. In every case, the work starts from what you bring.</p>
 </div>
 {cat_cards(d)}
 <p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="services.html">SEE ALL SERVICES<span class="cb-btn__arrow">&#8594;</span></a></p>
@@ -647,7 +647,7 @@ arrange a first introductory meeting — at the practice in {CITY} or online.</p
                      f"children, teenagers and adults, parent counselling, play therapy. In person "
                      f"or online. Tel. {PHONE_P}."),
         canonical=U(slug), ld_graph=ld, active="index.html",
-        content=hero + trust + approach + services + who + faq + booking)
+        content=hero + approach + services + who + faq + booking)
 
 
 # ==================================================================== ΒΙΟΓΡΑΦΙΚΟ
@@ -659,13 +659,25 @@ STUDIES_EN = [
  ("Licence to practise as a Psychologist",
   f"Licence number {LICENSE}, for the Greek territory."),
  ("Member", "Association of Greek Psychologists (S.E.PS.)."),
+ ("Play Therapy &amp; Creative Arts",
+  "Two-year specialisation, Metropolitan College of Athens."),
+ ("Systemic &amp; Family Psychotherapy",
+  "Centre for Systemic Study and Therapy (KESMETH), Athens — in progress."),
+ ("Counselling, Psychoeducation, Children's Drawing, Psychometric Tools",
+  "A series of certified trainings, professional development programmes and seminars."),
+ ("ThetaHealing®",
+  "Certified practitioner — six separate certifications across different fields of application."),
+ ("Therapeutic Dowsing (Radiestezja Terapeutyczna)",
+  "Radiestezyjne Studio Subtelnych Energii \u201eNon Profit\u201d (RSSE), Poland."),
+ ("First university studies",
+  "School of Theology, National and Kapodistrian University of Athens."),
 ]
 
 TRAINING_EN = [
  ("2023 – 2024", "MSc Clinical &amp; Community Psychology", "University of East London"),
  ("2022 – 2023", "Training in Counselling Skills", "\"Empsychosis\" Centre"),
  ("—", "Play Therapy &amp; Creative Arts", "Metropolitan College"),
- ("—", "Systemic &amp; Family Therapy", "Ke.Se.Me.Th., Athens"),
+ ("In progress", "Systemic &amp; Family Therapy", "Ke.Se.Me.Th., Athens"),
  ("2017 – 2020", "BSc Applied Psychology", "University of Derby"),
 ]
 
@@ -673,12 +685,18 @@ EXPERIENCE_EN = [
  ("2020 — present", "Clinical Psychologist · Private practice, Psychoptia",
   "Individual psychotherapy sessions with children, teenagers and adults, parent counselling and "
   "play therapy, at the practice in Ilioupoli or online. Every collaboration starts with "
-  "history-taking and clinical assessment, so that the therapeutic framework and its goals are set "
-  "jointly and on clear grounds."),
- ("2020 — 2022", "Mental Health Counsellor · Private counselling centres",
-  "Counselling and supportive work with adults and teenagers in a mental health centre setting, "
-  "with regular supervision and cooperation with other specialties."),
- ("Placement", "Hellenic Institute of RECBT",
+  "history-taking and the shaping of the therapeutic request, so that the framework and its goals "
+  "are set jointly with the person."),
+ ("Present", "External associate · Specialist therapy centres, Attica",
+  "Member of interdisciplinary teams in mental health services and specialist therapy centres: "
+  "<strong>Brainbow</strong> — Centre for Special Therapies &amp; Neurofeedback, "
+  "<strong>Amilla</strong> — Centre for Therapy and Rehabilitation, and "
+  "<strong>Atypical Center</strong> in Dafni, specialising in support for people on the autism "
+  "spectrum, among other therapeutic settings."),
+ ("Pandemic", "Free counselling sessions",
+  "Took part in providing free sessions to people in need, in cooperation with private "
+  "counselling and psychotherapy practices."),
+ ("Placement", "RECBT Institute",
   "Observation of real cases in an interdisciplinary setting and familiarisation with "
   "cognitive–behavioural methodology. Within this placement I wrote the psychoeducational material "
   "\"The self care of the caregivers\"."),
@@ -691,8 +709,9 @@ def about_en():
     d, slug = 1, "en/about.html"
     crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")), (T("nav.bio"), None)])
     hero = page_hero("Who I am", f"{NAME},<br>MSc",
-                     "Clinical Psychologist. Studies in the United Kingdom, three therapeutic "
-                     f"trainings, and a practice in {CITY} since 2020.", crumbs, marq_word="PROFILE")
+                     "Clinical Psychologist. Studies in the United Kingdom, training in more than "
+                     f"one therapeutic approach, and a practice in {CITY} since 2020.",
+                     crumbs, marq_word="PROFILE")
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-grid-2 cb-grid-2--aside">
@@ -702,16 +721,31 @@ def about_en():
  decoding="async" alt="Portrait of Christina Stamatopoulou, Clinical Psychologist MSc">
 </figure>
 <div class="cb-prose" data-reveal>
-<h2 class="cb-h2" style="margin-top:0">How I work</h2>
-<p>I am a Clinical Psychologist and I have been working in private practice since 2020, with
-children, teenagers, adults and parents. What I have kept from every training I have done is the
-same thing: that the method serves the person, never the other way round.</p>
-<p>My work rests on three trainings that speak to one another — the cognitive–behavioural approach,
-systemic and family therapy, and play therapy with the creative arts. Which of them is used, and in
-what proportion, follows from the <strong>clinical assessment</strong> of the first meeting rather
-than from a preference of mine.</p>
-<p>My continuing education in systemic and family therapy is ongoing. I mention it because it shapes
-how I think about families — not as a completed qualification.</p>
+<h2 class="cb-h2" style="margin-top:0">Why me</h2>
+<p>To me, every person who walks through the door of the therapy room is a unique phenomenon. A
+whole world of experiences, relationships, feelings and meanings, which cannot be contained in a
+diagnosis, a symptom or one particular therapeutic technique.</p>
+<p>With a holistic and systemic outlook, I try to understand not only the difficulty but the person
+within the history, the relationships and the context of a life that have shaped them. That is why I
+build every therapeutic plan individually, with respect for the needs, the pace and the singularity
+of the person in front of me.</p>
+<p>Above all, I believe in the power of the therapeutic relationship. I want my room to be a place
+where a person can relax, feel safe, come to trust — and, when they are ready, express even the most
+difficult or vulnerable parts of themselves without fear of judgement.</p>
+<p>Being a therapist also means, for me, a continuing personal responsibility to develop. Personal
+therapy, supervision, ongoing training and contact with current scientific developments are an
+inseparable part of my professional path.</p>
+<p>The way I work is <strong>holistic</strong>: I draw together techniques and tools from the
+evidence-based approaches I have trained in — among them the cognitive–behavioural approach,
+systemic and family therapy, and play therapy with the creative arts — and, where I judge it is
+needed, from the energy therapies. What is used, and in what proportion, follows from the
+<strong>nature of what is being asked</strong> rather than from a preference of mine, and the plan
+is built for the fullest possible outcome for the person in front of me.</p>
+<p>My training in systemic and family therapy is <strong>ongoing</strong>. I mention it because it
+shapes how I think about families — not as a completed qualification.</p>
+<p>I do not consider my training a closed chapter. I keep training — because the field moves, but
+mostly because my own development is part of the work. The list below describes where I am today,
+not where I stop.</p>
 <p>Sessions are held in Greek and in English, in person in {CITY} or online.</p>
 
 <h2 class="cb-h2">Studies and credentials</h2>
@@ -756,7 +790,7 @@ def services_en():
 comes for their child and discovers that the work starts with themselves. A teenager arrives "sent"
 and stays because they found a space of their own.</p>
 <p>The framework of the work is not fixed in advance. It follows from the
-<strong>clinical assessment</strong> of the first meeting, on the basis of what best serves what is
+<strong>therapeutic request</strong>, shaped over the first sessions, on the basis of what best serves what is
 being asked — and it can change along the way if the circumstances do.</p>
 </div>
 </div>
@@ -774,7 +808,7 @@ being asked — and it can change along the way if the circumstances do.</p>
 <ol>
 <li><strong>First contact.</strong> A phone call or a message. A short conversation is enough to see
 whether and how we can work together, and to arrange the first meeting.</li>
-<li><strong>First meeting: history and clinical assessment.</strong> I listen to what brings you
+<li><strong>First meeting: getting acquainted.</strong> I listen to what brings you
 here, take a history and make an initial clinical evaluation. You do not need to have "sorted" the
 problem — that is part of the work.</li>
 <li><strong>Setting the therapeutic framework.</strong> We agree goals, frequency and setting
@@ -804,35 +838,66 @@ still needed — including when therapy should come to an end.</li>
                   canonical=U(slug), ld_graph=ld, active="", content=hero + body)
 
 
+CAT_PAGE_EN = {
+"ypiresies/psychotherapeia-symvouleftiki.html": dict(
+ h1="Psychotherapy &amp;<br>Counselling",
+ marq="SESSIONS",
+ lede=("One therapeutic process, four settings. Which one fits follows from the therapeutic request "
+       "as it is shaped — not from a ready-made protocol."),
+ introH2="Why me",
+ intro="""<p>I work with a <strong>holistic outlook</strong>. I do not apply one method to everyone:
+I draw together techniques and tools from the approaches I have trained in and build an
+<strong>individualised therapeutic programme</strong> for each person.</p>
+<p>What is used follows from the <strong>therapeutic request</strong>, as it is shaped over the first
+sessions, together with you. The aim is the fullest possible therapeutic outcome — not fidelity to a
+protocol.</p>""",
+ chooseH2="Choose a setting",
+ title=f"Psychotherapy &amp; Counselling {CITY}, Athens | Children, Teens, Adults",
+ desc=("Psychotherapy for children, teenagers and adults and parent counselling in "
+       f"{CITY}, Athens or online, with an individualised therapeutic programme."),
+ crisis=True),
+
+"ypiresies/energeiakes-therapeies.html": dict(
+ h1="Energy<br>Therapies",
+ marq="ENERGY",
+ lede=("Two standalone methods, with their own framework and their own sessions: Theta Healing and "
+       "therapeutic dowsing."),
+ introH2="Two distinct methods",
+ intro="""<p><strong>Theta Healing</strong> and <strong>therapeutic dowsing</strong> are not one
+single method and do not work in the same way. Each has its own framework and its own sessions.</p>
+<p>Neither has an age limit. Where a minor is involved, the <strong>parents' agreement</strong>
+always comes first.</p>
+<div class="cb-note cb-note--scope">These methods <em>never</em> replace medication or medical
+follow-up, and no recommendation to discontinue either is given.</div>""",
+ chooseH2="Choose a method",
+ title=f"Energy Therapies {CITY}, Athens | Theta Healing &amp; Dowsing",
+ desc=("Theta Healing and therapeutic dowsing in " + CITY + ", Athens or online: two standalone "
+       "methods, with their own sessions and no age limit."),
+ crisis=False),
+}
+
+
 def category_en(cat):
     d, slug = 2, cat["slug_en"]
+    c = CAT_PAGE_EN[cat["slug"]]
     name = plain(L(cat, "nav"))
     crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")), (name, None)])
-    hero = page_hero("Services", "Psychotherapy &amp;<br>Counselling",
-                     "One therapeutic process, four settings. Which one fits follows from the "
-                     "clinical assessment of the first meeting — not from a ready-made protocol.",
-                     crumbs, marq_word="SESSIONS")
+    hero = page_hero("Services", c["h1"], c["lede"], crumbs, marq_word=c["marq"])
     kids = cat_children(cat)
+    crisis = f'<div data-reveal style="margin-top:2rem">{crisis_note()}</div>' if c["crisis"] else ""
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-grid-2 cb-grid-2--aside">
 <div>
 <div class="cb-prose" data-reveal>
-<h2 class="cb-h2" style="margin-top:0">What they all have in common</h2>
-<p>Whether it is a child, a teenager, an adult or a parent, the work starts from the same place: a
-<strong>clinical assessment</strong> in the first meeting, where we take a history and look together
-at what best serves what is being asked.</p>
-<p>What changes is the tools. A seven-year-old will not talk about their anxiety; they will play it.
-An adult with panic attacks needs both understanding and concrete tools for tomorrow morning. A
-teenager first needs to trust that the space is their own. And often, when the request concerns a
-child, the most substantial work happens with the parents.</p>
-<p>Sessions last {SESSION} minutes and take place at the practice in {CITY} or online, in Greek or
-in English.</p>
+<h2 class="cb-h2" style="margin-top:0">{c["introH2"]}</h2>
+{c["intro"]}
+<p>Sessions last {SESSION} minutes and take place at the practice in {CITY} or online.</p>
 </div>
-<h2 class="cb-h2" data-reveal>Choose a setting</h2>
+<h2 class="cb-h2" data-reveal>{c["chooseH2"]}</h2>
 {svc_cards(d, items=kids, cls="cb-cards")}
 <div data-reveal style="margin-top:2.5rem">{online_note()}</div>
-<div data-reveal style="margin-top:2rem">{crisis_note()}</div>
+{crisis}
 </div>
 {aside(d, extra=cta_button(d))}
 </div>
@@ -844,11 +909,7 @@ in English.</p>
            "hasPart": [{"@type": "Service", "name": plain(L(k, "short")), "url": U(S(k))}
                        for k in kids]},
           breadcrumb_ld([(T("nav.home"), U("en/index.html")), (name, U(slug))])]
-    return render(depth=d,
-                  title=f"Psychotherapy &amp; Counselling {CITY}, Athens | Children, Teens, Adults",
-                  description=("Psychotherapy for children, teenagers and adults and parent "
-                               f"counselling in {CITY}, Athens or online, with clinical assessment "
-                               "from the first meeting."),
+    return render(depth=d, title=c["title"], description=c["desc"],
                   canonical=U(slug), ld_graph=ld, active=S(cat), content=hero + body)
 
 
@@ -1007,26 +1068,63 @@ def articles_en():
     hero = page_hero("Articles", "Reading<br>room",
                      "Psychoeducational texts on what comes up most often in the consulting room.",
                      crumbs, marq_word="ARTICLES")
-    card = f"""<a class="cb-card" href="articles/carer-self-care.html" data-reveal>
-<span class="cb-card__ic">{icon('book','w-7 h-7')}</span>
-<span class="cb-card__t">The self-care of those who care</span>
-<span class="cb-card__d">When you look after someone every day — a parent, a child, a partner, a
-patient — your own exhaustion becomes invisible. What carer burden is, how to recognise it and what
-actually helps.</span>
-<span class="cb-card__more">{T("cta.more")} <span>&#8594;</span></span></a>"""
+
+    # Ίδια ομαδοποίηση με την ελληνική σελίδα: δεκαπέντε άρθρα σε ενιαία λίστα
+    # θα ήταν τοίχος.
+    items = [dict(slug="articles/carer-self-care.html", kicker="Psychoeducation",
+                  title="The self-care of those who care",
+                  teaser="When you look after someone every day — a parent, a child, a partner, a "
+                         "patient — your own exhaustion becomes invisible. What carer burden is, "
+                         "how to recognise it and what actually helps."),
+             dict(slug="articles/short-term-or-long-term-therapy.html", kicker="Framework",
+                  title="Short-term or long-term therapy?",
+                  teaser="One or two sessions rarely solve a problem. The pros and cons of each, "
+                         "how the request sets the length, and why time here is an investment "
+                         "rather than a cost.")] + [
+             dict(slug=a["slug"][len("en/"):], kicker=a["kicker"], title=a["title"],
+                  teaser=a["teaser"]) for a in ARTICLES_EN]
+
+    order = ["Psychoeducation", "Framework", "Play Therapy", "Parent counselling",
+             "Identity & acceptance", "ThetaHealing", "Energy therapies", "Dowsing"]
+    groups = {}
+    for a in items:
+        groups.setdefault(plain(a["kicker"]), []).append(a)
+    seen = [k for k in order if k in groups] + [k for k in groups if k not in order]
+
+    def card(a):
+        return (f'<a class="cb-post" href="{a["slug"]}" data-reveal>'
+                f'<span class="cb-post__k">{a["kicker"]}</span>'
+                f'<span class="cb-post__t">{a["title"]}</span>'
+                f'<span class="cb-post__d">{a["teaser"]}</span>'
+                f'<span class="cb-post__more">{T("cta.more")} <span>&#8594;</span></span></a>')
+
+    sections = "".join(
+        f'<h2 class="cb-h2" data-reveal style="margin-top:3.5rem">{k}</h2>'
+        f'<div class="cb-posts">{"".join(card(a) for a in groups[k])}</div>'
+        for k in seen)
+
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
-<div class="cb-cards cb-cards--3">{card}</div>
+{sections}
+<div class="cb-prose" data-reveal style="max-width:60ch;margin-top:3.5rem">
+<p>The texts on this page are <strong>informational and psychoeducational</strong>. They are not a
+diagnosis, a therapeutic instruction or a substitute for a session with a mental health
+professional. If something you read here speaks to you, the next step is not to read more — it is
+to talk about it.</p>
+</div>
+<p style="margin-top:2rem"><a class="cb-btn" href="tel:+30{PHONE}">{icon('phone','w-4 h-4')}<span>{PHONE_P}</span></a></p>
 </div>
 </section>"""
     ld = [practice_ld(), person_ld(),
           {"@type": "CollectionPage", "@id": U(slug) + "#page", "url": U(slug),
-           "name": "Articles", "inLanguage": "en-GB"},
+           "name": "Articles", "inLanguage": "en-GB",
+           "hasPart": [{"@type": "Article", "headline": plain(a["title"]),
+                        "url": U("en/" + a["slug"])} for a in items]},
           breadcrumb_ld([(T("nav.home"), U("en/index.html")), ("Articles", U(slug))])]
     return render(depth=d, title=f"Articles | {NAME}, Clinical Psychologist",
-                  description="Psychoeducational articles on psychotherapy, parenting and self-care.",
+                  description=("Psychoeducational articles on play therapy, parent counselling, "
+                               "energy therapies and identity."),
                   canonical=U(slug), ld_graph=ld, active="arthra.html", content=hero + body)
-
 
 ARTICLE_FAQ_EN = [
  ("Is it selfish to think about myself when someone else is ill?",
@@ -1211,12 +1309,10 @@ Intervention Line, 24/7), <a href="tel:10306">10306</a> (Psychological Support L
 policy are discussed openly before any therapeutic relationship begins, so that the framework is
 agreed rather than assumed.</p>
 
-<h2 class="cb-h2">Complementary methods</h2>
-<p>Theta Healing and therapeutic dowsing are offered as complementary relaxation practices, in a
-setting entirely separate from psychotherapy. They are not psychotherapy, they do not have
-scientific evidence comparable to that of recognised psychotherapeutic approaches, and they do not
-replace psychological, psychiatric or medical care.
-<a href="services/energy-therapies.html">The full framework is set out here</a>.</p>
+<h2 class="cb-h2">Energy therapies</h2>
+<p>The energy methods referred to (Theta Healing, therapeutic dowsing) <strong>do not replace
+medication or medical follow-up</strong>, and no recommendation to discontinue either is given.
+<a href="services/energy-therapies.html">The full description is set out here</a>.</p>
 
 <h2 class="cb-h2">Intellectual property</h2>
 <p>The texts, images and design of this website are protected by copyright. Reproduction in whole or
@@ -1267,18 +1363,307 @@ def not_found_en():
                   content=hero + body, noindex=True, with_cta=False)
 
 
+# ============================================================ the story of the name
+def onoma_en():
+    d, slug = 1, "en/the-story-behind-the-name.html"
+    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")), ("The name", None)])
+    hero = page_hero("Psychoptia",
+                     "The story behind<br>the name",
+                     "<em>Psychoptia</em> is a word born from the meeting of two ideas: "
+                     "<strong>psyche</strong> and <strong>optics</strong> — the soul, and the way "
+                     "we see.", crumbs, marq_word="PSYCHOPTIA")
+
+    onoma_sec = f"""<section class="cb-section">
+<div class="container mx-auto px-6 md:px-12">
+<div class="cb-grid-2 cb-grid-2--aside">
+<div>
+<div class="cb-prose" data-reveal>
+<h2 class="cb-h2" style="margin-top:0">Soul and perspective</h2>
+<p>It was made to name something therapy often does without ever naming it: <strong>the birth of a
+new way of seeing human experience</strong>.</p>
+<p>Psychotherapy is about the possibility of widening how we see, understand and relate to the
+people around us — and above all, to ourselves.</p>
+<p>Every therapeutic journey is its own. It does not lead to one shared truth, but to a deeper
+relationship with oneself, through greater awareness, fuller understanding and new ways of looking
+at a life.</p>
+</div>
+{infinity_rule()}
+</div>
+{aside(d, extra=cta_button(d))}
+</div>
+</div>
+</section>"""
+
+    iliotropio = f"""<section class="cb-section cb-section--beige">
+<div class="container mx-auto px-6 md:px-12">
+<div style="max-width:56rem" data-reveal>
+<span class="cb-eyebrow">The symbol</span>
+<h2 class="cb-h2">The sunflower</h2>
+<p class="cb-lede">It was not the symbol of Psychoptia from the start. Its natural turning towards
+the light became the starting point of a new idea: a therapeutic way of seeing oneself, others and
+life.</p>
+</div>
+<figure class="cb-figure cb-figure--wide" data-reveal style="margin:2.75rem 0">
+<img src="../assets/img/psychoptia-iliotropio.jpg" width="1440" height="959" loading="lazy"
+ decoding="async"
+ alt="Five sunflowers in a line of transformation, from yellow to deep violet, with the Psychoptia logotype">
+<figcaption>The sunflower's transformation: from the yellow of vitality to the violet of depth.</figcaption>
+</figure>
+<div class="cb-prose" data-reveal style="max-width:60ch">
+<p>In its own transformation, the sunflower begins in <strong>bright yellow</strong> — the colour of
+vitality, movement and hope — and gradually turns to deeper shades of <strong>blue and
+violet</strong>, which stand for calm, the wisdom of the mind and the depth of human experience:
+the light now taken in and carried within.</p>
+</div>
+</div>
+</section>"""
+
+    creed = f"""<section class="cb-section cb-section--dark">
+<div class="container mx-auto px-6 md:px-12">
+<ul class="cb-creed" data-reveal>
+<li><span>Light</span> is the medium.</li>
+<li><span>Understanding</span> is the process.</li>
+<li><span>Connection</span> is the outcome.</li>
+<li><span>Perspective</span> is the change.</li>
+</ul>
+{infinity_rule()}
+</div>
+</section>"""
+
+    ld = [practice_ld(), person_ld(),
+          {"@type": "AboutPage", "@id": U(slug) + "#page", "url": U(slug),
+           "name": "Psychoptia — the story behind the name", "inLanguage": "en-GB",
+           "mainEntity": {"@id": SITE_URL + "/viografiko.html#psychologos"}},
+          breadcrumb_ld([(T("nav.home"), U("en/index.html")), ("The name", U(slug))])]
+    return render(depth=d,
+        title="Psychoptia — the story behind the name",
+        description=("Psychoptia: psyche and optics. The story of the name and of the sunflower — "
+                     "light as the medium, understanding as the process, perspective as the change."),
+        canonical=U(slug), ld_graph=ld, active=slug, content=hero + onoma_sec + iliotropio + creed)
+
+# ---------------------------------------------- short-term / long-term therapy
+ARTICLE2_FAQ_EN = [
+ ("How long will my therapy take?",
+  "<p>It cannot honestly be answered over the phone. After the first few meetings it can be answered "
+  "approximately: once the request has taken shape, it becomes clear whether we are talking about a "
+  "few months or a longer road. That is discussed openly, and revisited as we go — not decided once "
+  "and for all.</p>"),
+ ("I came for one specific thing and other things are opening up. Is that normal?",
+  "<p>It is the most common thing that happens. The initial request is often the door, not the room. "
+  "That does not oblige you to go further: it means there is a choice, and the choice is yours. "
+  "Closing a short-term piece of work having achieved what you asked for is a perfectly good "
+  "outcome, not an unfinished one.</p>"),
+ ("Can I stop whenever I want?",
+  "<p>Yes — therapy is not a contract. What I do ask is that stopping is not done silently: one "
+  "closing session helps the gains stay with you and keeps the ending from feeling like flight. "
+  "Quite often the wish to stop appears exactly where the work begins to touch something that "
+  "matters — and that is worth saying out loud rather than acting on.</p>"),
+]
+
+
+def article_duration_en():
+    d, slug = 2, "en/articles/short-term-or-long-term-therapy.html"
+    title = "Short-term or long-term therapy?"
+    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")),
+                             (T("nav.articles"), page_slug("arthra.html")),
+                             (title, None)])
+    hero = page_hero("Framework", "Short-term or<br>long-term therapy?",
+                     "One or two sessions rarely \u201csolve\u201d anything. What each one does, where "
+                     "they really differ, and why the answer always starts from the request.",
+                     crumbs, marq_word="DURATION")
+    body = f"""<section class="cb-section">
+<div class="container mx-auto px-6 md:px-12">
+<div class="cb-grid-2 cb-grid-2--aside">
+<div>
+<div class="cb-prose" data-reveal>
+<p class="cb-lede">One of the most common things I meet: someone is in a difficult — sometimes
+urgent — place, books a session, and expects that one or two meetings will have settled it. The
+expectation is entirely understandable. It is not, however, how psychotherapy works, and it is worth
+saying so from the start.</p>
+
+<h2 class="cb-h2">A cry for help is not the solution — it is the beginning</h2>
+<p>Picking up the phone when you cannot take any more is a significant step, and often the hardest
+one. On its own, though, it does not solve the problem. A session in a crisis can bring relief, put
+things in order, give you a plan for the next few days. What caused it does not disappear with it.</p>
+<p>A psychologist is not a magician and therapy is not a prescription given in a single dose. It is a
+<strong>process</strong> — and, like any process, it needs time to pay off. That time is not a cost;
+it is the investment itself, and it is one of the few that keep paying decades later.</p>
+
+<div class="cb-note"><strong>If what you are living through is urgent</strong>, psychotherapy is not
+the first line. See the 24-hour support lines below — and then, in your own time, arrange a first
+meeting.</div>
+
+<h2 class="cb-h2">It all starts from the request</h2>
+<p>The length of a therapy is not chosen in advance, nor decided by the calendar. It follows from the
+<strong>request</strong>: from what exactly is being asked, and at what depth.</p>
+<p>A request can be <em>bounded</em>: a specific phobia, a decision that is stuck, preparing for an
+event, stabilising after a crisis. It can equally be <em>open</em>: "I keep repeating the same
+relationships", "I don't know who I am outside my roles", "something has weighed on me since
+childhood". These two do not need the same amount of time, because they are not asking for the same
+thing.</p>
+<p>That is why <strong>shaping the request</strong> is the first real work we do together. Very
+often, the request someone arrives with is not the one they end up working on.</p>
+
+<h2 class="cb-h2">Short-term therapy</h2>
+<p>It is focused and structured. A specific goal is set, we work mainly with <strong>tools and
+techniques</strong> — identifying thoughts, exposure, regulation skills, psychoeducation, tasks
+between sessions — and progress is reviewed regularly against that goal. Sessions are {SESSION}
+minutes, as always; what changes is the scope, not the hour.</p>
+{pros_cons("What it offers",
+           ["Relief within a relatively short span, when the request is clear.",
+            "Concrete tools that remain available after the work ends.",
+            "A clear frame: you know what we are working on and how we will know it worked.",
+            "A smaller overall commitment of time and money."],
+           "What it does not cover",
+           ["It does not reach patterns formed over many years.",
+            "Where the request was the tip of the iceberg, it eases it without resolving it.",
+            "Relapse is more likely if the cause was left untouched.",
+            "It asks for enough stability to be able to work in a focused way."])}
+
+<h2 class="cb-h2">Long-term therapy</h2>
+<p>Here the goal is not only for a symptom to recede, but for the relationship with oneself to
+change: repeating patterns, how one attaches, boundaries, self-image, the history one carries. It is
+a slower and less linear process — but what changes, changes at a level that needs no maintenance.</p>
+{pros_cons("What it offers",
+           ["Change in depth, which holds long after the therapy ends.",
+            "The cause is worked with, not only how it shows itself.",
+            "Room for what does not fit a narrow goal: relationships, identity, history.",
+            "The therapeutic relationship itself becomes a tool — often the strongest one."],
+           "What it asks of you",
+           ["Time and consistency; it does not work in sparse, occasional meetings.",
+            "Tolerance for stretches where there is no measurable \u201cprogress\u201d.",
+            "A larger overall financial investment.",
+            "A willingness to discuss the unwelcome too, not only the presenting complaint."])}
+
+<h2 class="cb-h2">Not two camps</h2>
+<p>In practice the two are not in competition. Many pieces of work begin short-term, with a clear
+goal, and there the request deepens: the symptom recedes and the question of where it came from
+surfaces. Others stay deliberately brief and close having achieved exactly what was asked — which is
+a thoroughly good outcome, not a half-finished one.</p>
+<p>What does not change is how it is decided: on <strong>clinical grounds</strong>, discussed with
+you, and not on what would be more convenient for either of us.</p>
+
+<h2 class="cb-h2">Why the time is worth it</h2>
+<p>Psychotherapy is one of the very few investments that cannot be taken away. What you come to
+understand about yourself, what you learn to recognise as it happens, what you gain in boundaries and
+in relationships — you keep. It does not expire, it needs no renewal, and it carries into every later
+period of a life — very often, into your children's.</p>
+<p>So the question is not "how many sessions do I need to be done with this". It is "what do I
+actually want to change, and what am I willing to give for it".</p>
+</div>
+
+<div data-reveal style="margin-top:2.5rem">{crisis_note()}</div>
+
+<div class="cb-prose" data-reveal style="margin-top:2rem">
+<p style="font-size:.9rem;opacity:.75">This text is informational and psychoeducational. It is not a
+diagnosis and does not replace a session with a mental health professional.</p>
+</div>
+
+<h2 class="cb-h2" data-reveal style="margin-top:3rem">Frequently asked questions</h2>
+<div data-reveal>{faq_block(ARTICLE2_FAQ_EN)}</div>
+
+<h2 class="cb-h2" data-reveal style="margin-top:3rem">Related services</h2>
+{related_chips(d, "ypiresies/psychotherapeia-paidion.html")}
+</div>
+{aside(d, extra=cta_button(d))}
+</div>
+</div>
+</section>"""
+    ld = [practice_ld(), person_ld(),
+          {"@type": "Article", "@id": U(slug) + "#article", "url": U(slug),
+           "headline": title, "inLanguage": "en-GB",
+           "datePublished": "2026-09-06", "dateModified": TODAY,
+           "author": {"@id": SITE_URL + "/viografiko.html#psychologos"},
+           "publisher": {"@id": SITE_URL + "/#grafeio"}},
+          faq_ld(ARTICLE2_FAQ_EN),
+          breadcrumb_ld([(T("nav.home"), U("en/index.html")),
+                         ("Articles", U("en/articles.html")), (title, U(slug))])]
+    return render(depth=d, title=f"{title} | Pros and cons",
+                  description=("The pros and cons of short-term and long-term psychotherapy, how the "
+                               "request sets the length, and why one or two sessions do not solve a "
+                               "problem."),
+                  canonical=U(slug), ld_graph=ld, active="arthra.html", content=hero + body,
+                  og_type="article")
+
+# ---------------------------------------------------------------- γενικό άρθρο EN
+from articles_data_en import ARTICLES_EN
+
+
+def article_page_en(a):
+    d = 2
+    slug = a["slug"]
+    crumbs = breadcrumbs(d, [(T("nav.home"), page_slug("index.html")),
+                             (T("nav.articles"), page_slug("arthra.html")),
+                             (plain(a["title"]), None)])
+    hero = page_hero(a["kicker"], a["title"], a["teaser"], crumbs, marq_word=a["marq"])
+    body_html = a["body"][0].replace("<p>", '<p class="cb-lede">', 1) + "".join(a["body"][1:])
+    body = f"""<section class="cb-section">
+<div class="container mx-auto px-6 md:px-12">
+<div class="cb-grid-2 cb-grid-2--aside">
+<div>
+<div class="cb-prose" data-reveal>
+{body_html}
+</div>
+
+{sources_block_en(a["sources"])}
+
+<div class="cb-prose" data-reveal style="margin-top:2rem">
+<p style="font-size:.9rem;opacity:.75">This text is informational and psychoeducational. It is not a
+diagnosis and does not replace a session with a mental health professional.</p>
+</div>
+
+<div data-reveal style="margin-top:2rem">{crisis_note()}</div>
+
+<h2 class="cb-h2" data-reveal style="margin-top:3rem">Related services</h2>
+{related_chips(d, None)}
+</div>
+{aside(d, extra=cta_button(d))}
+</div>
+</div>
+</section>"""
+    ld = [practice_ld(), person_ld(),
+          {"@type": "Article", "@id": U(slug) + "#article", "url": U(slug),
+           "headline": plain(a["title"]), "description": plain(a["teaser"]),
+           "inLanguage": "en-GB", "datePublished": a["date"], "dateModified": TODAY,
+           "author": {"@id": SITE_URL + "/viografiko.html#psychologos"},
+           "publisher": {"@id": SITE_URL + "/#grafeio"},
+           "image": SITE_URL + "/assets/img/og-image.jpg",
+           "isAccessibleForFree": True,
+           "citation": a["sources"]},
+          breadcrumb_ld([(T("nav.home"), U("en/index.html")),
+                         ("Articles", U("en/articles.html")), (plain(a["title"]), U(slug))])]
+    return render(depth=d,
+        title=plain(a["title"]) + (" | " + BRAND_SHORT if len(plain(a["title"])) < 48 else ""),
+        description=plain(a["teaser"]),
+        canonical=U(slug), ld_graph=ld, active="arthra.html", content=hero + body,
+        og_type="article")
+
+
+def sources_block_en(rows):
+    if not rows:
+        return ""
+    li = "".join("<li>%s</li>" % r for r in rows)
+    return (f'<details class="cb-src" data-reveal><summary>Sources &amp; references '
+            f'({len(rows)})</summary><ol>{li}</ol></details>')
+
 # ==================================================================== ΣΥΓΚΕΝΤΡΩΣΗ
 def pages_en():
     """Όλες οι αγγλικές σελίδες, με κλειδί το αγγλικό τους slug."""
     out = {
         "en/index.html":                  home_en(),
         "en/about.html":                  about_en(),
+        "en/the-story-behind-the-name.html": onoma_en(),
         "en/services.html":               services_en(),
         "en/contact.html":                contact_en(),
         "en/psychologist-ilioupoli.html": local_en(),
         "en/faq.html":                    faq_en(),
         "en/articles.html":               articles_en(),
         "en/articles/carer-self-care.html": article_en(),
+        "en/articles/short-term-or-long-term-therapy.html": article_duration_en(),
+    }
+    for a in ARTICLES_EN:
+        out[a["slug"]] = article_page_en(a)
+    out.update({
         "en/privacy-policy.html": legal_en(
             "en/privacy-policy.html", "Legal", "Privacy Policy",
             "How your personal data is collected, used and protected, in accordance with the GDPR.",
@@ -1290,9 +1675,9 @@ def pages_en():
             "The terms under which the content and services of this website are provided.",
             TERMS_EN, "Terms of Use | " + BRAND_SHORT,
             "Terms of use: the nature of the content, appointments and cancellations, emergencies, "
-            "complementary methods and intellectual property."),
+            "energy therapies and intellectual property."),
         "en/404.html":                    not_found_en(),
-    }
+    })
     for slug, cfg in SERVICE_PAGES_EN.items():
         out[PAGE_SLUGS[slug]] = service_page(slug, cfg)
     for cat in CATEGORIES:

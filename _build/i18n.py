@@ -39,6 +39,7 @@ STRINGS = {
  "nav.close":       {"el": "Κλείσιμο μενού", "en": "Close menu"},
  "nav.home":        {"el": "Αρχική", "en": "Home"},
  "nav.bio":         {"el": "Βιογραφικό", "en": "About"},
+ "nav.name":        {"el": "Το Όνομα", "en": "The Name"},
  "nav.services":    {"el": "Υπηρεσίες", "en": "Services"},
  "nav.articles":    {"el": "Άρθρα", "en": "Articles"},
  "nav.contact":     {"el": "Επικοινωνία", "en": "Contact"},

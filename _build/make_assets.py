@@ -41,7 +41,7 @@ SERVICE_PHOTOS = {
     "svc-symvouleftiki-goneon":      dict(src="SERVICE - symvouleftiki-goneon.jpg"),
     "svc-paigniotherapeia":          dict(src="SERVICE - paigniotherapeia.jpg"),
     "svc-theta-healing":             dict(src="SERVICE - theta-healing.jpg"),
-    "svc-radiaisthisia":             dict(src="SERVICE - radiaisthisia.jpg", card=False),
+    "svc-radiaisthisia":             dict(src="SERVICE - radiaisthisia.jpg"),
 }
 
 # Η φωτογραφία που κάθεται πίσω από το hero της αρχικής.

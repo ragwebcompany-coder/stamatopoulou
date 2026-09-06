@@ -150,6 +150,7 @@ ASSETS = {"css": "site.css", "js": "site.js"}
 PAGE_SLUGS = {
     "index.html":                        "en/index.html",
     "viografiko.html":                   "en/about.html",
+    "i-istoria-tou-onomatos.html":        "en/the-story-behind-the-name.html",
     "ypiresies.html":                    "en/services.html",
     "arthra.html":                       "en/articles.html",
     "epikoinonia.html":                  "en/contact.html",
@@ -159,6 +160,8 @@ PAGE_SLUGS = {
     "oroi-xrisis.html":                  "en/terms-of-use.html",
     "404.html":                          "en/404.html",
     "arthra/aftofrontida-frontiston.html": "en/articles/carer-self-care.html",
+    "arthra/vraxyxronia-makroxronia-psychotherapeia.html":
+        "en/articles/short-term-or-long-term-therapy.html",
 }
 def page_slug(el_slug):
     """Το slug μιας σελίδας στην τρέχουσα γλώσσα, από το ελληνικό της slug."""
@@ -179,7 +182,8 @@ def nav_items():
     αυτήν από το footer και όχι από το μενού.
     """
     return ([(T("nav.home"), page_slug("index.html")),
-             (T("nav.bio"),  page_slug("viografiko.html"))]
+             (T("nav.bio"),  page_slug("viografiko.html")),
+             (T("nav.name"), page_slug("i-istoria-tou-onomatos.html"))]
             + [(L(c, "nav"), S(c)) for c in CATEGORIES]
             + [(T("nav.articles"), page_slug("arthra.html")),
                (T("nav.contact"),  page_slug("epikoinonia.html"))])
@@ -230,9 +234,9 @@ SERVICES = [
                       en=("An adult woman sitting in an armchair by the window, hands on her chest and eyes closed",
                           "Individual sessions: time and space for what keeps repeating and will not resolve on its own."))],
          el=dict(nav="Ψυχοθεραπεία Ενηλίκων", who="Ενήλικες", short="Ψυχοθεραπεία Ενηλίκων",
-                 teaser="Ατομικές συνεδρίες για άγχος, πανικό, διάθεση, εξουθένωση, σχέσεις και ταυτότητα — με κλινική αξιολόγηση και στόχους που ορίζουμε μαζί."),
+                 teaser="Ατομικές συνεδρίες για άγχος, πανικό, διάθεση, εξουθένωση, σχέσεις και ταυτότητα — με αίτημα και στόχους που ορίζουμε μαζί."),
          en=dict(nav="Adult Psychotherapy", who="Adults", short="Adult Psychotherapy",
-                 teaser="Individual sessions for anxiety, panic, mood, burnout, relationships and identity — with clinical assessment and goals we set together.")),
+                 teaser="Individual sessions for anxiety, panic, mood, burnout, relationships and identity — with the request and the goals set together.")),
     dict(slug="ypiresies/symvouleftiki-goneon.html",
          slug_en="en/services/parent-counselling.html",
          icon="hands",
@@ -255,28 +259,34 @@ SERVICES = [
                           "The play space is the therapeutic medium itself, not a break from the work."))],
          el=dict(nav="Παιγνιοθεραπεία &amp; Δημιουργικές Τέχνες", who="Παιδιά &amp; έφηβοι",
                  short="Παιγνιοθεραπεία &amp; Δημιουργικές&nbsp;Τέχνες",
-                 teaser="Παιχνίδι, ζωγραφική, αφήγηση και δραματοποίηση ως θεραπευτικά εργαλεία — εκεί όπου ο λόγος από μόνος του δεν φτάνει."),
+                 teaser="Συμβολικές τεχνικές, παιχνίδι, ζωγραφική, αφήγηση και δραματοποίηση — εκεί όπου ο λόγος από μόνος του δεν φτάνει."),
          en=dict(nav="Play Therapy &amp; Creative Arts", who="Children &amp; teens",
                  short="Play Therapy &amp; Creative&nbsp;Arts",
-                 teaser="Play, drawing, storytelling and dramatisation as therapeutic tools — where words alone do not reach.")),
-    dict(slug="ypiresies/energeiakes-therapeies.html",
-         slug_en="en/services/energy-therapies.html",
-         icon="infinity",
-         # Δύο λήψεις, μία ανά μέθοδο: η κάρτα δείχνει την πρώτη, η σελίδα και τις δύο.
+                 teaser="Symbolic techniques, play, drawing, storytelling and dramatisation — where words alone do not reach.")),
+    dict(slug="ypiresies/theta-healing.html",
+         slug_en="en/services/theta-healing.html",
+         icon="spark",
          photos=[dict(f="svc-theta-healing",
                       el=("Δύο ζευγάρια χέρια ακουμπισμένα σε ξύλινο τραπέζι, με αναμμένο κερί και κρυστάλλους στο βάθος",
-                          "Theta Healing: μια ήρεμη, καθοδηγούμενη διαδικασία βαθιάς χαλάρωσης."),
+                          "Theta Healing: καθοδηγούμενη εργασία στις εγκεφαλικές συχνότητες θήτα."),
                       en=("Two pairs of hands resting on a wooden table, with a lit candle and crystals in the background",
-                          "Theta Healing: a calm, guided process of deep relaxation.")),
-                 dict(f="svc-radiaisthisia",
+                          "Theta Healing: guided work in the theta brainwave state."))],
+         el=dict(nav="Theta Healing", who="Κάθε ηλικία", short="Theta Healing",
+                 teaser="Καθοδηγούμενη εργασία στις εγκεφαλικές συχνότητες θήτα, εκεί όπου δουλεύονται πολύ βαθιά κομμάτια. Χωρίς ηλικιακό όριο."),
+         en=dict(nav="Theta Healing", who="Any age", short="Theta Healing",
+                 teaser="Guided work in the theta brainwave state, where very deep material can be reached. No age limit.")),
+    dict(slug="ypiresies/therapeftiki-radiaisthisia.html",
+         slug_en="en/services/therapeutic-dowsing.html",
+         icon="infinity",
+         photos=[dict(f="svc-radiaisthisia",
                       el=("Χέρι που κρατά εκκρεμές πάνω από κυκλικό διάγραμμα ραδιαισθησίας, με κρυστάλλους και σημειώσεις γύρω",
-                          "Θεραπευτική ραδιαισθησία: εργασία με εκκρεμές και διαγράμματα, σε πλαίσιο ξεχωριστό από την ψυχοθεραπεία."),
+                          "Θεραπευτική ραδιαισθησία: εργασία με εκκρεμές και διαγράμματα, σε δικές της συνεδρίες."),
                       en=("A hand holding a pendulum over a circular dowsing chart, with crystals and notes around it",
-                          "Therapeutic dowsing: work with a pendulum and charts, in a setting separate from psychotherapy."))],
-         el=dict(nav="Ενεργειακές Θεραπείες", who="Συμπληρωματικά", short="Ενεργειακές Θεραπείες",
-                 teaser="Συμπληρωματικές μέθοδοι χαλάρωσης και ενεργειακής εργασίας, σε ξεχωριστό πλαίσιο από την ψυχοθεραπεία και πάντα κατόπιν συζήτησης."),
-         en=dict(nav="Energy Therapies", who="Complementary", short="Energy Therapies",
-                 teaser="Complementary relaxation and energy-work methods, in a setting entirely separate from psychotherapy and always after discussion.")),
+                          "Therapeutic dowsing: work with a pendulum and charts, in its own sessions."))],
+         el=dict(nav="Θεραπευτική Ραδιαισθησία", who="Κάθε ηλικία", short="Θεραπευτική Ραδιαισθησία",
+                 teaser="Εργασία με εκκρεμές και διαγράμματα, ως μέθοδος εντοπισμού και εξισορρόπησης. Χωρίς ηλικιακό όριο."),
+         en=dict(nav="Therapeutic Dowsing", who="Any age", short="Therapeutic Dowsing",
+                 teaser="Work with a pendulum and charts, as a method of locating and rebalancing. No age limit.")),
 ]
 
 # Οι τρεις καρτέλες που ζήτησε η πελάτισσα. Το SERVICES από πάνω κρατά τις έξι
@@ -299,10 +309,10 @@ CATEGORIES = [
                    "ypiresies/symvouleftiki-goneon.html"],
          el=dict(nav="Ψυχοθεραπεία &amp; Συμβουλευτική", who="Παιδιά · Έφηβοι · Ενήλικες · Γονείς",
                  short="Ψυχοθεραπεία &amp; Συμβουλευτική",
-                 teaser="Ατομικές συνεδρίες για κάθε ηλικία και συμβουλευτική γονέων. Το πλαίσιο προκύπτει από την κλινική αξιολόγηση της πρώτης συνάντησης."),
+                 teaser="Ατομικές συνεδρίες για κάθε ηλικία και συμβουλευτική γονέων. Το πλαίσιο προκύπτει από το θεραπευτικό αίτημα, όπως προσδιορίζεται στις πρώτες συνεδρίες."),
          en=dict(nav="Psychotherapy &amp; Counselling", who="Children · Teens · Adults · Parents",
                  short="Psychotherapy &amp; Counselling",
-                 teaser="Individual sessions for every age, plus parent counselling. The setting follows from the clinical assessment in the first meeting.")),
+                 teaser="Individual sessions for every age, plus parent counselling. The setting follows from the therapeutic request, shaped over the first sessions.")),
     dict(slug="ypiresies/paigniotherapeia-dimiourgikes-technes.html",
          slug_en="en/services/play-therapy-creative-arts.html",
          icon="palette",
@@ -314,29 +324,36 @@ CATEGORIES = [
          children=[],
          el=dict(nav="Παιγνιοθεραπεία", who="Παιδιά &amp; έφηβοι",
                  short="Παιγνιοθεραπεία &amp; Δημιουργικές&nbsp;Τέχνες",
-                 teaser="Παιχνίδι, ζωγραφική, αφήγηση και δραματοποίηση ως θεραπευτικά εργαλεία — εκεί όπου ο λόγος από μόνος του δεν φτάνει."),
+                 teaser="Συμβολικές τεχνικές, παιχνίδι, ζωγραφική, αφήγηση και δραματοποίηση — εκεί όπου ο λόγος από μόνος του δεν φτάνει."),
          en=dict(nav="Play Therapy", who="Children &amp; teens",
                  short="Play Therapy &amp; Creative&nbsp;Arts",
-                 teaser="Play, drawing, storytelling and dramatisation as therapeutic tools — where words alone do not reach.")),
+                 teaser="Symbolic techniques, play, drawing, storytelling and dramatisation — where words alone do not reach.")),
     dict(slug="ypiresies/energeiakes-therapeies.html",
          slug_en="en/services/energy-therapies.html",
          icon="infinity",
          photos=[dict(f="svc-theta-healing",
                       el=("Δύο ζευγάρια χέρια ακουμπισμένα σε ξύλινο τραπέζι, με αναμμένο κερί και κρυστάλλους στο βάθος",
-                          "Συμπληρωματικές μέθοδοι, πάντα κατόπιν συζήτησης και ποτέ στη θέση ενδεδειγμένης θεραπείας."),
+                          "Theta Healing: εργασία στις εγκεφαλικές συχνότητες θήτα, με δικές της συνεδρίες."),
                       en=("Two pairs of hands resting on a wooden table, with a lit candle and crystals in the background",
-                          "Complementary methods, always after discussion and never in place of indicated treatment."))],
-         children=[],
-         el=dict(nav="Ενεργειακές Θεραπείες", who="Συμπληρωματικά", short="Ενεργειακές Θεραπείες",
-                 teaser="Theta Healing και θεραπευτική ραδιαισθησία, ως συμπληρωματικές μέθοδοι χαλάρωσης — σε πλαίσιο ξεχωριστό από την ψυχοθεραπεία."),
-         en=dict(nav="Energy Therapies", who="Complementary", short="Energy Therapies",
-                 teaser="Theta Healing and therapeutic dowsing, as complementary relaxation methods — in a setting separate from psychotherapy.")),
+                          "Theta Healing: work in the theta brainwave state, in its own sessions."))],
+         children=["ypiresies/theta-healing.html",
+                   "ypiresies/therapeftiki-radiaisthisia.html"],
+         el=dict(nav="Ενεργειακές Θεραπείες", who="Κάθε ηλικία", short="Ενεργειακές Θεραπείες",
+                 teaser="Theta Healing και θεραπευτική ραδιαισθησία: δύο αυτοτελείς μέθοδοι, με δικές τους συνεδρίες και χωρίς ηλικιακό όριο."),
+         en=dict(nav="Energy Therapies", who="Any age", short="Energy Therapies",
+                 teaser="Theta Healing and therapeutic dowsing: two standalone methods, with their own sessions and no age limit.")),
 ]
 
 
 # Οι σελίδες υπηρεσιών συμπληρώνουν το μητρώο μόλις οριστούν.
 PAGE_SLUGS.update({x["slug"]: x["slug_en"] for x in SERVICES})
 PAGE_SLUGS.update({x["slug"]: x["slug_en"] for x in CATEGORIES})
+# Τα άρθρα υπάρχουν και στις δύο γλώσσες: το μητρώο συμπληρώνεται από τα ίδια
+# τα δεδομένα, ώστε να μη γράφεται δύο φορές.
+def register_articles(pairs):
+    PAGE_SLUGS.update(pairs)
+    EN_TO_EL.update({v: k for k, v in pairs.items()})
+
 EN_TO_EL = {v: k for k, v in PAGE_SLUGS.items()}
 
 
