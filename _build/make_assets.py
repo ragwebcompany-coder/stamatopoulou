@@ -22,9 +22,11 @@ LOGO_SRC = BASE / "LOGO - F4FAF825-D5E2-4AD0-8A78-E2FE4213720C.png"
 PHOTOS = {
     "christina-stamatopoulou.jpg": "PHOTO - 8DC9041D-8F10-4E7C-A887-873324A72B36.jpg",  # πορτρέτο
     "grafeio.jpg":                 "PHOTO - IMG_1911.jpg",                              # ο χώρος, ευρεία λήψη
-    "grafeio-synedria.jpg":        "PHOTO - 9DB60425-63DE-42CC-B576-34FC087E5AD5.jpg",  # στην πολυθρόνα
+    "grafeio-synedria.jpg":        "PHOTO - GRAFEIO SYNEDRIA V2.jpg",                   # στο γραφείο, με τα πιστοποιητικά
     "grafeio-grafeio.jpg":         "PHOTO - B995789B-5DC9-4577-B0B6-CB73DEA3891D.jpg",  # στο γραφείο
     "online-synedries.jpg":        "PHOTO - BD479336-1092-4B69-9E69-F81CE67521E4.jpg",  # διαδικτυακά
+    "grafeio-giati-emena.jpg":     "PHOTO - GIATI EMENA.jpg",                           # στο γραφείο, για «Γιατί εμένα»
+    "christina-poia-eimai.jpg":    "PHOTO - POIA EIMAI.png",                            # πορτρέτο για «Ποια είμαι» στην αρχική
 }
 
 # Οι φωτογραφίες των υπηρεσιών, μία ανά θεραπευτική κατηγορία. Το κλειδί είναι
@@ -56,6 +58,12 @@ THINK_SRC = "LOGO - THETAHEALING THINK.png"
 CERT_SRC = "CERT - radiaisthisia.jpg"
 CERT_BOX = (22, 108, 880, 1395)
 
+# Η μικρή, πλάγια φωτογραφία μέσα στο άρθρο για ταυτότητα/αυτοαποδοχή. Η πηγή
+# είναι ήδη μια συμπιεσμένη μικρογραφία (320×277) — τη μεγαλώνουμε ελάχιστα,
+# όσο αρκεί για μια στήλη-πλάι, αντί να την τεντώσουμε στο μέγεθος μιας
+# φωτογραφίας υπηρεσίας και να φανεί θολή.
+AUTOAPODOXI_SRC = "PHOTO - AUTOAPODOXI LGBTQ.jpg"
+
 INK = (19, 18, 87)          # --cb-ink   · το indigo του λογοτύπου
 LIGHT = (248, 247, 252)     # --color-paper
 GOLD = (240, 180, 90)       # --cb-gold-soft
@@ -66,6 +74,7 @@ OUT_W = 900                 # πλάτος του κάθετου lockup
 LOGO_BOX = (52, 452, 890, 1090)      # ολόκληρο το lockup, με το άπειρο
 FLOWER_BOX = (288, 455, 643, 776)    # μόνο το άνθος
 TEXT_BOX = (66, 783, 886, 1023)      # PSYCHOPTIA + υπογραφή + ΚΛΙΝΙΚΗ ΨΥΧΟΛΟΓΟΣ
+INFINITY_BOX = (415, 1035, 520, 1082)  # το σύμβολο του απείρου, κάτω από το λεκτικό
 
 
 def cutout(box):
@@ -141,7 +150,9 @@ def write_logos():
     Και οι δύο κρατούν τα χρώματα του πρωτοτύπου — το μωβ άνθος με τις
     πορτοκαλί μύτες. Στο header το μελάνι μόνο βαθαίνει (βλ. `deepen`), όσο
     χρειάζεται για να σταθεί πάνω στο ανοιχτό φόντο· το λεκτικό βαθαίνει
-    περισσότερο από το άνθος, γιατί ως κείμενο θέλει μεγαλύτερη αντίθεση.
+    περισσότερο από το άνθος, γιατί ως κείμενο θέλει μεγαλύτερη αντίθεση. Κάτω
+    από το λεκτικό μπαίνει και το άπειρο, όπως το ζήτησε η πελάτισσα — στην
+    ίδια σχετική κλίμακα με το πρωτότυπο, ώστε να μη μοιάζει προστιθέμενο.
     """
     # ---- κάθετο, πολύχρωμο: footer & og ------------------------------------
     rgb, alpha = cutout(LOGO_BOX)
@@ -154,18 +165,35 @@ def write_logos():
     flower = to_rgba(deepen(frgb, 0.88), fa)
     trgb, ta = cutout(TEXT_BOX)
     text = to_rgba(deepen(trgb, 0.70), ta)
+    irgb, ia = cutout(INFINITY_BOX)
+    infinity = to_rgba(deepen(irgb, 0.70), ia)
 
     H = 330                                   # ~3× το ύψος εμφάνισης στο header
     fw = round(H * flower.width / flower.height)
     flower = flower.resize((fw, H), Image.LANCZOS)
 
-    tw = round(H * 0.66 * text.width / text.height)
-    text = text.resize((tw, round(H * 0.66)), Image.LANCZOS)
+    th = round(H * 0.66)
+    tw = round(th * text.width / text.height)
+    text = text.resize((tw, th), Image.LANCZOS)
+
+    # Το άπειρο κλιμακώνεται με τον ίδιο συντελεστή του λεκτικού, ώστε να
+    # κρατήσει το μέγεθός του σχετικά με αυτό όπως στο πρωτότυπο, αντί να
+    # μαντεύεται ξεχωριστή αναλογία.
+    k = th / (TEXT_BOX[3] - TEXT_BOX[1])
+    iw = round(k * (INFINITY_BOX[2] - INFINITY_BOX[0]))
+    ih = round(k * (INFINITY_BOX[3] - INFINITY_BOX[1]))
+    infinity = infinity.resize((iw, ih), Image.LANCZOS)
 
     gap = round(H * 0.14)
-    canvas = Image.new("RGBA", (fw + gap + tw, H), (0, 0, 0, 0))
+    i_gap = round(ih * 0.35)
+    col_h = th + i_gap + ih
+    col_w = max(tw, iw)
+    col_top = (H - col_h) // 2
+
+    canvas = Image.new("RGBA", (fw + gap + col_w, H), (0, 0, 0, 0))
     canvas.alpha_composite(flower, (0, 0))
-    canvas.alpha_composite(text, (fw + gap, (H - text.height) // 2))
+    canvas.alpha_composite(text, (fw + gap + (col_w - tw) // 2, col_top))
+    canvas.alpha_composite(infinity, (fw + gap + (col_w - iw) // 2, col_top + th + i_gap))
     save_png8(canvas, "logo.png")
 
 
@@ -229,6 +257,18 @@ def write_service_photos():
             im = base.resize((w, round(w * 10 / 16)), Image.LANCZOS)
             im.save(IMG / name, quality=78, optimize=True, progressive=True)
             print(" ", name, im.size, (IMG / name).stat().st_size // 1024, "KB")
+
+
+def write_autoapodoxi_photo():
+    """Η πλάγια φωτογραφία του άρθρου ταυτότητας/αυτοαποδοχής.
+
+    320×277 πηγή -> 440 πλάτος: μια μέτρια μεγέθυνση (1.4×) που τη γεμίζει σε
+    στήλη-πλάι χωρίς να τη σπρώχνει στο μέγεθος όπου θα φανεί η θόλωση.
+    """
+    im = Image.open(BASE / AUTOAPODOXI_SRC).convert("RGB")
+    im = im.resize((440, round(440 * im.height / im.width)), Image.LANCZOS)
+    im.save(IMG / "autoapodoxi-lgbtq.jpg", quality=82, optimize=True, progressive=True)
+    print("  autoapodoxi-lgbtq.jpg", im.size, (IMG / "autoapodoxi-lgbtq.jpg").stat().st_size // 1024, "KB")
 
 
 def write_cert():
@@ -306,4 +346,5 @@ if __name__ == "__main__":
     print("υπηρεσίες:");    write_service_photos()
     print("πιστοποίηση:");  write_think_badge()
     print("δίπλωμα:");      write_cert()
+    print("αυτοαποδοχή:");  write_autoapodoxi_photo()
     print("κοινοποίηση:");  write_og()

@@ -922,6 +922,9 @@ ARTICLES_EN = [
    "<p>The difficulty, then, does not lie in the person's identity. It may lie in the conditions "
    'within which they are asked to live it.</p>',
    '<h2 class="cb-h2">Acceptance is not only about other people</h2>',
+   '<figure class="cb-figure cb-figure--float">'
+   '<img src="../../assets/img/autoapodoxi-lgbtq.jpg" width="440" height="381" loading="lazy" decoding="async" '
+   'alt="A woman hugging herself, smiling, as an image of self-acceptance"></figure>',
    '<p>There is also a more personal road.</p>',
    '<p>A person may need time to explore their sexuality or their identity, to understand what it '
    'means for them, to manage contradictory feelings, or to gradually let go of guilt and '

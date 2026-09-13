@@ -78,7 +78,7 @@ def logo_block(depth, footer=False):
     `logo-light.png` (ανοιχτό μελάνι, για το σκούρο footer)."""
     r = rel(depth)
     # Το ίδιο σήμα σε δύο αναλογίες: κάθετο στο footer, οριζόντιο στο header.
-    src, w, h = ("logo-light.png", 900, 685) if footer else ("logo.png", 1155, 330)
+    src, w, h = ("logo-light.png", 900, 685) if footer else ("logo.png", 1156, 330)
     cls = " cb-logo--footer" if footer else ""
     # Δεν μπαίνει υπότιτλος: το ίδιο το λογότυπο γράφει ήδη «ΚΛΙΝΙΚΗ ΨΥΧΟΛΟΓΟΣ MSc».
     return (f'<a class="cb-logo{cls}" href="{r}{page_slug('index.html')}" aria-label="{brand()} — {T("home.link")}">'
@@ -1034,6 +1034,12 @@ body { overflow-wrap: break-word; }
 .cb-figure--cert img { border: 1px solid rgba(19,18,87,.14); border-radius: 3px;
   box-shadow: 0 10px 30px rgba(19,18,87,.10); }
 .cb-figure--cert figcaption { max-width: 34rem; }
+
+/* ---- πλάγια φωτογραφία μέσα σε άρθρο ----
+   Μικρή εικόνα-συνοδεία, όχι πλατιά κάτω από τον τίτλο: πλέει δεξιά του
+   κειμένου σε πλατιά οθόνη· σε στενή κάθεται μόνη της, στο μισό πλάτος. */
+.cb-figure--float { float: right; width: 12rem; margin: .3rem 0 1.4rem 1.6rem; }
+@media (max-width: 640px) { .cb-figure--float { float: none; width: 60%; margin: 0 0 1.4rem; } }
 
 /* ---- τυπογραφία των άρθρων ----
    Οι ρήσεις μέσα στα κείμενα («Ξέρω τι θέλω…») δεν είναι επικεφαλίδες αλλά

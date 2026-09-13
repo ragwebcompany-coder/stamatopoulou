@@ -363,14 +363,14 @@ point, not evidence.</div>
 
 # ------------------------------------------------------------------ energy therapies
 "ypiresies/theta-healing.html": dict(
- title=f"Theta Healing {CITY}, Athens | Work in the theta state",
- desc=("Theta Healing in " + CITY + ", Athens or online: guided work in the theta brainwave state, "
-       "where very deep material can be reached. No age limit."),
+ title=f"Theta Healing {CITY}, Athens | Meditation in the theta state",
+ desc=("Theta Healing in " + CITY + ", Athens or online: guided meditation in a state of theta "
+       "brain waves, where very deep material can be reached. No age limit."),
  eyebrow="Theta Healing",
  marq="THETA",
  h1="Theta<br>Healing",
- lede=("Guided work in the theta brainwave state — where the mind becomes receptive and material "
-       "that stays out of reach in ordinary waking alertness can be worked with."),
+ lede=("Guided meditation in a state of theta brain waves — where the mind becomes receptive and "
+       "material that stays out of reach in ordinary waking alertness can be worked with."),
  facts=[("For", "Any age; for minors, always with the parents' agreement")] + COMMON_FACTS_EN,
  body="""
 <h2 class="cb-h2" style="margin-top:0">A route towards deeper beliefs and self-knowledge</h2>
@@ -415,8 +415,8 @@ bring light to beliefs and patterns that operate less consciously, and to open r
 perspectives, choices and possibilities.</p>
 <p>Every session is different, because so is the person who comes to it.</p>
 
-<h2 class="cb-h2">A complementary approach</h2>
-<div class="cb-note cb-note--scope">ThetaHealing® is used as a complementary tool for
+<h2 class="cb-h2">An energy therapy approach</h2>
+<div class="cb-note cb-note--scope">ThetaHealing® is used as an energy therapy tool for
 self-knowledge, personal exploration and spiritual development. It is not psychotherapy, nor
 psychological or medical treatment, and it does not replace assessment, diagnosis or care by the
 appropriate health professional where that is needed.</div>
@@ -425,15 +425,14 @@ appropriate health professional where that is needed.</div>
        "<p>No. It can be applied at any age. Where a minor is involved, the <strong>parents' "
        "agreement</strong> always comes first.</p>"),
       ("What will I need to do in a session?",
-       "<p>I will guide you into a state of deep relaxation, and from there we work together. No "
-       "previous experience of meditation or similar practices is needed.</p>"),
+       "<p>It is a process of guided meditation for deep relaxation.</p>"),
       ("Can it replace my medication?",
        "<p>No. It does not replace medication or medical follow-up, and no recommendation to stop "
        "either is given. If you are considering a change to your treatment, discuss it with your "
        "treating clinician.</p>"),
       ("How many sessions are needed?",
-       "<p>It depends on what you bring. Some requests are worked through in a few sessions, others "
-       "need more. It is discussed from the start and revisited as we go.</p>")]),
+       "<p>It depends on what you bring. The plan for theta sessions is shaped according to the "
+       "nature of the request.</p>")]),
 
 "ypiresies/therapeftiki-radiaisthisia.html": dict(
  title=f"Therapeutic Dowsing {CITY}, Athens | Pendulum &amp; charts",
@@ -469,15 +468,10 @@ the practitioner. The process is always carried out after the person has been in
 their consent.</p>
 
 <h2 class="cb-h2">The certification</h2>
-<figure class="cb-figure cb-figure--cert">
-<img src="../../assets/img/cert-radiaisthisia.jpg" width="760" height="1140" loading="lazy"
- decoding="async"
- alt="Certificate in Therapeutic Dowsing in the name of Christina Stamatopoulou, from the Polish Radiestezyjne Studio Subtelnych Energii Non Profit">
-<figcaption>Certification in <strong>Therapeutic Dowsing</strong> (Radiestezja Terapeutyczna) from
-the Polish <strong>Radiestezyjne Studio Subtelnych Energii &ldquo;Non Profit&rdquo; (RSSE)</strong>.
+<p>Certification in <strong>Therapeutic Dowsing</strong> (Radiestezja Terapeutyczna) from the
+Polish <strong>Radiestezyjne Studio Subtelnych Energii &ldquo;Non Profit&rdquo; (RSSE)</strong>.
 The training covers the Technology of Therapeutic Dowsing, the use of specialist dowsing tools and
-of the Prometheus system, and work with frequencies and colour vibrations.</figcaption>
-</figure>
+of the Prometheus system, and work with frequencies and colour vibrations.</p>
 
 <div class="cb-note cb-note--scope"><strong>An important clarification.</strong> Therapeutic Dowsing
 belongs to the field of energy practices and is not a method of medical or psychological diagnosis
@@ -581,12 +575,12 @@ def home_en():
 <div class="cb-grid-2">
 <figure class="cb-figure" data-reveal>
 <img src="../assets/img/grafeio-synedria.jpg" width="1000" height="1333" loading="lazy" decoding="async"
- alt="Christina Stamatopoulou in the consulting room in {CITY}, with the Psychoptia artwork behind her">
+ alt="Christina Stamatopoulou at her desk in {CITY}, with her certifications on the wall">
 <figcaption>The consulting room in {CITY} — quiet, warm and unhurried.</figcaption>
 </figure>
 <div data-reveal>
 <span class="cb-eyebrow">The approach</span>
-<h2 class="cb-h2">The right tool for each person</h2>
+<h2 class="cb-h2">What you can expect from working together</h2>
 <div class="cb-prose">
 <p>There is no single method that suits everyone. I work with a <strong>holistic
 outlook</strong>: I draw together techniques and tools from the evidence-based approaches I have
@@ -640,7 +634,7 @@ observing real cases alongside experienced clinicians.</p>
 </div>
 <div data-reveal>
 <figure class="cb-portrait">
-<img src="../assets/img/christina-stamatopoulou.jpg" width="1000" height="1502" loading="lazy" decoding="async"
+<img src="../assets/img/christina-poia-eimai.jpg" width="1000" height="1509" loading="lazy" decoding="async"
  alt="Portrait of Christina Stamatopoulou, Clinical Psychologist MSc">
 </figure>
 </div>
@@ -895,13 +889,8 @@ CAT_PAGE_EN = {
  marq="SESSIONS",
  lede=("One therapeutic process, four settings. Which one fits follows from the therapeutic request "
        "as it is shaped — not from a ready-made protocol."),
- introH2="Why me",
- intro="""<p>I work with a <strong>holistic outlook</strong>. I do not apply one method to everyone:
-I draw together techniques and tools from the approaches I have trained in and build an
-<strong>individualised therapeutic programme</strong> for each person.</p>
-<p>What is used follows from the <strong>therapeutic request</strong>, as it is shaped over the first
-sessions, together with you. The aim is the fullest possible therapeutic outcome — not fidelity to a
-protocol.</p>""",
+ introH2="",
+ intro="",
  chooseH2="Choose a setting",
  title=f"Psychotherapy &amp; Counselling {CITY}, Athens | Children, Teens, Adults",
  desc=("Psychotherapy for children, teenagers and adults and parent counselling in "
@@ -913,7 +902,7 @@ protocol.</p>""",
  marq="ENERGY",
  lede=("Two standalone methods, with their own framework and their own sessions: Theta Healing and "
        "therapeutic dowsing."),
- introH2="Two distinct methods",
+ introH2="Energy Therapies",
  intro="""<p><strong>Theta Healing</strong> and <strong>therapeutic dowsing</strong> are not one
 single method and do not work in the same way. Each has its own framework and its own sessions.</p>
 <p>Neither has an age limit. Where a minor is involved, the <strong>parents' agreement</strong>
@@ -936,14 +925,14 @@ def category_en(cat):
     hero = page_hero("Services", c["h1"], c["lede"], crumbs, marq_word=c["marq"])
     kids = cat_children(cat)
     crisis = f'<div data-reveal style="margin-top:2rem">{crisis_note()}</div>' if c["crisis"] else ""
+    intro_block = (f'<h2 class="cb-h2" style="margin-top:0">{c["introH2"]}</h2>\n{c["intro"]}\n'
+                   if c["introH2"] else "")
     body = f"""<section class="cb-section">
 <div class="container mx-auto px-6 md:px-12">
 <div class="cb-grid-2 cb-grid-2--aside">
 <div>
 <div class="cb-prose" data-reveal>
-<h2 class="cb-h2" style="margin-top:0">{c["introH2"]}</h2>
-{c["intro"]}
-<p>Sessions last {SESSION} minutes and take place at the practice in {CITY} or online.</p>
+{intro_block}<p>Sessions last {SESSION} minutes and take place at the practice in {CITY} or online.</p>
 </div>
 <h2 class="cb-h2" data-reveal>{c["chooseH2"]}</h2>
 {svc_cards(d, items=kids, cls="cb-cards")}
