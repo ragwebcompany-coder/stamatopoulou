@@ -24,9 +24,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Ο φάκελος website/ ανεβαίνει αυτούσιος
-        run: |
-          touch website/.nojekyll
-          echo "www.psychoptia.com" > website/CNAME
+        run: touch website/.nojekyll
 
       - uses: actions/configure-pages@v5
 
