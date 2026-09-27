@@ -2327,15 +2327,25 @@ def build():
     pages["404.html"] = absolutise(pages["404.html"])
     pages["en/404.html"] = absolutise(pages["en/404.html"], prefix="en/")
 
+    # Το παλαιό site (προ CLINICBRAIN) είχε τα ελληνικά κάτω από /el/ και η
+    # Google κρατά ακόμη τέτοια URLs. Το GitHub Pages σερβίρει το 404.html για
+    # κάθε άγνωστο path, οπότε το 404 αναλαμβάνει να ξεπροθεματίσει: /el/x →
+    # /x, κι αν ούτε αυτό υπάρχει, το δεύτερο 404 δεν ταιριάζει πια στο μοτίβο.
+    el_rescue = ('<script>(function(){var m=location.pathname.match(/^\\/el(\\/.*)?$/);'
+                 'if(m)location.replace(m[1]||"/");})();</script>')
+    pages["404.html"] = pages["404.html"].replace("</head>", el_rescue + "</head>")
+
     # ---------------- redirects για URLs που άλλαξαν ----------------
     # Το GitHub Pages αγνοεί τα redirects του vercel.json, οπότε τα παλιά URLs
     # που έχει καταχωρημένα η Google χρειάζονται στατικές σελίδες-γέφυρες.
+    # Το κενό σημαίνει αρχική.
     redirects = {
         "proseggiseis.html": "ypiresies.html",
         "ypiresies/enallaktikes-methodoi.html": "ypiresies/energeiakes-therapeies.html",
+        "el/index.html": "",
     }
     for old, new in redirects.items():
-        target = U(new)
+        target = SITE_URL + "/" if new == "" else U(new)
         pages[old] = (
             '<!DOCTYPE html>\n<html lang="el">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
