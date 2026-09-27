@@ -2327,6 +2327,26 @@ def build():
     pages["404.html"] = absolutise(pages["404.html"])
     pages["en/404.html"] = absolutise(pages["en/404.html"], prefix="en/")
 
+    # ---------------- redirects για URLs που άλλαξαν ----------------
+    # Το GitHub Pages αγνοεί τα redirects του vercel.json, οπότε τα παλιά URLs
+    # που έχει καταχωρημένα η Google χρειάζονται στατικές σελίδες-γέφυρες.
+    redirects = {
+        "proseggiseis.html": "ypiresies.html",
+        "ypiresies/enallaktikes-methodoi.html": "ypiresies/energeiakes-therapeies.html",
+    }
+    for old, new in redirects.items():
+        target = U(new)
+        pages[old] = (
+            '<!DOCTYPE html>\n<html lang="el">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+            '<title>Ανακατεύθυνση | %s</title>\n'
+            '<meta name="robots" content="noindex">\n'
+            '<link rel="canonical" href="%s">\n'
+            '<meta http-equiv="refresh" content="0; url=%s">\n'
+            '<script>location.replace("%s");</script>\n'
+            '</head>\n<body>\n<p>Η σελίδα μεταφέρθηκε: <a href="%s">%s</a></p>\n'
+            '</body>\n</html>\n' % (BRAND_SHORT, target, target, target, target, target))
+
     for slug, html in pages.items():
         p = WEB / slug
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -2368,7 +2388,7 @@ def build():
             "politiki-aporritou.html": "0.3", "oroi-xrisis.html": "0.3"}
     urls = []
     for slug in pages:
-        if slug.endswith("404.html"):
+        if slug.endswith("404.html") or slug in redirects:
             continue
         # Η αγγλική σελίδα κληρονομεί την προτεραιότητα της ελληνικής της.
         key = EN_TO_EL.get(slug, slug)
