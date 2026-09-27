@@ -102,7 +102,7 @@
 
   /* ---------------------------------------------------------- μενού κινητού */
   var menu = q("#cb-menu");
-  var burger = q("header button.lg\\:hidden");
+  var burger = q("header .cb-burger");
   function openMenu() {
     if (!menu) return;
     menu.classList.add("open");
