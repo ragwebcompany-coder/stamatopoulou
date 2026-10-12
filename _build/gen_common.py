@@ -5,11 +5,7 @@ import html as _html
 from i18n import T, set_lang, STRINGS
 import i18n
 
-BASE = pathlib.Path(
-    "/Users/apostolospollalis/Library/CloudStorage/GoogleDrive-apostolos@clinicbrain.gr/"
-    "Shared drives/BRAIN GROUP/CLINICBRAIN/CLIENTS FORM/"
-    "2026-08-24 · Psychoptia Χριστίνα Σταματοπούλου  · Ψυχολόγος"
-)
+BASE = pathlib.Path(__file__).resolve().parent.parent
 WEB = BASE / "website"
 
 # ------------------------------------------------------------------ ταυτότητα

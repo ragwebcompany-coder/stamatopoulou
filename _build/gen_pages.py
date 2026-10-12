@@ -231,13 +231,7 @@ def home():
     approach = f"""<section class="cb-section cb-section--lilac cb-section--marq" id="proseggisi">
 {marquee("PSYCHOPTIA", "1", "12%")}
 <div class="container mx-auto px-6 md:px-12">
-<div class="cb-grid-2">
-<figure class="cb-figure" data-reveal>
-<img src="assets/img/grafeio-synedria.jpg" width="1000" height="1333" loading="lazy" decoding="async"
- alt="Η Χριστίνα Σταματοπούλου στο γραφείο της στην {CITY}, με τα πιστοποιητικά της στον τοίχο">
-<figcaption>Ο χώρος των συνεδριών στην {CITY} — ήσυχος, ζεστός και χωρίς βιασύνη.</figcaption>
-</figure>
-<div data-reveal>
+<div class="max-w-3xl" data-reveal>
 <span class="cb-eyebrow">Η προσέγγιση</span>
 <h2 class="cb-h2">Τι μπορείτε να περιμένετε από τη συνεργασία μας</h2>
 <div class="cb-prose">
@@ -255,7 +249,6 @@ def home():
 πρώτα να εμπιστευτεί ότι ο χώρος είναι δικός του.</p>
 </div>
 <p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="viografiko.html">ΣΠΟΥΔΕΣ &amp; ΕΚΠΑΙΔΕΥΣΕΙΣ<span class="cb-btn__arrow">&#8594;</span></a></p>
-</div>
 </div>
 </div>
 </section>"""

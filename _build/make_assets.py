@@ -22,7 +22,6 @@ LOGO_SRC = BASE / "LOGO - F4FAF825-D5E2-4AD0-8A78-E2FE4213720C.png"
 PHOTOS = {
     "christina-stamatopoulou.jpg": "PHOTO - 8DC9041D-8F10-4E7C-A887-873324A72B36.jpg",  # πορτρέτο
     "grafeio.jpg":                 "PHOTO - IMG_1911.jpg",                              # ο χώρος, ευρεία λήψη
-    "grafeio-synedria.jpg":        "PHOTO - GRAFEIO SYNEDRIA V2.jpg",                   # στο γραφείο, με τα πιστοποιητικά
     "grafeio-grafeio.jpg":         "PHOTO - B995789B-5DC9-4577-B0B6-CB73DEA3891D.jpg",  # στο γραφείο
     "online-synedries.jpg":        "PHOTO - BD479336-1092-4B69-9E69-F81CE67521E4.jpg",  # διαδικτυακά
     "grafeio-giati-emena.jpg":     "PHOTO - GIATI EMENA.jpg",                           # στο γραφείο, για «Γιατί εμένα»
@@ -161,16 +160,12 @@ def write_logos():
               "logo-light.png")
 
     # ---- οριζόντιο, πολύχρωμο: header --------------------------------------
-    frgb, fa = cutout(FLOWER_BOX)
-    flower = to_rgba(deepen(frgb, 0.88), fa)
     trgb, ta = cutout(TEXT_BOX)
     text = to_rgba(deepen(trgb, 0.70), ta)
     irgb, ia = cutout(INFINITY_BOX)
     infinity = to_rgba(deepen(irgb, 0.70), ia)
 
     H = 330                                   # ~3× το ύψος εμφάνισης στο header
-    fw = round(H * flower.width / flower.height)
-    flower = flower.resize((fw, H), Image.LANCZOS)
 
     th = round(H * 0.66)
     tw = round(th * text.width / text.height)
@@ -184,16 +179,15 @@ def write_logos():
     ih = round(k * (INFINITY_BOX[3] - INFINITY_BOX[1]))
     infinity = infinity.resize((iw, ih), Image.LANCZOS)
 
-    gap = round(H * 0.14)
     i_gap = round(ih * 0.35)
     col_h = th + i_gap + ih
     col_w = max(tw, iw)
-    col_top = (H - col_h) // 2
 
-    canvas = Image.new("RGBA", (fw + gap + col_w, H), (0, 0, 0, 0))
-    canvas.alpha_composite(flower, (0, 0))
-    canvas.alpha_composite(text, (fw + gap + (col_w - tw) // 2, col_top))
-    canvas.alpha_composite(infinity, (fw + gap + (col_w - iw) // 2, col_top + th + i_gap))
+    # Στο header δεν μπαίνει το άνθος (ζητήθηκε 2026-10-12): μόνο το λεκτικό
+    # με το άπειρο από κάτω. Ο καμβάς κόβεται στο ύψος της στήλης.
+    canvas = Image.new("RGBA", (col_w, col_h), (0, 0, 0, 0))
+    canvas.alpha_composite(text, ((col_w - tw) // 2, 0))
+    canvas.alpha_composite(infinity, ((col_w - iw) // 2, th + i_gap))
     save_png8(canvas, "logo.png")
 
 

@@ -572,13 +572,7 @@ def home_en():
     approach = f"""<section class="cb-section cb-section--lilac cb-section--marq" id="approach">
 {marquee("PSYCHOPTIA", "1", "12%")}
 <div class="container mx-auto px-6 md:px-12">
-<div class="cb-grid-2">
-<figure class="cb-figure" data-reveal>
-<img src="../assets/img/grafeio-synedria.jpg" width="1000" height="1333" loading="lazy" decoding="async"
- alt="Christina Stamatopoulou at her desk in {CITY}, with her certifications on the wall">
-<figcaption>The consulting room in {CITY} — quiet, warm and unhurried.</figcaption>
-</figure>
-<div data-reveal>
+<div class="max-w-3xl" data-reveal>
 <span class="cb-eyebrow">The approach</span>
 <h2 class="cb-h2">What you can expect from working together</h2>
 <div class="cb-prose">
@@ -595,7 +589,6 @@ needs both understanding and concrete tools for tomorrow morning. A teenager fir
 that the space is genuinely their own.</p>
 </div>
 <p style="margin-top:2rem"><a class="cb-btn cb-btn--ghost" href="about.html">STUDIES &amp; TRAINING<span class="cb-btn__arrow">&#8594;</span></a></p>
-</div>
 </div>
 </div>
 </section>"""

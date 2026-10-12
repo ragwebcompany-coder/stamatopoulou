@@ -78,7 +78,7 @@ def logo_block(depth, footer=False):
     `logo-light.png` (ανοιχτό μελάνι, για το σκούρο footer)."""
     r = rel(depth)
     # Το ίδιο σήμα σε δύο αναλογίες: κάθετο στο footer, οριζόντιο στο header.
-    src, w, h = ("logo-light.png", 900, 685) if footer else ("logo.png", 1156, 330)
+    src, w, h = ("logo-light.png", 900, 685) if footer else ("logo.png", 745, 276)
     cls = " cb-logo--footer" if footer else ""
     # Δεν μπαίνει υπότιτλος: το ίδιο το λογότυπο γράφει ήδη «ΚΛΙΝΙΚΗ ΨΥΧΟΛΟΓΟΣ MSc».
     return (f'<a class="cb-logo{cls}" href="{r}{page_slug('index.html')}" aria-label="{brand()} — {T("home.link")}">'
@@ -426,12 +426,15 @@ img { height: auto; }
    ορατά το μενού — σφάλμα που φαινόταν μόνο σε συγκεκριμένα πλάτη. */
 .cb-logo { display: block; text-decoration: none; max-width: 14rem; flex: none; }
 .cb-logo img { display: block; width: 100%; height: auto; }
+/* Στο header το λεκτικό χωρίς το άνθος: κρατάμε σταθερό ύψος, το πλάτος ακολουθεί. */
+.cb-logo:not(.cb-logo--footer) { max-width: none; }
+.cb-logo:not(.cb-logo--footer) img { width: auto; height: 3.75rem; }
 .cb-logo__sub { font-size: .55rem; letter-spacing: .26em; text-transform: uppercase;
   color: var(--cb-violet); padding-left: .1rem; }
 /* Το footer φιλοξενεί το κάθετο lockup — έχει τον χώρο καθ' ύψος. */
 .cb-logo--footer { max-width: 13rem; }
 .cb-logo--footer .cb-logo__sub { color: var(--cb-lilac); }
-@media (max-width: 480px) { .cb-logo { max-width: 11rem; } }
+@media (max-width: 480px) { .cb-logo { max-width: 11rem; } .cb-logo:not(.cb-logo--footer) img { height: 3rem; } }
 
 .cb-nav { display: flex; gap: 1.6rem; }
 .cb-nav__link { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
@@ -501,6 +504,7 @@ img { height: auto; }
   .cb-nav { gap: .95rem; }
   .cb-nav__link { font-size: .6rem; letter-spacing: .09em; }
   .cb-logo { max-width: 11.5rem; }
+  .cb-logo:not(.cb-logo--footer) img { height: 3.25rem; }
   .cb-logo__sub { font-size: .5rem; letter-spacing: .18em; }
   .cb-btn--sm { padding: .65rem .95rem; font-size: .58rem; letter-spacing: .12em; }
 }
